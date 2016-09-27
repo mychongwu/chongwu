@@ -215,7 +215,12 @@
 					"css/iconfont.css",
 					"css/mui.min.css",
 					"js/ajax.js",
-					"fonts/iconfont.ttf"
+					"fonts/iconfont.ttf",
+					"fonts/mui.ttf",
+					"css/iconfont-menu.css",
+					"fonts/iconfont-menu.ttf",
+					"fonts/iconfont_menu.ttf",
+					"css/iconfont_menu.css"
 				],
 				"refer": [
 					"template-main.html",
@@ -233,7 +238,10 @@
 			"template-main.html": {
 				"resources": [
 					"fonts/mui.ttf",
-					"img/jump.gif"
+					"img/jump.gif",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -258,7 +266,12 @@
 			},
 			"product-detail-tem.html": {
 				"resources": [
-					"img/jump.gif"
+					"img/jump.gif",
+					"css/own.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -267,7 +280,13 @@
 				"resources": [
 					"js/wl_ajax.js",
 					"img/jump.gif",
-					"js/own.js"
+					"js/own.js",
+					"css/own.css",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"js/load.js",
+					"js/md5.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -282,7 +301,8 @@
 					"js/ajax.js",
 					"img/shuijiao.jpg",
 					"img/muwu.jpg",
-					"img/yuantiao.jpg"
+					"img/yuantiao.jpg",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
