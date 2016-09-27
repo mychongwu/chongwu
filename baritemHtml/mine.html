@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>E3</title>
+    <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/own.css"/>
+    
+    <style type="text/css">
+    		.headImg {
+    			padding: 8% 0px 13% 0px;
+    			background: url(../img/bg.jpeg);
+    			background-position: center center; 
+    			background-size: 100% auto;
+    		}
+    		
+    		.touxiang {
+    			text-align: center;
+    		}
+    		.touxiang div {
+    			width: 4em;
+    			height: 4em;
+    			padding: 0px;
+    			border-radius: 50%;
+    			border: 2px solid white;
+    			color: gray;
+    			margin: 0px auto;
+    			margin-bottom: 5px;
+    		}
+    		
+    </style>
+</head>
+<body>
+	
+	<div class="mui-content">
+		
+		<div class="headImg">
+			<!--<span id="touxiang" class="mui-btn mui-btn-link mui-icon iconfont icon-zhanghao"></span>-->
+			<div class="touxiang">
+				<div >
+
+					<img id="trueimg" src="../img/bg.jpeg"  style="width: 100%; height: 100%; border-radius: 50%;" />	
+				</div>
+				<span id="touxiangword">请登录</span>
+			</div>
+		</div>
+		
+		<ul class="mui-table-view" style="margin-top: 10px;">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="../Mine/my-dingdan-needtem.html">
+					<span class="mui-icon iconfont icon-wodedingdan"></span>
+					我的订单
+				</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a id="changeaddress" class="mui-navigate-right" href="../Mine/change-address-needtem.html">
+					<span class="mui-icon iconfont icon-dizhi"></span>
+					修改地址
+				</a>
+			</li>
+		</ul>
+		<ul class="mui-table-view" style="margin-top: 20px;">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="../Mine/changeEmail-needtem.html">
+					<span class="mui-icon mui-icon-email"></span>
+					修改邮箱
+				</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="../Mine/changepsd-needtem.html">
+					<span class="mui-icon mui-icon-locked"></span>
+					修改密码
+				</a>
+			</li>
+		</ul>
+		<ul class="mui-table-view" style="margin-top: 20px;">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right">
+					<span class="mui-icon iconfont icon-xiaolian"></span>
+					用户反馈
+				</a>
+			</li>
+		</ul>
+		
+		<ul id="logoutBtn" class="mui-table-view" style="margin-top: 20px;margin-bottom: 20px;">
+			<li class="mui-table-view-cell" style="text-align: center;">
+				<span style="color: indianred;">退出登录</span>
+			</li>
+		</ul>
+		
+	</div>
+	
+	<script src="../js/mui.min.js" charset="UTF-8"></script>
+	<script src="../js/own.js" charset="UTF-8"></script>
+	<script src="../js/ajax.js" charset="UTF-8"></script>
+	<script type="text/javascript" charset="UTF-8">
+		mui.init({
+			swipeBack:false
+		});
+		
+		
+		mui.plusReady(function(){
+			
+	</script>
+</body>
+</html>
