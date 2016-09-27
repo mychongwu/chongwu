@@ -1,0 +1,120 @@
+{
+	"baritemHtml/home.html": {
+		"resources": [
+			"js/own.js",
+			"js/load.js",
+			"js/md5.js",
+			"css/own.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"js/ajax.js",
+			"img/jump.gif",
+			"img/chat.jpeg"
+		],
+		"refer": []
+	},
+	"index.html": {
+		"resources": [
+			"baritemHtml/home.html",
+			"css/own.css",
+			"js/mui.min.js",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"js/ajax.js",
+			"fonts/iconfont.ttf"
+		],
+		"refer": [
+			"baritemHtml/home.html",
+			"template-main.html",
+			"baritemHtml/mine.html",
+			"baritemHtml/xinyuandan.html",
+			"Mine/login.html",
+			"baritemHtml/category.html",
+			"baritemHtml/cart.html",
+			"product-detail-tem.html",
+			"Mine/remenberpsd-needtem.html",
+			"Mine/register-needtem.html"
+		]
+	},
+	"template-main.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"img/jump.gif"
+		],
+		"refer": []
+	},
+	"baritemHtml/mine.html": {
+		"resources": [
+			"img/bg.jpeg",
+			"js/own.js",
+			"img/touxiang.jpg",
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/own.css",
+			"css/iconfont.css",
+			"js/ajax.js",
+			"fonts/iconfont.ttf",
+			"js/load.js",
+			"js/md5.js"
+		],
+		"refer": []
+	},
+	"product-detail-tem.html": {
+		"resources": [
+			"img/jump.gif"
+		],
+		"refer": []
+	},
+	"baritemHtml/cart.html": {
+		"resources": [
+			"js/wl_ajax.js",
+			"img/jump.gif",
+			"js/own.js"
+		],
+		"refer": []
+	},
+	"baritemHtml/category.html": {
+		"resources": [
+			"js/own.js",
+			"js/load.js",
+			"js/md5.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/ajax.js",
+			"img/shuijiao.jpg",
+			"img/muwu.jpg",
+			"img/yuantiao.jpg"
+		],
+		"refer": []
+	},
+	"baritemHtml/xinyuandan.html": {
+		"resources": [
+			"js/own.js",
+			"css/own.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/ajax.js",
+			"js/load.js",
+			"js/md5.js"
+		],
+		"refer": []
+	},
+	"Mine/login.html": {
+		"resources": [
+			"js/own.js",
+			"fonts/mui.ttf",
+			"js/load.js",
+			"js/md5.js",
+			"css/own.css",
+			"js/mui.min.js",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"js/ajax.js",
+			"fonts/iconfont.ttf"
+		],
+		"refer": []
+	}
+}
