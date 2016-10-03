@@ -32,10 +32,14 @@
 					auto: false,
 					offset: 100, //距离底部高度(到达该高度即触发)
 					show: true,
+					contentinit: '上拉显示更多',
 					contentdown: '上拉显示更多',
 					contentrefresh: '正在加载...',
 					contentnomore: '没有更多数据了',
 					callback: false
+				},
+				preventDefaultException: {
+					tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/
 				}
 			}, options);
 			this.stopped = this.isNeedRefresh = this.isDragging = false;
@@ -45,21 +49,34 @@
 
 			this.initEvent();
 		},
+		_preventDefaultException: function(el, exceptions) {
+			for (var i in exceptions) {
+				if (exceptions[i].test(el[i])) {
+					return true;
+				}
+			}
+			return false;
+		},
 		initEvent: function() {
 			if ($.isFunction(this.options.down.callback)) {
+				this.element.addEventListener($.EVENT_START, this);
 				this.element.addEventListener('drag', this);
 				this.element.addEventListener('dragend', this);
 			}
 			if (this.pullUpTips) {
 				this.element.addEventListener('dragup', this);
-				window.addEventListener('scroll', this);
 				if (this.isInScroll) {
 					this.element.addEventListener('scrollbottom', this);
+				} else {
+					window.addEventListener('scroll', this);
 				}
 			}
 		},
 		handleEvent: function(e) {
 			switch (e.type) {
+				case $.EVENT_START:
+					this.isInScroll && this._canPullDown() && e.target && !this._preventDefaultException(e.target, this.options.preventDefaultException) && e.preventDefault();
+					break;
 				case 'drag':
 					this._drag(e);
 					break;
@@ -74,7 +91,9 @@
 					this._dragup(e);
 					break;
 				case 'scrollbottom':
-					this.pullUpLoading(e);
+					if (e.target === this.element) {
+						this.pullUpLoading(e);
+					}
 					break;
 			}
 		},
@@ -109,7 +128,7 @@
 						if (!self.options.up.show) {
 							element.classList.add(CLASS_HIDDEN);
 						}
-						element.innerHTML = '<div class="mui-pull-bottom-wrapper"><span class="mui-pull-loading">' + self.options.up.contentdown + '</span></div>';
+						element.innerHTML = '<div class="mui-pull-bottom-wrapper"><span class="mui-pull-loading">' + self.options.up.contentinit + '</span></div>';
 						self.element.appendChild(element);
 					}
 					self.pullUpTipsIcon = element.querySelector(SELECTOR_PULL_LOADING);
@@ -127,7 +146,7 @@
 			if (self.loading) {
 				return;
 			}
-			if (e && e.detail && e.detail.drag) {
+			if (e && e.detail && $.gestures.session.drag) {
 				self.isDraggingUp = true;
 			} else {
 				if (!self.isDraggingUp) { //scroll event
@@ -175,6 +194,11 @@
 			var detail = e.detail;
 			if (!this.isDragging) {
 				if (detail.direction === 'down' && this._canPullDown()) {
+					if (document.querySelector('.' + CLASS_PULL_TOP_TIPS)) {
+						e.stopPropagation();
+						e.detail.gesture.preventDefault();
+						return;
+					}
 					this.isDragging = true;
 					this.removing = false;
 					this.startDeltaY = detail.deltaY;
@@ -326,6 +350,9 @@
 			} else {
 				this.removing = true;
 			}
+			if (this.isInScroll) {
+				$(this.element.parentNode).scroll().refresh();
+			}
 		},
 		endPullUpToRefresh: function(finished) {
 			if (finished) {
@@ -337,6 +364,9 @@
 				this.pullUpTipsIcon.innerHTML = this.options.up.contentdown;
 			}
 			this.loading = false;
+			if (this.isInScroll) {
+				$(this.element.parentNode).scroll().refresh();
+			}
 		},
 		setStopped: function(stopped) {
 			if (stopped != this.stopped) {

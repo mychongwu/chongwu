@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>E3</title>
+    <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/own.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/wwstyle.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+    <style type="text/css">
+    		.mui-table-view:after {
+    			height: 0px;
+    		}
+    		
+    		
+    		
+    </style>
+</head>
+<body>
+
+	<header class="mui-bar mui-bar-nav own-main-background-color">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="topnavleft" style="color: #FFFFFF;" ></a>
+		<span style="float: right;color: #FFFFFF;" class="mui-icon mui-icon-bars"></span>
+		<h1 id="nav-title"  style="color: #FFFFFF;" class="mui-title">详细内容</h1>
+	</header>
+	<div class="mui-content">
+		<div class="mui-card" style="border:none;margin:0px;">
+				<div class="mui-card-content" style="margin-top:20px;">
+					<div class="mui-card-content-inner" style="white-space:normal">
+						<p><img style="width: 30px;" src="../img/chat.jpeg" align="center"> <a href="#" style="color:#8F8F94 ;">用户姓名</a> <a href="#" style="float: right;margin-right:10px;color:#8F8F94 ;">加为好友</a></p>
+						<div style="width: 100%;height:20px;text-align: left;font-size:14px;color:#8F8F94">
+					2015-5-5				
+				</div>
+						<p style="color: #333;margin-top:3px;">这里显示文章摘要(20字)，让读者对文章内容有个粗略的概念...单一图片是视频的</p>
+					</div>
+				</div>
+				<div class="mui-card-header mui-card-media" style="">			
+					<img style="width:100%;" src="../img/chat.jpeg" />
+				</div>
+				
+				<div id="bnt" style="width: 100%;height: 30px;">
+						<div id="" style="width: 25%;height: 30px;background-color: ;float: left;">
+							<span class="mui-icon mui-icon-chatbubble" style="color: #8F8F94; line-height: 30px;"></span>
+							<span style="color: #8F8F94;font-size: 12px;">100</span>
+						</div>
+						<div id="" style="width: 25%;height: 30px;background-color: ;float: left;">
+							<span class="mui-icon mui-icon-compose" style="color: #8F8F94; line-height: 30px;"></span>
+							<span style="color: #8F8F94;font-size: 12px;">100</span>
+						</div>
+						<div id="" style="width: 25%;height: 30px;background-color: ;float: left;">
+							<span class="mui-icon mui-icon-compose" style="line-height: 30px;color: #8F8F94"></span>
+							<span style="color: #8F8F94;font-size: 12px;">100</span>
+						</div>
+						<div id="" style="width: 25%;height: 30px;background-color: ;float: right;">
+							<span class="mui-icon-extra mui-icon-extra-like" style="text-align:center;font-size:17px;line-height: 30px;color: #8F8F94"></span>
+							<span style="color: #8F8F94;font-size: 12px;">100</span>
+						</div>
+						
+					</div>
+			</div>
+	</div>
+</body>	
+	<script src="../js/mui.min.js" charset="UTF-8"></script>
+	<script src="../js/ajax.js" charset="UTF-8"></script>
+	<script src="../js/own.js" charset="UTF-8"></script>	
+	<script type="text/javascript">
+		window.onload = function(){
+  //从服务器获取数据
+  //....
+  //业务数据获取完毕，并已插入当前页面DOM；
+  //注意：若为ajax请求，则需将如下代码放在处理完ajax响应数据之后；
+  mui.plusReady(function(){
+    //关闭等待框
+    plus.nativeUI.closeWaiting();
+    //显示当前页面
+    mui.currentWebview.show();
+  });
+}
+		
+	</script>
+</body>
+</html>

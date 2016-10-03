@@ -5,13 +5,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="white">
-	<title>E3</title>
+	<title>主页</title>
 
 	<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
 	<link rel="stylesheet" type="text/css" href="css/own.css"/>
 	<link rel="stylesheet" type="text/css" href="css/iconfont_menu.css"/>
-
+	<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
 	<style type="text/css">
 		
 		.mui-bar-nav .mui-title {
@@ -27,15 +27,16 @@
 
 <body>
 	<header class="mui-bar mui-bar-nav own-main-background-color">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="topnavleft" style="display: none;"></a>
 		<span style="float: right;color: #FFFFFF;" class="mui-icon mui-icon-bars"></span>
-		<h1 id="nav-title" class="mui-title">首页</h1>
+		<h1 id="nav-title" class="mui-title">首页1</h1>
 	</header>
 	<nav class="mui-bar mui-bar-tab">
 		<a class="mui-tab-item mui-active" href="baritemHtml/home.html">
 			<span class="mui-icon iconfont icon-home"></span>
 			<span class="mui-tab-label">首页</span>
 		</a>
-		<a class="mui-tab-item" href="baritemHtml/category.html">
+		<a class="mui-tab-item" href="baritemHtml/test.html">
 			<span class="mui-icon iconfont icon-fenlei"></span>
 			<span class="mui-tab-label">宠物</span>
 		</a>
@@ -73,7 +74,6 @@
 		var detailTem;
 		var detailsub;
 		mui.plusReady(function() {
-			
 			//改变statusbar
 			plus.navigator.setStatusBarBackground('#41cea9');
 			navtitle = document.getElementById('nav-title');
@@ -103,6 +103,7 @@
 		function closeStartScreent(){
 			//创建父子模版完成后关闭启动页面
 			plus.navigator.closeSplashscreen();
+			
 		}
 		
 		//判断是否已经登陆
@@ -195,6 +196,8 @@
 		
 		//设置webview的切换显示的函数
 		function showCurWebView(href) {
+//			var navs = document.getElementById('topnavleft');
+//			navs.style.display= 'block';
 			var index = 0;
 			for (var i = 0; i < barItemUrl.length; i++) {
 				if (href == barItemUrl[i]) {
