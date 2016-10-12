@@ -29,7 +29,7 @@
 			p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
 			md: plus.device.model, //设备型号
 			app_version: plus.runtime.version,
-			plus_version: plus.runtime.innerVersion, //基座版本号
+			plus_versin: plus.runtime.innerVersion, //基座版本号
 			os:  mui.os.version,
 			net: ''+plus.networkinfo.getCurrentType()
 		}
@@ -75,8 +75,6 @@
 		imageIndexIdNum++;
 		var placeholder = document.createElement('div');
 		placeholder.setAttribute('class', 'image-item space');
-		var up = document.createElement("div");
-		up.setAttribute('class','image-up')
 		//删除图片
 		var closeButton = document.createElement('div');
 		closeButton.setAttribute('class', 'image-close');
@@ -120,7 +118,6 @@
 						feedback.addFile(zip.target);
 						feedback.newPlaceholder();
 					}
-					up.classList.remove('image-up');
 					placeholder.style.backgroundImage = 'url(' + zip.target + ')';
 				}, function(zipe) {
 					mui.toast('压缩失败！')
@@ -133,7 +130,6 @@
 			},{});
 		}, false);
 		placeholder.appendChild(closeButton);
-		placeholder.appendChild(up);
 		placeholder.appendChild(fileInput);
 		feedback.imageList.appendChild(placeholder);
 	};
@@ -164,42 +160,39 @@
 		}, function(upload, status) {
 //			plus.nativeUI.closeWaiting()
 			console.log("upload cb:"+upload.responseText);
+			console.log("upload status:"+status);
 			if(status==200){
 				var data = JSON.parse(upload.responseText);
 				//上传成功，重置表单
 				if (data.ret === 0 && data.desc === 'Success') {
-//					mui.toast('反馈成功~')
 					console.log("upload success");
-//					feedback.clearForm();
 				}
 			}else{
 				console.log("upload fail");
 			}
-			
 		});
 		//添加上传数据
 		mui.each(content, function(index, element) {
 			if (index !== 'images') {
-				console.log("addData:"+index+","+element);
-//				console.log(index);
+//				console.log("addData:"+index+","+element);
 				feedback.uploader.addData(index, element)
 			} 
 		});
 		//添加上传文件
 		mui.each(feedback.files, function(index, element) {
 			var f = feedback.files[index];
-			console.log("addFile:"+JSON.stringify(f));
+//			console.log("addFile:"+JSON.stringify(f));
 			feedback.uploader.addFile(f.path, {
 				key: f.name
 			});
 		});
+		
 		//开始上传任务
 		feedback.uploader.start();
 		mui.alert("感谢反馈，点击确定关闭","问题反馈","确定",function () {
 			feedback.clearForm();
 			mui.back();
 		});
-//		plus.nativeUI.showWaiting();
 	};
 	
 	 //应用评分
