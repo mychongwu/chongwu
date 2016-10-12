@@ -58,6 +58,7 @@
 		var psd;
 		var repsd;
 		var registerBtn ;
+		var k;
 		mui.plusReady(function(){
 			account = document.getElementById('account');
 			psd = document.getElementById('psd');
@@ -70,6 +71,7 @@
 					mui.toast('请输入要注册的账号');
 					return;
 				}
+				
 				if (psd.value.length <= 0){
 					mui.toast('请输入密码');
 					return;
@@ -78,13 +80,36 @@
 					mui.toast('两次输入密码必须一致');
 					return;
 				}
-				
+				k = plus.nativeUI.showWaiting('正在注册');
 				//联网注册
-				ajax_register({
-					account:account.value,
-					pwd:repsd.value,
-					website_id:'1'
-				});
+				 mui.ajax('http://192.168.1.102/Pet/index.php/Home/login/index',{
+	     	   		data:{
+	     	   			account:account.value,
+	     	   			psd:psd.value
+	     	   		},
+	     	   		dataType:'json',
+	     	   		type:'post',
+	     	   		success:function(data){
+	     				if(data == 0){
+	     					mui.toast('用户已存在');
+	     					k.close();
+	     				}
+	     				if(data == 1){
+	     					mui.toast('注册失败');
+	     					k.close();
+	     				}
+	     				if(data == 2){
+	     					mui.toast('注册成功');
+	     					k.close();
+	     					mui.back();
+	     				}
+	     	    	},
+	     	    	error:function(xhr,type,errorThrown){
+						//异常处理；
+						k.close();
+						console.log(type);
+					}
+	       		});
 			},false);
 			
 		});

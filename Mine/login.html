@@ -37,11 +37,11 @@
 			<form class="mui-input-group">
 				<div class="mui-input-row">
 					<label><span class="mui-icon iconfont icon-zhanghao"></span></label>
-					<input type="text" class="mui-input-clear" value="13881111755" placeholder="请输入手机号或邮箱" />
+					<input type="text" class="mui-input-clear" value="" placeholder="请输入账号" />
 				</div>
 				<div class="mui-input-row">
 					<label><span class="mui-icon iconfont icon-mimaxiugai"></span></label>
-					<input type="password" class="mui-input-clear" value="123456" placeholder="请输入密码" />
+					<input type="password" class="mui-input-clear" value="" placeholder="请输入密码" />
 				</div>
 			</form>
 		</div>
@@ -81,9 +81,9 @@
 			loginWebview = plus.webview.currentWebview();
 			
 			//检测本地的登录过的账号。
-			if (localStorage.getItem('account')) {
-				account.value = localStorage.getItem('account');
-			}
+//			if (localStorage.getItem('account')) {
+//				account.value = localStorage.getItem('account');
+//			}
 			
 			//登陆的点击事件
 			login.addEventListener('tap',function(){
@@ -100,10 +100,31 @@
 					return;
 				}
 				//登陆联网处理todo之后将页面close
-				ajax_login({
-					pwd:psd.value,
-					user_name:account.value
-				});
+				k = plus.nativeUI.showWaiting('正在登陆');
+				//联网注册
+				 mui.ajax('http://192.168.1.102/Pet/index.php/Home/login/login',{
+	     	   		data:{
+	     	   			account:account.value,
+	     	   			psd:psd.value
+	     	   		},
+	     	   		dataType:'json',
+	     	   		type:'post',
+	     	   		success:function(data){
+	     	   			var res = JSON.parse(data);
+	     				if(data == 0){
+	     					mui.toast('用户名或密码错误');
+	     					k.close();
+	     				}else{
+	     					loginSuccess(res);
+	     					k.close();
+	     				}
+	     	    	},
+	     	    	error:function(xhr,type,errorThrown){
+						//异常处理；
+						k.close();
+						console.log(type);
+					}
+	       		});
 				
 				//添加事件接收close事件，并且要判断是否已经登录成功，然后页面close，因为login页面是预先加载的页面
 				//在这里向需要的页面发送消息事件通知已经登录做响应的处理
@@ -128,7 +149,6 @@
 					var cartwebview = plus.webview.getWebviewById('baritemHtml/cart.html');
 					var minewebview = plus.webview.getWebviewById('baritemHtml/mine.html');
 					var xinyuandanwebview = plus.webview.getWebviewById('baritemHtml/xinyuandan.html');
-					
 					mui.fire(cartwebview,'loginSuccess',{});
 					mui.fire(minewebview,'loginSuccess',{});
 					mui.fire(xinyuandanwebview,'loginSuccess',{});
@@ -141,7 +161,6 @@
 			//注册按钮的点击事件
 			register.addEventListener('tap',function(){
 				var aniShow = getaniShow();
-				
 				var list = plus.webview.all();
 				mui.each(list,function(index,item){
 					console.log(item.id);
@@ -169,21 +188,17 @@
 			},false);
 		});
 		
-		function loginSuccess(data){
-			//将用户信息和account分开存放是有好处的
-			if ('000000' == data.code) {
+		function loginSuccess(res){
 				var user = {
-					website_name:data.website_name,
-					website_logo:data.website_logo,
-					website_grade:data.website_grade,
-					website_id:data.website_id
+					website_name:res.username,
+					website_id:res.login_id
 				}
 				//将两个数据存放起来，第一个是等出之后删除，第二个只要登录之后就会记录保存
 				localStorage.setItem('user',JSON.stringify(user));
-				localStorage.setItem('account',data.account);
+//				var mine = plus.webview.getWebviewById('baritemHtml/mine.html');
+//				mine.reload();
 				mui.back();
 				mui.toast('登录成功');
-			}
 		}
 	</script>
 </body>
