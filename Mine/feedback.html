@@ -11,16 +11,53 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <span style="float:right" class="mui-icon mui-icon-upload"></span>
+		    <span id="sub" style="float:right" class="mui-icon mui-icon-upload"></span>
 		    <h1 class="mui-title">用户反馈</h1>
 		</header>
 		<div id=""  style="padding: 20px;background-color: ;">
-			<textarea style="margin-top:50px;height:200px;padding: 10px;"></textarea>
+			<textarea id="content" style="margin-top:50px;height:200px;padding: 10px;"></textarea>
 			<div style="float:right;margin-right:5px;color:#cccccc;">0/100</div>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			var content;
+			var sub;
+			var user;
+			mui.plusReady(function(){
+				var user = JSON.parse(localStorage.getItem('user'));
+				content = document.getElementById('content');
+				sub = document.getElementById('sub');
+				
+				sub.addEventListener('tap',function(){
+					if(content.value.length <= 0){
+						mui.toast('请输入内容');
+					}else{
+						mui.ajax('http://192.168.1.108/Pet/index.php/Home/User/index',{
+			     	   		data:{
+			     	   			content:content.value,
+			     	   			user_id:user.website_id
+			     	   		},
+			     	   		dataType:'json',
+			     	   		type:'post',
+			     	   		success:function(data){
+			     	   			if(data == 1){
+			     	   				mui.toast('感谢您的宝贵意见');
+			     	   				mui.back();
+			     	   			}else{
+			     	   				mui.toast('留言失败');
+			     	   			}
+			     	    	},
+			     	    	error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+			       		});
+					}
+				})
+			})
 		</script>
 	</body>
 

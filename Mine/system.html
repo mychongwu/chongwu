@@ -14,54 +14,58 @@
 		    <h1 class="mui-title">设置</h1>
 		</header>
 		<div id="" style="widows: 100%;height: 100px;background-color: pink;margin-top: 45px;">
-			
+			<div id="" style="width:30% ;height: 100px;background-color: ;float: left;">
+				<div id="" style="width: 70px;height: 70px;background-color:red ;margin: auto;border-radius: 80px;margin-top: 15px;">
+					<img id="img" style="border-radius: 70px;" width="100%" src="../img/chat.jpeg"/>
+				</div>
+			</div>
+			<div id="" style="width:70% ;height: 100px;background-color: ;float: left;">
+				<span id="" style="float: right;margin-right: 15px;margin-top: 40px;">
+					头像
+				</span>
+			</div>
 		</div>
 		<ul class="mui-table-view" style="margin-top: 10px;">
-			<li class="mui-table-view-cell">
-				<a class="mui-navigate-right" href="../Mine/mymessage.html">
-					<span style="background-color: pink;color: #FFFFFF;border-radius: 5px;font-size: 20px;" class="mui-icon iconfont icon-wodedingdan"></span>
-					性别
-				</a>
+			<li id="sex" class="mui-table-view-cell">
+				<span style="background-color: pink;color: #FFFFFF;border-radius: 5px;font-size: 20px;" class="mui-icon iconfont icon-wodedingdan"></span>
+				<span>性别</span>
+				<span id="msex" style="float: right">未设置</span>
+			</li>
+			<li id="mclass" class="mui-table-view-cell">
+				<span class="mui-icon iconfont icon-dizhi"></span>
+				<span>家族</span>
+				<span id="mmclass" style="float: right;">未设置</span>
+			</li>
+			<li id="birthday" class="mui-table-view-cell">
+				<span class="mui-icon iconfont icon-dizhi"></span>
+				<span>生日</span>
+				<span id="mbirthday" style="float: right;">未设置</span>
+			</li>
+			<li id="city" class="mui-table-view-cell">
+				<span class="mui-icon iconfont icon-dizhi"></span>
+				<span>城市</span>
+				<span id="mcity" style="float: right;">呼和浩特市</span>
 			</li>
 			<li class="mui-table-view-cell">
-				<a id="" class="mui-navigate-right" href="../Mine/history.html">
-					<span class="mui-icon iconfont icon-dizhi"></span>
-					家族
-				</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a id="" class="mui-navigate-right" href="../Mine/history.html">
-					<span class="mui-icon iconfont icon-dizhi"></span>
-					生日
-				</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a id="" class="mui-navigate-right" href="../Mine/history.html">
-					<span class="mui-icon iconfont icon-dizhi"></span>
-					城市
-				</a>
-			</li>
-			<li class="mui-table-view-cell">
-				<a id="" class="mui-navigate-right" href="../Mine/history.html">
-					<span class="mui-icon iconfont icon-dizhi"></span>
-					ID
-				</a>
+				<span class="mui-icon iconfont icon-dizhi"></span>
+				<span>ID</span>
+				<span style="float: right;">100102</span>
 			</li>
 		</ul>
 		<ul class="mui-table-view" style="margin-top: 20px;">
-			<li class="mui-table-view-cell">
+			<li id="phoneSys" class="mui-table-view-cell">
 				<a class="mui-navigate-right">
 					<span class="mui-icon iconfont icon-xiaolian"></span>
 					手机设置
 				</a>
 			</li>
-			<li class="mui-table-view-cell">
+			<li id="updete" class="mui-table-view-cell">
 				<a class="mui-navigate-right">
 					<span class="mui-icon iconfont icon-xiaolian"></span>
 					检测版本更新
 				</a>
 			</li>
-			<li class="mui-table-view-cell">
+			<li id="mtext" class="mui-table-view-cell">
 				<a class="mui-navigate-right">
 					<span class="mui-icon iconfont icon-xiaolian"></span>
 					免责声明及版权投诉
@@ -74,7 +78,121 @@
 		
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				swipeBack:false
+			});
+			var img;
+			var sex;
+			var msex
+			var mclass;
+			var mmclass
+			var birthday;
+			var mbirthday
+			var city;
+			var mcity;
+			var phoneSys;
+			var updete;
+			var mtext;
+			var user = JSON.parse(localStorage.getItem('user'));
+			mui.plusReady(function(){
+				img = document.getElementById('img');
+				sex = document.getElementById('sex');
+				msex = document.getElementById('msex');
+				mclass = document.getElementById('mclass');
+				mmclass = document.getElementById('mmclass');
+				birthday = document.getElementById('birthday');
+				mbirthday = document.getElementById('mbirthday');
+				city = document.getElementById('city');
+				mcity = document.getElementById('mcity');
+				phoneSys = document.getElementById('phoneSys');
+				updete = document.getElementById('updete');
+				mtext = document.getElementById('mtext');
+				
+				mui.ajax('http://192.168.1.108/Pet/index.php/Home/User/system',{
+			     	   		data:{
+			     	   			user_id:user.website_id
+			     	   		},
+			     	   		dataType:'json',
+			     	   		type:'post',
+			     	   		success:function(data){
+			     	   			var res = JSON.parse(data);
+			     	   			if(res.login_img == null){
+			     	   				img.src = "../img/60x60.gif";
+			     	   			}else{
+			     	   				img.src = "../img/60x60.gif";
+			     	   			}
+			     	   			if(res.sex == null){
+			     	   				msex.innerHTML = '未设置';
+			     	   			}else{
+			     	   				msex.innerHTML = '未设置';
+			     	   			}
+			     	   			if(res.class == null){
+			     	   				msex.innerHTML = res.sex;
+			     	   			}else{
+			     	   				msex.innerHTML = res.sex;
+			     	   			}
+			     	   			if(res.city == null){
+			     	   				msex.innerHTML = res.sex;
+			     	   			}else{
+			     	   				msex.innerHTML = res.sex;
+			     	   			}
+			     	    	},
+			     	    	error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+			       		});
+				
+				sex.addEventListener('tap',function(){
+					mui.openWindow({
+						url: '',
+						id: '',
+						show: {
+						},
+						extras:{
+							
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				})
+				
+				mclass.addEventListener('tap',function(){
+					mui.openWindow({
+						url: '',
+						id: '',
+						show: {
+						},
+						extras:{
+							
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				})
+				
+				birthday.addEventListener('tap',function(){
+					alert(1)
+				})
+				
+				phoneSys.addEventListener('tap',function(){
+					alert(1);
+				})
+				
+				updete.addEventListener('tap',function(){
+					alert(1);
+				})
+				
+				mtext.addEventListener('tap',function(){
+					alert(1);
+				})
+				
+				
+				
+				
+			})
 		</script>
 	</body>
 
