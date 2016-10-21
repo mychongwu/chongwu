@@ -7,11 +7,10 @@
     <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="../css/own.css"/>
-    
     <style type="text/css">
     		.headImg {
     			padding: 8% 0px 13% 0px;
-    			background: url(../img/minelogin01.jpg);
+    			background: url(../img/bbvbg.png);
     			background-position: center center; 
     			background-size: 100% auto;
     		}
@@ -40,44 +39,46 @@
 			<!--<span id="touxiang" class="mui-btn mui-btn-link mui-icon iconfont icon-zhanghao"></span>-->
 			<div class="touxiang">
 				<div >
-					<span id="touxiangimg"  class="mui-icon mui-icon-person" style="font-size: 3.8em; color: white;"></span> 
-					<img id="trueimg" src="../img/bg.jpeg"  style="width: 100%; height: 100%; border-radius: 50%;" />	
+					<img id="touxiangimg" style="width: 70px;padding-right: 6px;" src="../img/mao.png"/>
+					
+					<!--<span id="touxiangimg"  class="mui-icon mui-icon-person" style="font-size: 3.8em; color: white;"></span>--> 
+					<img id="trueimg" src="../img/mao.png"  style="width: 100%; height: 100%; border-radius: 50%;" />	
 				</div>
-				<span id="touxiangword">请登录</span>
+				<span id="touxiangword" style="font-size: 14px;">请登录</span>
 			</div>
 		</div>
 		
 		<ul class="mui-table-view" style="margin-top: 10px;">
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="../Mine/mymessage.html">
-					<span style="background-color: pink;color: #FFFFFF;border-radius: 5px;font-size: 20px;" class="mui-icon iconfont icon-wodedingdan"></span>
-					我的消息
+					<span style="background-color: ;color: #777777;border-radius: 5px;font-size: ;" class="mui-icon mui-icon-chatbubble"></span>
+					<span style="font-size: 16px;color: #777777;"> 我的消息</span>
 				</a>
 			</li>
 			<li class="mui-table-view-cell">
 				<a id="changeaddress" class="mui-navigate-right" href="../Mine/history.html">
-					<span class="mui-icon iconfont icon-dizhi"></span>
-					历史发布
+					<span style="color: #777777;" class="mui-icon mui-icon-compose"></span>
+					<span style="font-size: 16px;color: #777777;">历史发布</span>
 				</a>
 			</li>
 		</ul>
 		<ul class="mui-table-view" style="margin-top: 20px;">
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="../Mine/collect.html">
-					<span class="mui-icon mui-icon-email"></span>
-					我的收藏
+					<span style="color: #777777;" class="mui-icon mui-icon-star"></span>
+					<span style="font-size: 16px;color: #777777;">我的收藏</span>
 				</a>
 			</li>
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="../Mine/personage.html">
-					<span class="mui-icon mui-icon-locked"></span>
-					个人信息
+					<span style="color: #777777;" class="mui-icon mui-icon-locked"></span>
+					<span style="font-size: 16px;color: #777777;">个人信息</span>
 				</a>
 			</li>
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="../Mine/system.html">
-					<span class="mui-icon mui-icon-locked"></span>
-					设置
+					<span style="color: #777777;" class="mui-icon mui-icon-gear"></span>
+					<span style="font-size: 16px;color: #777777;">设置</span>
 				</a>
 			</li>
 		</ul>
@@ -85,15 +86,15 @@
 		<ul class="mui-table-view" style="margin-top: 20px;">
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" href="../Mine/feedback.html">
-					<span class="mui-icon iconfont icon-xiaolian"></span>
-					用户反馈
+					<span style="color: #777777;" class="mui-icon iconfont icon-xiaolian"></span>
+					<span style="font-size: 16px;color: #777777;">用户反馈</span>
 				</a>
 			</li>
 		</ul>
 		
 		<ul id="logoutBtn" class="mui-table-view" style="margin-top: 20px;margin-bottom: 20px;">
 			<li class="mui-table-view-cell" style="text-align: center;">
-				<span style="color: indianred;">退出登录</span>
+				<span style="color: indianred;font-size: 16px;">退出登录</span>
 			</li>
 		</ul>
 		
@@ -126,15 +127,15 @@
 				logoutBtn.style.display = 'none';
 				trueimg.style.display = 'none';
 				touxiangimg.style.display = 'inline';
-				touxiangword.style.color = 'indianred';
+				touxiangword.style.color = '#FFFFFF';
 			}else {
 				logoutBtn.style.display = 'block';
 				trueimg.style.display = 'inline';
 				touxiangimg.style.display = 'none';
 				var user = JSON.parse(localStorage.getItem('user'));
-				trueimg.src = '../img/touxiang.jpg';
+				trueimg.src = '../img/nan.png';
 				touxiangword.innerText = user.website_name;
-				touxiangword.style.color = 'black';
+				touxiangword.style.color = '#FFFFFF';
 			}
 			
 			mui('.mui-table-view').on('tap','a',function() {
