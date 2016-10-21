@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body style="background-color: #FFFFFF;">
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		     <span id="sub" style="float: right;" class="mui-icon mui-icon-upload"></span>
+		    <h1 class="mui-title">选择类别</h1>
+		</header>
+		<div id="" style="width: 100%;height: 200px;background-color: ;margin-top: 30%;">
+			<div id="class1" style="width: 100px;height: 100px;background-color: ;margin: ;border-radius: 200px;float: left;margin-left: 2%;">
+				<img id="oo1" width="100%" src="../img/oo1.png"/>
+			</div>
+			<div id="class2" style="width: 100px;height: 100px;background-color: ;margin: ;border-radius: 200px;float: left;margin-left: 2%;">
+				<img id="oo2" width="100%" src="../img/oo2.png"/>
+			</div>
+			<div id="class3" style="width: 100px;height: 100px;background-color: ;margin: ;border-radius: 200px;float: left;margin-left: 2%;">
+				<img id="oo3" width="100%" src="../img/oo3.png"/>
+			</div>
+			<div id="class4" style="width: 100px;height: 100px;background-color: ;margin: ;border-radius: 200px;float: left;margin-left: 2%;">
+				<img id="oo4" width="100%" src="../img/oo4.png"/>
+			</div>
+			<div id="class5" style="width: 100px;height: 100px;background-color: ;margin: ;border-radius: 200px;float: left;margin-left: 2%;">
+				<img id="oo5" width="100%" src="../img/oo5.png"/>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:false
+			});
+			var class1;
+			var class2;
+			var class3;
+			var class4;
+			var class5;
+			var oo1;
+			var oo2;
+			var oo3;
+			var oo4;
+			var oo5;
+			var sum = '';
+			var user = JSON.parse(localStorage.getItem('user'));
+			mui.plusReady(function(){
+				class1 = document.getElementById('class1');
+				class2 = document.getElementById('class2');
+				class3 = document.getElementById('class3');
+				class4 = document.getElementById('class4');
+				class5 = document.getElementById('class5');
+				oo1 = document.getElementById('oo1');
+				oo2 = document.getElementById('oo2');
+				oo3 = document.getElementById('oo3');
+				oo4 = document.getElementById('oo4');
+				oo5 = document.getElementById('oo5');
+				sub = document.getElementById('sub');
+				class1.addEventListener('tap',function(){
+					sum = 1;
+					oo1.src = '../img/gou.png';
+					oo2.src = '../img/oo2.png';
+					oo3.src = '../img/oo3.png';
+					oo4.src = '../img/oo4.png';
+					oo5.src = '../img/oo5.png'
+				})
+				class2.addEventListener('tap',function(){
+					sum = 2;
+					oo1.src = '../img/oo1.png';
+					oo2.src = '../img/mao.png';
+					oo3.src = '../img/oo3.png';
+					oo4.src = '../img/oo4.png';
+					oo5.src = '../img/oo5.png'
+				})
+				class3.addEventListener('tap',function(){
+					sum = 3;
+					oo1.src = '../img/oo1.png';
+					oo2.src = '../img/oo2.png';
+					oo3.src = '../img/niao.png';
+					oo4.src = '../img/oo4.png';
+					oo5.src = '../img/oo5.png'
+				})
+				class4.addEventListener('tap',function(){
+					sum = 4;
+					oo1.src = '../img/oo1.png';
+					oo2.src = '../img/oo2.png';
+					oo3.src = '../img/oo3.png';
+					oo4.src = '../img/qita.png';
+					oo5.src = '../img/oo5.png'
+				})
+				class5.addEventListener('tap',function(){
+					sum = 5;
+					oo1.src = '../img/oo1.png';
+					oo2.src = '../img/oo2.png';
+					oo3.src = '../img/oo3.png';
+					oo4.src = '../img/oo4.png';
+					oo5.src = '../img/yu.png';
+				})
+				
+				sub.addEventListener('tap',function(){
+					mui.ajax('http://192.168.1.106/Pet/index.php/Home/User/sys',{
+			     	   		data:{
+			     	   			user_id:user.website_id,
+			     	   			mclass:sum
+			     	   		},
+			     	   		dataType:'json',
+			     	   		type:'post',
+			     	   		success:function(data){
+			     	   			if(data == 1){
+			     	   				mui.toast('修改成功');
+			     	   				mui.back();
+			     	   			}else{
+			     	   				mui.toast('修改失败');
+			     	   			}
+			     	    	},
+			     	    	error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+			       		});
+				})
+			})
+		</script>
+	</body>
+
+</html>

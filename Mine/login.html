@@ -19,7 +19,7 @@
     		
     </style>
 </head>
-<body>
+<body style="background-color: #FFFFFF;">
 	
 	<header class="mui-bar mui-bar-nav">
 		<button type="button" class="mui-action-back mui-btn  mui-btn-link mui-pull-left own-button" >
@@ -29,9 +29,10 @@
 		<h1 class="mui-title">登录</h1>
 	</header>
 	
-	<div class="mui-content">
+	<div class="mui-content" style="background-color: #FFFFFF;">
 		<div style="margin-top: 30px; text-align: center;">
-			<span class="mui-icon mui-icon-person" style="font-size: 4em; border: 2px solid gray; border-radius: 50%; color: gray;"></span>
+			<img width="100px" src="../img/mao.png"/>
+			<!--<span class="mui-icon mui-icon-person" style="font-size: 4em; border: 2px solid gray; border-radius: 50%; color: gray;"></span>-->
 		</div>
 		<div class="mui-card" style="margin-top: 20px;">
 			<form class="mui-input-group">
@@ -46,11 +47,11 @@
 			</form>
 		</div>
 		<div class="mui-button-row" style="margin: 10px 15px;">
-			<button id="loginBtn" type="button" class="mui-btn mui-btn-green own-btn-green mui-btn-block " style="padding: 5px 0px;">登录</button>
+			<button id="loginBtn" type="button" class="mui-btn mui-btn-green own-btn-green mui-btn-block " style="padding: 5px 0px;background-color: lightpink;border-width: 0px;">登录</button>
 		</div>
 		<div class="mui-button-row" style="padding-top: 0px;">
-			<button id="register" type="button" class="mui-btn mui-btn-link own-main-color own-font-size" style="padding-top: 0px; margin-right: 60px; ">快速注册</button>
-			<button id="repsd" type="button" class="mui-btn mui-btn-link own-font-size" style="padding-top: 0px; margin-left: 60px; color: #FF6A6A;">忘记密码</button>
+			<button id="register" type="button" class="mui-btn mui-btn-link own-main-color own-font-size" style="padding-top: 0px; margin-right: 60px;color: #777777;">快速注册</button>
+			<button id="repsd" type="button" class="mui-btn mui-btn-link own-font-size" style="padding-top: 0px; margin-left: 60px; color: #777777;font-size: 16px;">忘记密码?</button>
 		</div>
 		
 		
@@ -99,10 +100,11 @@
 					mui.toast(toastMSG);
 					return;
 				}
+				
 				//登陆联网处理todo之后将页面close
 				k = plus.nativeUI.showWaiting('正在登陆');
 				//联网注册
-				 mui.ajax('http://192.168.1.108/Pet/index.php/Home/login/login',{
+				 mui.ajax('http://192.168.16.126/Pet/index.php/Home/login/login',{
 	     	   		data:{
 	     	   			account:account.value,
 	     	   			psd:psd.value

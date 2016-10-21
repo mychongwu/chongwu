@@ -13,14 +13,14 @@
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		    <h1 class="mui-title">设置</h1>
 		</header>
-		<div id="" style="widows: 100%;height: 100px;background-color: pink;margin-top: 45px;">
+		<div id="" style="widows: 100%;height: 100px;background-color: #FFFFFF;margin-top: 45px;">
 			<div id="" style="width:30% ;height: 100px;background-color: ;float: left;">
-				<div id="" style="width: 70px;height: 70px;background-color:red ;margin: auto;border-radius: 80px;margin-top: 15px;">
+				<div id="" style="width: 70px;height: 70px;background-color: ;margin: auto;border-radius: 80px;margin-top: 15px;">
 					<img id="img" style="border-radius: 70px;" width="100%" src="../img/chat.jpeg"/>
 				</div>
 			</div>
 			<div id="" style="width:70% ;height: 100px;background-color: ;float: left;">
-				<span id="" style="float: right;margin-right: 15px;margin-top: 40px;">
+				<span id="" style="float: right;margin-right: 15px;margin-top: 40px;font-size: 14px;color: #777777;">
 					头像
 				</span>
 			</div>
@@ -28,47 +28,47 @@
 		<ul class="mui-table-view" style="margin-top: 10px;">
 			<li id="sex" class="mui-table-view-cell">
 				<span style="background-color: pink;color: #FFFFFF;border-radius: 5px;font-size: 20px;" class="mui-icon iconfont icon-wodedingdan"></span>
-				<span>性别</span>
-				<span id="msex" style="float: right">未设置</span>
+				<span style="color: #777777;">性别</span>
+				<span id="msex" style="float: right;font-size: 14px;color: #777777;">未设置</span>
 			</li>
 			<li id="mclass" class="mui-table-view-cell">
 				<span class="mui-icon iconfont icon-dizhi"></span>
-				<span>家族</span>
-				<span id="mmclass" style="float: right;">未设置</span>
+				<span style="color: #777777;">家族</span>
+				<span id="mmclass" style="float: right;font-size: 14px;color: #777777;">未设置</span>
 			</li>
 			<li id="birthday" class="mui-table-view-cell">
 				<span class="mui-icon iconfont icon-dizhi"></span>
-				<span>生日</span>
-				<span id="mbirthday" style="float: right;">未设置</span>
+				<span style="color: #777777;">生日</span>
+				<span id="mbirthday" style="float: right;font-size: 14px;color: #777777;">未设置</span>
 			</li>
 			<li id="city" class="mui-table-view-cell">
 				<span class="mui-icon iconfont icon-dizhi"></span>
-				<span>城市</span>
-				<span id="mcity" style="float: right;">呼和浩特市</span>
+				<span style="color: #777777;">城市</span>
+				<span id="mcity" style="float: right; font-size: 14px;color: #777777;">呼和浩特市</span>
 			</li>
 			<li class="mui-table-view-cell">
 				<span class="mui-icon iconfont icon-dizhi"></span>
-				<span>ID</span>
-				<span style="float: right;">100102</span>
+				<span style="color: #777777;">ID</span>
+				<span style="float: right; font-size: 14px;color: #777777;">100102</span>
 			</li>
 		</ul>
 		<ul class="mui-table-view" style="margin-top: 20px;">
 			<li id="phoneSys" class="mui-table-view-cell">
 				<a class="mui-navigate-right">
 					<span class="mui-icon iconfont icon-xiaolian"></span>
-					手机设置
+					<span style="color: #777777;">手机设置</span>
 				</a>
 			</li>
 			<li id="updete" class="mui-table-view-cell">
 				<a class="mui-navigate-right">
 					<span class="mui-icon iconfont icon-xiaolian"></span>
-					检测版本更新
+					<span style="color: #777777;">检测版本更新</span>
 				</a>
 			</li>
 			<li id="mtext" class="mui-table-view-cell">
 				<a class="mui-navigate-right">
 					<span class="mui-icon iconfont icon-xiaolian"></span>
-					免责声明及版权投诉
+					<span style="color: #777777;">免责声明及版权投诉</span>
 				</a>
 			</li>
 			
@@ -108,7 +108,7 @@
 				updete = document.getElementById('updete');
 				mtext = document.getElementById('mtext');
 				
-				mui.ajax('http://192.168.1.108/Pet/index.php/Home/User/system',{
+				mui.ajax('http://192.168.1.111/Pet/index.php/Home/User/system',{
 			     	   		data:{
 			     	   			user_id:user.website_id
 			     	   		},
@@ -145,8 +145,8 @@
 				
 				sex.addEventListener('tap',function(){
 					mui.openWindow({
-						url: '',
-						id: '',
+						url: 'sex.html',
+						id: 'sex.html',
 						show: {
 						},
 						extras:{
@@ -160,8 +160,8 @@
 				
 				mclass.addEventListener('tap',function(){
 					mui.openWindow({
-						url: '',
-						id: '',
+						url: 'mclass.html',
+						id: 'mclass.html',
 						show: {
 						},
 						extras:{
@@ -174,25 +174,198 @@
 				})
 				
 				birthday.addEventListener('tap',function(){
-					alert(1)
+					mui.openWindow({
+						url: 'birthday.html',
+						id: 'birthday.html',
+						show: {
+						},
+						extras:{
+							
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
 				})
 				
 				phoneSys.addEventListener('tap',function(){
-					alert(1);
+					mui.openWindow({
+						url: 'phone_system.html',
+						id: 'phone_system.html',
+						show: {
+						},
+						extras:{
+							
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
 				})
 				
 				updete.addEventListener('tap',function(){
-					alert(1);
+					checkUpdate();
 				})
 				
 				mtext.addEventListener('tap',function(){
-					alert(1);
+					mui.openWindow({
+						url: 'mtext_shengming.html',
+						id: 'mtext_shengming.html',
+						show: {
+						},
+						extras:{
+							
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				})	
+				img.addEventListener('tap',function(){
+					galleryImg();
 				})
-				
-				
-				
-				
-			})
+		})
+			
+	function plusReady(){
+		    // 获取本地应用资源版本号
+		    plus.runtime.getProperty(plus.runtime.appid,function(inf){
+		        wgtVer=inf.version;
+		        console.log("当前应用版本："+wgtVer);
+		    });
+		}
+		if(window.plus){
+		    plusReady();
+		}else{
+		    document.addEventListener('plusready',plusReady,false);
+		}
+		
+		var checkUrl="http://192.168.1.106/Pet/index.php/Home/User/checkup";
+		function checkUpdate(){
+		    plus.nativeUI.showWaiting("检测更新...");
+		    var xhr=new XMLHttpRequest();
+		    xhr.onreadystatechange=function(){
+		        switch(xhr.readyState){
+		            case 4:
+		            plus.nativeUI.closeWaiting();
+		            if(xhr.status==200){
+		                console.log("检测更新成功："+xhr.responseText);
+		                var newVer=xhr.responseText;
+		                if(wgtVer&&newVer&&(wgtVer!=newVer)){
+		                    downWgt();  // 下载升级包
+		                }else{
+		                    plus.nativeUI.alert("无新版本可更新！");
+		                }
+		            }else{
+		                console.log("检测更新失败！");
+		                plus.nativeUI.alert("检测更新失败！");
+		            }
+		            break;
+		            default:
+		            break;
+		        }
+		    }
+		    xhr.open('GET',checkUrl);
+		    xhr.send();
+		}
+		// 下载wgt文件
+		var wgtUrl='192.168.1.102';
+		function downWgt(){
+		    plus.nativeUI.showWaiting("下载wgt文件...");
+		    plus.downloader.createDownload( wgtUrl, {filename:"_doc/update/"}, function(d,status){
+		        if ( status == 200 ) { 
+		            console.log("下载wgt成功："+d.filename);
+		            installWgt(d.filename); // 安装wgt包
+		        } else {
+		            console.log("下载wgt失败！");
+		            plus.nativeUI.alert("下载wgt失败！");
+		        }
+		        plus.nativeUI.closeWaiting();
+		    }).start();
+		}
+		
+		// 更新应用资源
+		function installWgt(path){
+		    plus.nativeUI.showWaiting("安装wgt文件...");
+		    plus.runtime.install(path,{},function(){
+		        plus.nativeUI.closeWaiting();
+		        console.log("安装wgt文件成功！");
+		        plus.nativeUI.alert("应用资源更新完成！",function(){
+		            plus.runtime.restart();
+		        });
+		    },function(e){
+		        plus.nativeUI.closeWaiting();
+		        console.log("安装wgt文件失败["+e.code+"]："+e.message);
+		        plus.nativeUI.alert("安装wgt文件失败["+e.code+"]："+e.message);
+		    });
+		}
+		
+		
+		
+		document.addEventListener( "plusready", onPlusReady, false );
+			function onPlusReady() {
+			}
+			// 从相册中选择图片 
+			function galleryImg() {
+				// 从相册中选择图片
+				console.log("从相册中选择图片:");
+			    plus.gallery.pick( function(path){
+			    	console.log(path);
+			    	img.src = path;
+			    	var timestamp=new Date().getTime();
+			    	createUpload(path,timestamp);
+			    }, function ( e ) {
+			    	console.log( "取消选择图片" );
+			    }, {filter:"image"} );
+			}
+			
+			document.addEventListener( "plusready", onPlusReady, false );
+			var r = null; 
+			function onPlusReady() {
+			}
+			function createUpload(fullPath,name) {
+				var task = plus.uploader.createUpload("http://192.168.1.111/Pet/index.php/Home/User/timg", 
+					{ method:"POST",blocksize:204800,priority:100 },
+					function ( t,status ) {
+						// 上传完成
+						if ( status == 200 ) { 
+							alert( "Upload success: " + t.url );
+							addmytx(name);
+						} else {
+							alert( "Upload failed: " + status );
+						}
+					}
+				);
+				task.addFile( fullPath, {key:name} );
+				task.start();
+			}
+			
+			//联网更改头像
+			function addmytx(name){
+				mui.ajax('http://192.168.1.111/Pet/index.php/Home/User/sys',{
+	     	   		data:{
+	     	   			user_id:user.website_id,
+	     	   			img:name
+	     	   		},
+	     	   		dataType:'json',
+	     	   		type:'post',
+	     	   		success:function(data){
+	     	   			if(data == 1){
+	     	   				mui.toast('修改成功');
+	     	   				var ress = plus.webview.getWebviewById("baritemHtml/mine.html");
+							ress.reload(true);
+	     	   			}else{
+	     	   				mui.toast('修改失败');
+	     	   			}
+	     	   			
+	     	    	},
+		     	    error:function(xhr,type,errorThrown){
+						//异常处理；
+						console.log(type);
+					}
+		      	});
+			}
+			
+			
 		</script>
 	</body>
 

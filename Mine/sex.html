@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body style="background-color: #FFFFFF;">
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <span id="sub" style="float: right;" class="mui-icon mui-icon-upload"></span>
+		    <h1 class="mui-title">选择性别</h1>
+		</header>
+		<div id="" style="width: 100%;height: 150px;background-color: ;margin-top: 30%;">
+			<div id="nan" style="width: 100px;height: 100px;background-color: ;margin: ;float: left;border-radius: 300px;margin-top: 5%;margin-left: 40px;">
+				<img id="nanwa" width="100%" src="../img/nannwawa.png"/>
+			</div>
+		<div id="nv" style="width: 100px;height: 100px;background-color: ;margin: ;float: right;border-radius: 300px;margin-top: 5%;margin-right: 40px;">
+			<img id="nvwa" width="100%" src="../img/nvwawa.png"/>
+		</div>
+		
+			
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:false
+			});
+			var nan;
+			var nv;
+			var sub;
+			var sum = '';
+			var nanwa;
+			var nvwa
+			var user = JSON.parse(localStorage.getItem('user'));
+			mui.plusReady(function(){
+				nan = document.getElementById('nan');
+				nv = document.getElementById('nv');
+				nanwa = document.getElementById('nanwa');
+				nvwa = document.getElementById('nvwa');
+				sub = document.getElementById('sub');
+				nan.addEventListener('tap',function(){
+					sum = 1;
+					nanwa.src = "../img/nan.png"
+					nvwa.src = "../img/nvwawa.png"
+				})
+				nv.addEventListener('tap',function(){
+					sum = 2;
+					nanwa.src = "../img/nannwawa.png";
+					nvwa.src = "../img/nv.png";
+				})
+				
+				sub.addEventListener('tap',function(){
+					
+					mui.ajax('http://192.168.1.106/Pet/index.php/Home/User/sys',{
+			     	   		data:{
+			     	   			sex:sum,
+			     	   			user_id:user.website_id
+			     	   		},
+			     	   		dataType:'json',
+			     	   		type:'post',
+			     	   		success:function(data){
+			     	   			if(data == 1){
+			     	   				mui.toast('修改成功');
+			     	   				mui.back();
+			     	   			}else{
+			     	   				mui.toast('修改失败');
+			     	   			}
+			     	    	},
+			     	    	error:function(xhr,type,errorThrown){
+								//异常处理；
+								console.log(type);
+							}
+			       		});
+				})
+			})
+		</script>
+	</body>
+
+</html>
