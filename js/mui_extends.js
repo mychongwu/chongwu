@@ -9,12 +9,11 @@
 	create_tag = function(tagName, attrs, value) {
 			if(typeof(attrs) != "object") {
 				value = attrs;
+				attrs = [];
 			}
 			var tag = document.createElement(tagName);
-			if(typeof(attrs) == "object") {
-				for(var i in attrs) {
-					tag.setAttribute(i, attrs[i]);
-				}
+			for(var i in attrs) {
+				tag.setAttribute(i, attrs[i]);
 			}
 			if(tagName.toLowerCase() == "input") {
 				tag.value = value;
@@ -103,12 +102,12 @@
 		var obj = document.getElementById(id);
 		obj.appendChild(ul);
 		mui(".mui-table-view-cell").on('tap', ".dzg-a-class", function() {
-			
-			var data_params = eval("("+this.getAttribute("data-params")+")");
+
+			var data_params = eval("(" + this.getAttribute("data-params") + ")");
 			var href = data_params['href'];
 			delete data_params['href'];
-//			console.log(JSON.stringify(data_params));
-//			console.log(href);
+			//			console.log(JSON.stringify(data_params));
+			//			console.log(href);
 			mui.openWindow({
 				id: href,
 				url: href,

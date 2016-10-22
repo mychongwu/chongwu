@@ -303,6 +303,8 @@
 				color: #ff4677;
 			}
 		</style>
+		<script src="../js/Cache.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/im_data.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body contextmenu="return false;">
@@ -312,12 +314,12 @@
 		</header>
 		<pre id='h'></pre>
 		
-		
 		<script id='msg-template' type="text/template">
-			<span class="dzg-datetime-span">2016-10-14 14:56:30</span>
+			
 			<% for(var i in record){ var item=record[i]; %>
-				<div class="msg-item <%= (item.sender=='self'?' msg-item-self':'') %>" msg-type='<%=(item.type)%>' msg-content='<%=(item.content)%>'>
-					<% if(item.sender=='self' ) { %>
+				<span class="dzg-datetime-span"><%=(item.dtime)%></span>
+				<div class="msg-item <%= (item.sender==user.id ?' msg-item-self':'') %>" msg-type='<%=(item.type)%>' msg-content='<%=(item.content)%>'>
+					<% if(item.sender==user.id ) { %>
 						<img class="msg-content-image msg-user mui-icon mui-icon-person" id="dzg-icon-tx" src="../img/touxiang.jpg" style="max-width: 100px;" />
 					<% } else { %>
 						<img class="msg-user-img" src="../img/touxiang.jpg" alt="" />
@@ -370,12 +372,20 @@
 				template.config('escape', false);
 				//$.plusReady=function(fn){fn();};
 				$.plusReady(function() {
+					localStorage.setItem("user", '{"id":100,"namne":"dzg"}');
 					var webview = plus.webview.currentWebview();
-					//console.log(JSON.stringify(webview));
+					var user = localStorage.getItem('user');
+					user = eval("("+user+")");
+					
+					// 清除聊天记录
+//					im_data.clear(webview.u_id,function(tx){ 
+//						console.log(tx);
+//						bindMsgList();
+//					}); 
 					if(webview.name == "") {
 						webview.name = "游客";
 					}
-					var user = localStorage.getItem('user');
+					
 //					}
 					document.getElementById("dzg-title-name").innerHTML = webview.name;
 					plus.webview.currentWebview().setStyle({
@@ -404,6 +414,8 @@
 //						type: 'text',
 //						content: 'Hi，我是 MUI 小管家！'
 //					}];
+					//
+					
 					var ui = {
 						body: doc.querySelector('body'),
 						footer: doc.querySelector('footer'),
@@ -418,29 +430,27 @@
 					ui.h.style.width = ui.boxMsgText.offsetWidth + 'px';
 					var footerPadding = ui.footer.offsetHeight - ui.boxMsgText.offsetHeight;
 					var bindMsgList = function() {
-						//绑定数据:
-						/*tp.bind({
-							template: 'msg-template',
-							element: 'msg-list',
-							model: record
-						});*/
-						console.log(JSON.stringify(record));
-						ui.areaMsgList.innerHTML = template('msg-template', {
-							"record": record/*获取所有聊天数据-dzg*/
+						im_data.get(user.id,webview.u_id,function(data){
+							console.log(JSON.stringify(data));
+							ui.areaMsgList.innerHTML = template('msg-template', {
+								"record": data,/*获取所有聊天数据-dzg*/
+								"user": user
+							});
+							ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
 						});
-						
-						ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
 					};
 					bindMsgList();
 					window.addEventListener('resize', function() {
 						ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
 					}, false);
 					var send = function(msg) {
-						record.push(msg);
-						bindMsgList();
-						console.log("写入的json内容:"+JSON.stringify(msg));/*写入的内容-dzg*/
-						toRobot(msg.content);
-						console.log(JSON.stringify(record));
+//						record.push(msg);
+						console.log(JSON.stringify(msg));
+						im_data.set(user.id, webview.u_id, msg,function(tx){
+							toRobot(msg.content);
+							bindMsgList();
+						});
+						//bindMsgList();
 					};
 					var toRobot = function(info) {
 						var apiUrl = 'http://www.tuling123.com/openapi/api';
@@ -449,16 +459,11 @@
 							"info": info,
 							"userid": plus.device.uuid
 						}, function(data) {
-							console.log(JSON.stringify(data));
-							record.push({
-								sender: 'zs',
-								type: 'text',
-								content: data.text
+							im_data.set(user.id, webview.u_id, {sender: user.id,type: 'text',content: data.text},function(d){
+								bindMsgList();
 							});
-							bindMsgList();
 						});
-						
-					};
+ 					};
 
 					function msgTextFocus() {
 							ui.boxMsgText.focus();
@@ -490,7 +495,7 @@
 							return false;
 						}
 						send({
-							sender: 'self',
+							sender: webview.u_id,//dzg-
 							type: 'text',
 							content: ui.boxMsgText.value.replace(new RegExp('\n', 'gm'), '<br/>')
 						});
