@@ -28,7 +28,10 @@
 						contentrefresh: '正在加载..',
 						contentnomore: '没有更多好友了',
 						callback: pullupRefresh
-					}
+					},
+					preloadPages : [
+						"/Chat/im-chat.html"
+					],
 				}
 			});
 			var data = [{
@@ -36,7 +39,8 @@
 				"m_title": "张三",
 				"m_content": "这家伙很懒...",
 				"m_href": "/Chat/im-chat.html",
-				"m_params": {"u_id":"1","name":"张三","tx":"../img/touxiang.jpg"}
+				"m_params": {"u_id":"1","name":"张三","tx":"../img/touxiang.jpg"},
+				"news" : 10
 			}, {
 				"m_src": "../img/touxiang.jpg",
 				"m_title": "李四",
@@ -64,7 +68,7 @@
 					"m_content": "m_content",
 					"m_href": "m_href",
 					"m_params": "m_params"
-				}, 3);
+				}, 1);
 			});
 
 			//		var  xinyuandanwebview;//心愿单当前页面

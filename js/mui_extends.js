@@ -71,11 +71,16 @@
 				data[i][data_columns.m_params].href = data[i][data_columns.m_href];
 				data[i][data_columns.m_params] = JSON.stringify(data[i][data_columns.m_params]);
 			}
+			var va = '';
+			if(data[i]['news']){
+				va = '<span class="mui-badge mui-badge-success">'+(data[i]['news'])+'</span>'	
+			}
+			
 			var a = create_tag("a", {
 				"href": "javascrip:;",
 				"class": a_class,
 				"data-params": data[i][data_columns.m_params]
-			}, "");
+			}, va);
 
 			a.appendChild(img);
 			a.appendChild(div);
@@ -83,20 +88,6 @@
 				"class": "mui-table-view-cell mui-media"
 			}, "");
 			li.appendChild(a);
-			//			if(data[i][data_columns.m_href] != "") {
-			//				a.addEventListener('tap', function() {
-			//					mui.openWindow({
-			//						id: data[i][data_columns.m_href],
-			//						url: data[i][data_columns.m_href],
-			//						extras: data[i][data_columns.m_params],
-			//						waiting:{
-			//							autoShow:true,//自动显示等待框，默认为true
-			//    						title:'正在加载...',//等待对话框上显示的提示内容 
-			//						}
-			//					});
-			//					console.log(JSON.stringify({id: data[i][data_columns.m_href]+Math.random(),url: data[i][data_columns.m_href],extras: data[i][data_columns.m_params]}));
-			//				}, true);
-			//			}
 			ul.appendChild(li);
 		}
 		var obj = document.getElementById(id);
