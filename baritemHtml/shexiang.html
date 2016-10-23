@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>Camera Example</title>
+	<script type="text/javascript">
+// 扩展API加载完毕后调用onPlusReady回调函数 
+document.addEventListener( "plusready", onPlusReady, false );
+// 扩展API加载完毕，现在可以正常调用扩展API 
+function onPlusReady() {
+	console.log("plusready");
+}
+// 摄像
+function videoCapture(){
+	var cmr = plus.camera.getCamera();
+	var res = cmr.supportedVideoResolutions[0];
+	var fmt = cmr.supportedVideoFormats[0];
+	console.log("Resolution: "+res+", Format: "+fmt);
+	cmr.startVideoCapture( function( path ){
+			console.log( "Capture video success: " + path );  
+		},
+		function( error ) {
+			console.log( "Capture video failed: " + error.message );
+		},
+		{resolution:res,format:fmt}
+	);
+}
+	</script>
+	</head>
+	<body>
+		<button onclick="videoCapture()">摄像</button>
+	</body>
+</html>
