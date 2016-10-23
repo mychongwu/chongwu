@@ -28,15 +28,15 @@
 <body>
 	<header class="mui-bar mui-bar-nav own-main-background-color">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="topnavleft" style="display: none;"></a>
-		<a id="menuss" style="color: #FFFFFF;" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" ></a>
-		<h1 id="nav-title" class="mui-title">首页</h1>
+		<span style="float: right;color: #FFFFFF;" class="mui-icon mui-icon-bars"></span>
+		<h1 id="nav-title" class="mui-title">首页1</h1>
 	</header>
 	<nav class="mui-bar mui-bar-tab">
 		<a class="mui-tab-item mui-active" href="baritemHtml/home.html">
 			<span class="mui-icon iconfont icon-home"></span>
 			<span class="mui-tab-label">首页</span>
 		</a>
-		<a class="mui-tab-item" href="baritemHtml/category.html">
+		<a class="mui-tab-item" href="baritemHtml/test.html">
 			<span class="mui-icon iconfont icon-fenlei"></span>
 			<span class="mui-tab-label">宠物</span>
 		</a>
@@ -65,7 +65,7 @@
 		var mainWebView; //当前主webview
 		var navtitle;
 		var curTabItem; //当前被选中tabitem
-		var barItemUrl = ['baritemHtml/home.html', 'baritemHtml/category.html', 'baritemHtml/cart.html', 'baritemHtml/mine.html'];
+		var barItemUrl = ['baritemHtml/home.html', 'baritemHtml/category.html', 'baritemHtml/xinyuandan.html', 'baritemHtml/cart.html', 'baritemHtml/mine.html'];
 		var barItemWebView = {}; //每个tabitem所对应显示的页面对象
 		 //父子模版页面
 		var headerWebView;
@@ -78,7 +78,6 @@
 			plus.navigator.setStatusBarBackground('#41cea9');
 			navtitle = document.getElementById('nav-title');
 			mainWebView = plus.webview.currentWebview();
-			
 			//判断是否已经登陆,若没有登陆将预加载登陆页面，知道登陆成功为止close登陆页面
 			judgelogin();
 			//初始化商品详情页面。
@@ -117,7 +116,7 @@
 					url:'Mine/login.html',
 					id:'Mine/login.html',
 					styles:{
-						top:'0px',
+						top:'0px', 
 						bottom:'0px'
 					}
 				});
@@ -176,7 +175,6 @@
 					barItemWebView[i].hide();
 //				}
 				mainWebView.append(barItemWebView[i]);
-				
 			}
 			
 			barItemWebView[0].show();
@@ -185,7 +183,6 @@
 
 		function addEventForTabitem() {
 			mui('.mui-bar-tab').on('tap', '.mui-tab-item', function() {
-				
 				var tabitem = this;
 				if (tabitem == curTabItem) {
 					return;
@@ -194,10 +191,6 @@
 				navtitle.innerText = tabitem.children[tabitem.children.length - 1].innerText;
 				//设置将显示当前webview
 				showCurWebView(tabitem.getAttribute('href'));
-				
-				
-				//mui.fire(tabitem.getAttribute('href'),'showOrHidePopover',{param:333});
-				
 			});
 		}
 		
@@ -278,7 +271,7 @@
 				var categoryID = options.detail.categoryID;
 				
 				
-				console.log(id+'zzzzzzzzzzzzzzzzzz');
+				console.log(id);
 				console.log(href);
 				console.log(aniShow);
 				console.log(title);
@@ -382,61 +375,6 @@
 			}
 		}
 	</script>
-
-
-				<!--右上角弹出菜单-->
-		<div id="topPopover" class="mui-popover" style="z-index: 9999;">
-			<div class="mui-popover-arrow"></div>
-			<div class="mui-scroll-wrapper">
-				<div class="mui-scroll">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							<a href="#">Item1</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="#">Item2</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="#">Item3</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="#">Item4</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="#">Item5</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="#">Item6</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="#">Item7</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="#">Item8</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="#">Item9</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="#">Item10</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-		</div>
-
-<script type="text/javascript">
-	
-	mui('.mui-scroll-wrapper').scroll();
-			mui('body').on('shown', '.mui-popover', function(e) {
-				//console.log('shown', e.detail.id);//detail为当前popover元素
-			});
-			mui('body').on('hidden', '.mui-popover', function(e) {
-				//console.log('hidden', e.detail.id);//detail为当前popover元素
-			});
-	
-	//
-	var menus = document.getElementById("menuss");
-			menus.addEventListener('tap',function(){
-				
-				//mui.fire('home.html','showOrHidePopover',{param:333});
-				barItemWebView[0].evalJS("showOrHidePopover()");
-				//console.log(barItemWebView);
-				
-			});
-</script>
 
 </body>
 

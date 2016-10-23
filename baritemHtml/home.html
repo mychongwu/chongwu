@@ -348,9 +348,9 @@
 				var id = this.id;
 				
 				if(id=='up_video'){
+					videoCapture1();
 					
-					
-					videoCapture();
+					//videoCapture();
 					
 //			      mui.openWindow({
 //				  	url:'shexiang.html',
@@ -378,7 +378,31 @@
 				);
 			}
 		</script>
-
+<script type="text/javascript">
+	var cmr=null;
+// 摄像
+function videoCapture1(){
+	cmr = plus.camera.getCamera();
+	var res = cmr.supportedVideoResolutions[0];
+	var fmt = cmr.supportedVideoFormats[0];
+	console.log("Resolution: "+res+", Format: "+fmt);
+	cmr.startVideoCapture( function( path ){
+			console.log( "Capture video success: " + path );  
+		},
+		function( error ) {
+			console.log( "Capture video failed: " + error.message );
+		},
+		{resolution:res,format:fmt}
+	);
+	// 拍摄10s后自动完成 
+	setTimeout( stopCapture, 10000 );
+}
+// 停止摄像
+function stopCapture(){
+	console.log("stopCapture");
+	cmr.stopVideoCapture();
+}
+</script>
 	</body>
 
 </html>
