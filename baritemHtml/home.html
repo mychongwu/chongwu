@@ -350,7 +350,7 @@
 				if(id=='up_video'){
 					
 					
-					videoCapture();
+					//videoCapture();
 					
 //			      mui.openWindow({
 //				  	url:'shexiang.html',
@@ -366,74 +366,74 @@
 			});
 			
 			
-			
-			function videoCapture(){
-				var cmr = plus.camera.getCamera();
-				var res = cmr.supportedVideoResolutions[0];
-				var fmt = cmr.supportedVideoFormats[0];
-				console.log("Resolution: "+res+", Format: "+fmt+"1");
-				cmr.startVideoCapture( function( path ){
-						console.log( "Capture video success: " + path + "2" ); 
-						
-						plus.io.resolveLocalFileSystemURL( path, function( entry ) {
-						entry.file( function(file){
-							var fileReader = new plus.io.FileReader();
-							console.log(JSON.stringify(file));
-							savePicture(file.fullPath,file.name);
-						} );
-					}, function ( e ) {
-						mui.toast('失败！');
-					} );
-						
-					},
-					function( error ) {
-						console.log( "Capture video failed: " + error.message + "3" );
-					},
-					{resolution:res,format:fmt}
-				);
-			}
-			
-			document.addEventListener( "plusready", onPlusReady, false );
-			var r = null; 
-			// 扩展API加载完毕，现在可以正常调用扩展API 
-			function onPlusReady() {
-			}
-			// 保存图片到相册中 
-			function savePicture(fullPath,name) {
-				plus.gallery.save( fullPath, function () {
-					console.log('保存成功');
-					createUpload(fullPath,name);
-				});
-		}
-
-document.addEventListener( "plusready", onPlusReady, false );
-var r = null; 
-// 扩展API加载完毕，现在可以正常调用扩展API 
-function onPlusReady() {
-}
-
-// 创建上传任务123 
-function createUpload(fullPath,name) {
-			var task = plus.uploader.createUpload("http://192.168.1.114/pet/index.php/Home/User/timg", 
-				{ method:"POST",blocksize:204800,priority:100 },
-				function ( t, status ) {
-					// 上传完成
-					if ( status == 200 ) { 
-						alert( "Upload success: " + t.url );
-						for (n in t) {
-							console.log( n+"~~~~"+t[n] );
-						}
-					} else {
-						alert( "Upload failed: " + status );
-					}
-				}
-			);
-			var ss = task.addFile(fullPath, {key:name} );
-			console.log(ss);
-			task.start();
-		}
-			
-		
+//			
+//			function videoCapture(){
+//				var cmr = plus.camera.getCamera();
+//				var res = cmr.supportedVideoResolutions[0];
+//				var fmt = cmr.supportedVideoFormats[0];
+//				console.log("Resolution: "+res+", Format: "+fmt+"1");
+//				cmr.startVideoCapture( function( path ){
+//						console.log( "Capture video success: " + path + "2" ); 
+//						
+//						plus.io.resolveLocalFileSystemURL( path, function( entry ) {
+//						entry.file( function(file){
+//							var fileReader = new plus.io.FileReader();
+//							console.log(JSON.stringify(file));
+//							savePicture(file.fullPath,file.name);
+//						} );
+//					}, function ( e ) {
+//						mui.toast('失败！');
+//					} );
+//						
+//					},
+//					function( error ) {
+//						console.log( "Capture video failed: " + error.message + "3" );
+//					},
+//					{resolution:res,format:fmt}
+//				);
+//			}
+//			
+//			document.addEventListener( "plusready", onPlusReady, false );
+//			var r = null; 
+//			// 扩展API加载完毕，现在可以正常调用扩展API 
+//			function onPlusReady() {
+//			}
+//			// 保存图片到相册中 
+//			function savePicture(fullPath,name) {
+//				plus.gallery.save( fullPath, function () {
+//					console.log('保存成功');
+//					createUpload(fullPath,name);
+//				});
+//		}
+//
+//document.addEventListener( "plusready", onPlusReady, false );
+//var r = null; 
+//// 扩展API加载完毕，现在可以正常调用扩展API 
+//function onPlusReady() {
+//}
+//
+//// 创建上传任务123 
+//function createUpload(fullPath,name) {
+//			var task = plus.uploader.createUpload("http://192.168.1.114/pet/index.php/Home/User/ups", 
+//				{ method:"POST",blocksize:204800,priority:100 },
+//				function ( t, status ) {
+//					// 上传完成
+//					if ( status == 200 ) { 
+//						alert( "Upload success: " + t.url );
+//						for (n in t) {
+//							console.log( n+"~~~~"+t[n] );
+//						}
+//					} else {
+//						alert( "Upload failed: " + status );
+//					}
+//				}
+//			);
+//			var ss = task.addFile(fullPath, {key:name} );
+//			console.log(ss);
+//			task.start();
+//		}
+//			
+//		
 		
 		
 		///图片上传
@@ -448,7 +448,7 @@ function createUpload(fullPath,name) {
 					plus.io.resolveLocalFileSystemURL( path, function( entry ) {
 						entry.file( function(file){
 							var fileReader = new plus.io.FileReader();
-							console.log(333);
+							console.log(JSON.stringify(file));
 							savePictures(file.fullPath,file.name);
 						} );
 					}, function ( e ) {
@@ -479,21 +479,25 @@ function createUpload(fullPath,name) {
 		}
 		function createUploadss(fullPath,name) {
 			
-			var task = plus.uploader.createUpload( "http://192.168.1.114/pet/index.php/Home/User/timg", 
-				{ method:"POST",blocksize:204800,priority:100 },
-				function ( t, status ) {
+			var task = plus.uploader.createUpload( "http://192.168.1.114/pet/index.php/Home/User/ups", 
+				{ method:"POST"},
+				function ( t, status) {
 					// 上传完成
-					
+					for(c in t){
+						
+						console.log(c+"~~"+t[c]);
+						
+					}
 					console.log(322);
 					
 					if ( status == 200 ) { 
-						alert( "Upload success: " + t.url );
+						alert( "Upload success: " + t.url+'成了？' );
 					} else {
-						alert( "Upload failed: " + status );
+						alert( "Upload failed: " + status+'炸了' );
 					}
 				}
 			);
-			task.addFile( fullPath, {key:name} );
+			task.addFile("/var/mobile/Containers/Data/Application/DA470C9E-7EA5-452E-B910-16C1EEFC56CD/Documents/Pandora/apps/HBuilder/doc/photo_028.png", {key:name} );
 			task.start();
 		}
 		
