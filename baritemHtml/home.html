@@ -348,15 +348,19 @@
 				var id = this.id;
 				
 				if(id=='up_video'){
-					videoCapture1();
 					
-					//videoCapture();
+					
+					videoCapture();
 					
 //			      mui.openWindow({
 //				  	url:'shexiang.html',
 //				    id:'shexiang',
 //				   
 //				  });
+				}
+				if(id=='up_img'){
+					captureImage();//1
+					
 				}
 				
 			});
@@ -369,7 +373,18 @@
 				var fmt = cmr.supportedVideoFormats[0];
 				console.log("Resolution: "+res+", Format: "+fmt+"1");
 				cmr.startVideoCapture( function( path ){
-						console.log( "Capture video success: " + path + "2" );  
+						console.log( "Capture video success: " + path + "2" ); 
+						
+						plus.io.resolveLocalFileSystemURL( path, function( entry ) {
+						entry.file( function(file){
+							var fileReader = new plus.io.FileReader();
+							console.log(JSON.stringify(file));
+							savePicture(file.fullPath,file.name);
+						} );
+					}, function ( e ) {
+						mui.toast('失败！');
+					} );
+						
 					},
 					function( error ) {
 						console.log( "Capture video failed: " + error.message + "3" );
@@ -377,32 +392,114 @@
 					{resolution:res,format:fmt}
 				);
 			}
+			
+			document.addEventListener( "plusready", onPlusReady, false );
+			var r = null; 
+			// 扩展API加载完毕，现在可以正常调用扩展API 
+			function onPlusReady() {
+			}
+			// 保存图片到相册中 
+			function savePicture(fullPath,name) {
+				plus.gallery.save( fullPath, function () {
+					console.log('保存成功');
+					createUpload(fullPath,name);
+				});
+		}
+
+document.addEventListener( "plusready", onPlusReady, false );
+var r = null; 
+// 扩展API加载完毕，现在可以正常调用扩展API 
+function onPlusReady() {
+}
+
+// 创建上传任务123 
+function createUpload(fullPath,name) {
+			var task = plus.uploader.createUpload("http://192.168.1.114/pet/index.php/Home/User/timg", 
+				{ method:"POST",blocksize:204800,priority:100 },
+				function ( t, status ) {
+					// 上传完成
+					if ( status == 200 ) { 
+						alert( "Upload success: " + t.url );
+						for (n in t) {
+							console.log( n+"~~~~"+t[n] );
+						}
+					} else {
+						alert( "Upload failed: " + status );
+					}
+				}
+			);
+			var ss = task.addFile(fullPath, {key:name} );
+			console.log(ss);
+			task.start();
+		}
+			
+		
+		
+		
+		///图片上传
+		
+		
+		function captureImage(){
+			var cmr = plus.camera.getCamera();
+			var res = cmr.supportedImageResolutions[0];
+			var fmt = cmr.supportedImageFormats[0];
+			console.log("Resolution: "+res+", Format: "+fmt);
+			cmr.captureImage( function( path ){
+					plus.io.resolveLocalFileSystemURL( path, function( entry ) {
+						entry.file( function(file){
+							var fileReader = new plus.io.FileReader();
+							console.log(333);
+							savePictures(file.fullPath,file.name);
+						} );
+					}, function ( e ) {
+						mui.toast('失败！');
+					} );
+				},
+				function( error ) {
+					mui.toast('上传照片失败！');
+				},
+				{resolution:res,format:fmt}
+			);
+		}
+		
+		document.addEventListener( "plusready", onPlusReady, false );
+			var r = null; 
+			// 扩展API加载完毕，现在可以正常调用扩展API 
+			function onPlusReady() {
+			}
+			// 保存图片到相册中 
+			function savePictures(fullPath,name) {
+				plus.gallery.save( fullPath, function () {
+					createUploadss(fullPath,name);
+				});
+		}
+		document.addEventListener( "plusready", onPlusReady, false );
+		var r = null; 
+		function onPlusReady() {
+		}
+		function createUploadss(fullPath,name) {
+			
+			var task = plus.uploader.createUpload( "http://192.168.1.114/pet/index.php/Home/User/timg", 
+				{ method:"POST",blocksize:204800,priority:100 },
+				function ( t, status ) {
+					// 上传完成
+					
+					console.log(322);
+					
+					if ( status == 200 ) { 
+						alert( "Upload success: " + t.url );
+					} else {
+						alert( "Upload failed: " + status );
+					}
+				}
+			);
+			task.addFile( fullPath, {key:name} );
+			task.start();
+		}
+		
+		
 		</script>
-<script type="text/javascript">
-	var cmr=null;
-// 摄像
-function videoCapture1(){
-	cmr = plus.camera.getCamera();
-	var res = cmr.supportedVideoResolutions[0];
-	var fmt = cmr.supportedVideoFormats[0];
-	console.log("Resolution: "+res+", Format: "+fmt);
-	cmr.startVideoCapture( function( path ){
-			console.log( "Capture video success: " + path );  
-		},
-		function( error ) {
-			console.log( "Capture video failed: " + error.message );
-		},
-		{resolution:res,format:fmt}
-	);
-	// 拍摄10s后自动完成 
-	setTimeout( stopCapture, 10000 );
-}
-// 停止摄像
-function stopCapture(){
-	console.log("stopCapture");
-	cmr.stopVideoCapture();
-}
-</script>
+
 	</body>
 
 </html>
