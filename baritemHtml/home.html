@@ -269,6 +269,7 @@
 		</div>
 		
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/config.js"></script>
 		<script>
 			mui.init({
 			swipeBack:false,
@@ -479,7 +480,7 @@
 		}
 		function createUploadss(fullPath,name) {
 			
-			var task = plus.uploader.createUpload( "http://192.168.1.114/pet/index.php/Home/User/ups", 
+			var task = plus.uploader.createUpload( config.ajax_url+"/Home/Ww/ups", 
 				{ method:"POST"},
 				function ( t, status) {
 					// 上传完成
@@ -497,10 +498,10 @@
 					}
 				}
 			);
-			task.addFile("/var/mobile/Containers/Data/Application/DA470C9E-7EA5-452E-B910-16C1EEFC56CD/Documents/Pandora/apps/HBuilder/doc/photo_028.png", {key:name} );
+			task.addFile(fullPath, {key:name} );
 			task.start();
 		}
-		
+	
 		
 		</script>
 
