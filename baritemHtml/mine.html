@@ -44,7 +44,7 @@
 					<!--<span id="touxiangimg"  class="mui-icon mui-icon-person" style="font-size: 3.8em; color: white;"></span>--> 
 					<img id="trueimg" src="../img/mao.png"  style="width: 100%; height: 100%; border-radius: 50%;" />	
 				</div>
-				<span id="touxiangword" style="font-size: 14px;">请登录</span>
+				<span id="touxiangword" style="font-size: 14px;color: #FFFFFF;">请登录</span>
 			</div>
 		</div>
 		
@@ -114,6 +114,7 @@
 		var logoutBtn;
 		var trueimg;
 		var touxiangword;
+		var user = JSON.parse(localStorage.getItem('user'));
 		mui.plusReady(function(){
 			parentWebView = plus.webview.currentWebview().parent();
 			aniShow = getaniShow();
@@ -134,7 +135,7 @@
 				touxiangimg.style.display = 'none';
 				var user = JSON.parse(localStorage.getItem('user'));
 				trueimg.src = '../img/nan.png';
-				touxiangword.innerText = user.website_name;
+				touxiangword.innerText = user.username;
 				touxiangword.style.color = '#FFFFFF';
 			}
 			
