@@ -103,7 +103,7 @@
 				}
 				
 				//登陆联网处理todo之后将页面close
-				k = plus.nativeUI.showWaiting('正在登陆');
+				k = plus.nativeUI.showWaiting('正在登录');
 				//联网注册
 				 mui.ajax(config.ajax_url+'Home/login/login',{
 	     	   		data:{
@@ -125,6 +125,7 @@
 	     	    	error:function(xhr,type,errorThrown){
 						//异常处理；
 						k.close();
+						mui.toast('请检测网络');
 						console.log(type);
 					}
 	       		});

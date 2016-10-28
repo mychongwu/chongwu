@@ -48,6 +48,7 @@
 	
 	<script src="../js/mui.min.js" charset="UTF-8"></script>
 	<script src="../js/own.js" charset="UTF-8"></script>
+	<script src="../js/config.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/ajax.js" charset="UTF-8"></script>
 	<script type="text/javascript" charset="UTF-8">
 		mui.init({
@@ -86,6 +87,7 @@
 	     	   		data:{
 	     	   			account:account.value,
 	     	   			psd:psd.value
+	     	   			
 	     	   		},
 	     	   		dataType:'json',
 	     	   		type:'post',
@@ -107,18 +109,13 @@
 	     	    	error:function(xhr,type,errorThrown){
 						//异常处理；
 						k.close();
+						mui.toast('请检查网络');
 						console.log(type);
 					}
 	       		});
 			},false);
 			
 		});
-		
-		function registerSeccess(data) {
-			if (data.code == '000000') {
-				
-			}
-		}
 	</script>
 	
 </body>

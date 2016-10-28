@@ -11,6 +11,7 @@
 		<!--<link href="../css/mui.picker.css" rel="stylesheet" />
 		<link href="../css/mui.dtpicker.css" rel="stylesheet" />-->
 		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<script src="../js/config.js" type="text/javascript" charset="utf-8"></script>
 		<style>
 			html,
 			body,
@@ -119,18 +120,30 @@
 				sub = document.getElementById('sub');
 				result = document.getElementById('result');
 				sub.addEventListener('tap',function(){
-					mui.ajax('http://192.168.1.106/Pet/index.php/Home/User/sys',{
+					k = plus.nativeUI.showWaiting();
+					mui.ajax(config.ajax_url+'/Home/User/sys',{
 			     	   		data:{
 			     	   			birthday:result.innerHTML,
-			     	   			user_id:user.website_id
+			     	   			user_id:user.login_id
 			     	   		},
 			     	   		dataType:'json',
 			     	   		type:'post',
 			     	   		success:function(data){
-			     	   			alert(data);
+			     	   			if(data == 1){
+			     	   				k.close();
+			     	   				mui.toast('修改成功');
+			     	   				var systemwebview = plus.webview.getWebviewById("../Mine/system.html");
+									systemwebview.reload(true);
+			     	   				mui.back();
+			     	   			}else{
+			     	   				k.close();
+			     	   				mui.toast('修改失败');
+			     	   			}
 			     	    	},
 			     	    	error:function(xhr,type,errorThrown){
 								//异常处理；
+								k.close();
+								mui.toast('请检查网络');
 								console.log(type);
 							}
 			       		});

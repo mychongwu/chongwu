@@ -6,6 +6,7 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/config.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
@@ -28,27 +29,27 @@
 		<ul class="mui-table-view" style="margin-top: 10px;">
 			<li id="sex" class="mui-table-view-cell">
 				<span style="background-color: pink;color: #FFFFFF;border-radius: 5px;font-size: 20px;" class="mui-icon iconfont icon-wodedingdan"></span>
-				<span style="color: #777777;">性别</span>
+				<span style="color: ;">性别：</span>
 				<span id="msex" style="float: right;font-size: 14px;color: #777777;">未设置</span>
 			</li>
 			<li id="mclass" class="mui-table-view-cell">
 				<span class="mui-icon iconfont icon-dizhi"></span>
-				<span style="color: #777777;">家族</span>
+				<span style="color: ;">家族：</span>
 				<span id="mmclass" style="float: right;font-size: 14px;color: #777777;">未设置</span>
 			</li>
 			<li id="birthday" class="mui-table-view-cell">
 				<span class="mui-icon iconfont icon-dizhi"></span>
-				<span style="color: #777777;">生日</span>
+				<span style="color: ;">生日：</span>
 				<span id="mbirthday" style="float: right;font-size: 14px;color: #777777;">未设置</span>
 			</li>
 			<li id="city" class="mui-table-view-cell">
 				<span class="mui-icon iconfont icon-dizhi"></span>
-				<span style="color: #777777;">城市</span>
+				<span style="color: ;">城市：</span>
 				<span id="mcity" style="float: right; font-size: 14px;color: #777777;">呼和浩特市</span>
 			</li>
 			<li class="mui-table-view-cell">
 				<span class="mui-icon iconfont icon-dizhi"></span>
-				<span style="color: #777777;">ID</span>
+				<span style="color: ;">ID：</span>
 				<span style="float: right; font-size: 14px;color: #777777;">100102</span>
 			</li>
 		</ul>
@@ -95,6 +96,7 @@
 			var mtext;
 			var user = JSON.parse(localStorage.getItem('user'));
 			mui.plusReady(function(){
+				systemwebview = plus.webview.currentWebview();
 				img = document.getElementById('img');
 				sex = document.getElementById('sex');
 				msex = document.getElementById('msex');
@@ -107,34 +109,53 @@
 				phoneSys = document.getElementById('phoneSys');
 				updete = document.getElementById('updete');
 				mtext = document.getElementById('mtext');
-				
-				mui.ajax('http://192.168.1.111/Pet/index.php/Home/User/system',{
+				mui.ajax(config.ajax_url+'/Home/User/system',{
 			     	   		data:{
-			     	   			user_id:user.website_id
+			     	   			user_id:user.login_id
 			     	   		},
 			     	   		dataType:'json',
 			     	   		type:'post',
 			     	   		success:function(data){
 			     	   			var res = JSON.parse(data);
+			     	   			
 			     	   			if(res.login_img == null){
-			     	   				img.src = "../img/60x60.gif";
+			     	   				img.src = "../img/chat.jpeg";
 			     	   			}else{
-			     	   				img.src = "../img/60x60.gif";
+									img.src = res.login_img+'jpg';
 			     	   			}
 			     	   			if(res.sex == null){
 			     	   				msex.innerHTML = '未设置';
 			     	   			}else{
-			     	   				msex.innerHTML = '未设置';
+			     	   				if(res.sex == 1){
+			     	   					msex.innerHTML = "男娃";
+			     	   				}else{
+			     	   					msex.innerHTML = "女娃";
+			     	   				}
 			     	   			}
 			     	   			if(res.class == null){
-			     	   				msex.innerHTML = res.sex;
+			     	   				mmclass.innerHTML = '未设置';
 			     	   			}else{
-			     	   				msex.innerHTML = res.sex;
+			     	   				if(res.class == 1){
+			     	   					mmclass.innerHTML = '喵星人';
+			     	   				}
+			     	   				if(res.class == 2){
+			     	   					mmclass.innerHTML = '汪星人';
+			     	   				}
+			     	   				if(res.class == 3){
+			     	   					mmclass.innerHTML = '鸟星人';
+			     	   				}
+			     	   				if(res.class == 4){
+			     	   					mmclass.innerHTML = '其他';
+			     	   				}
+			     	   				if(res.class == 5){
+			     	   					mmclass.innerHTML = '鱼星人';
+			     	   				}
+			     	   				
 			     	   			}
-			     	   			if(res.city == null){
-			     	   				msex.innerHTML = res.sex;
+			     	   			if(res.birthday == null){
+			     	   				mbirthday.innerHTML = '未设置';
 			     	   			}else{
-			     	   				msex.innerHTML = res.sex;
+			     	   				mbirthday.innerHTML = res.birthday;
 			     	   			}
 			     	    	},
 			     	    	error:function(xhr,type,errorThrown){
@@ -239,7 +260,7 @@
 		    document.addEventListener('plusready',plusReady,false);
 		}
 		
-		var checkUrl="http://192.168.1.106/Pet/index.php/Home/User/checkup";
+		var checkUrl= config.ajax_url+"/Home/User/checkup";
 		function checkUpdate(){
 		    plus.nativeUI.showWaiting("检测更新...");
 		    var xhr=new XMLHttpRequest();
@@ -309,7 +330,6 @@
 				// 从相册中选择图片
 				console.log("从相册中选择图片:");
 			    plus.gallery.pick( function(path){
-			    	console.log(path);
 			    	img.src = path;
 			    	var timestamp=new Date().getTime();
 			    	createUpload(path,timestamp);
@@ -323,12 +343,12 @@
 			function onPlusReady() {
 			}
 			function createUpload(fullPath,name) {
-				var task = plus.uploader.createUpload("http://192.168.1.111/Pet/index.php/Home/User/timg", 
+				var task = plus.uploader.createUpload(config.ajax_url+"/Home/User/timg", 
 					{ method:"POST",blocksize:204800,priority:100 },
 					function ( t,status ) {
 						// 上传完成
 						if ( status == 200 ) { 
-							alert( "Upload success: " + t.url );
+							
 							addmytx(name);
 						} else {
 							alert( "Upload failed: " + status );
@@ -341,9 +361,9 @@
 			
 			//联网更改头像
 			function addmytx(name){
-				mui.ajax('http://192.168.1.111/Pet/index.php/Home/User/sys',{
+				mui.ajax(config.ajax_url+'/Home/User/sys',{
 	     	   		data:{
-	     	   			user_id:user.website_id,
+	     	   			user_id:user.login_id,
 	     	   			img:name
 	     	   		},
 	     	   		dataType:'json',

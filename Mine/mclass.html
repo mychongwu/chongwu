@@ -6,6 +6,7 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/config.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body style="background-color: #FFFFFF;">
@@ -102,23 +103,30 @@
 				})
 				
 				sub.addEventListener('tap',function(){
-					mui.ajax('http://192.168.1.106/Pet/index.php/Home/User/sys',{
+					k = plus.nativeUI.showWaiting();
+					mui.ajax(config.ajax_url+'/Home/User/sys',{
 			     	   		data:{
-			     	   			user_id:user.website_id,
+			     	   			user_id:user.login_id,
 			     	   			mclass:sum
 			     	   		},
 			     	   		dataType:'json',
 			     	   		type:'post',
 			     	   		success:function(data){
 			     	   			if(data == 1){
+			     	   				k.close();
 			     	   				mui.toast('修改成功');
+			     	   				var systemwebview = plus.webview.getWebviewById("../Mine/system.html");
+									systemwebview.reload(true);
 			     	   				mui.back();
 			     	   			}else{
+			     	   				k.close()
 			     	   				mui.toast('修改失败');
 			     	   			}
 			     	    	},
 			     	    	error:function(xhr,type,errorThrown){
 								//异常处理；
+								mui.toast('请检查网络');
+								k.close();
 								console.log(type);
 							}
 			       		});

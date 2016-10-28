@@ -7,28 +7,200 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<!--标准mui.css-->
+		<script src="../js/config.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" href="../css/mui.min.css">
-		
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-bar .mui-pull-left .mui-icon {
+				padding-right: 5px;
+				font-size: 28px;
+			}
+			
+			.mui-bar .mui-btn {
+				font-weight: normal;
+				font-size: 17px;
+			}
+			
+			.mui-bar .mui-btn-link {
+				top: 1px;
+			}
+			
+			.mui-content img{
+				width: 100%;
+			}
+			.hm-description{
+				margin: .5em 0 2em;
+			}
+			
+			.hm-description>li {
+				font-size: 14px;
+				color: #8f8f94;
+			}
+			
+			
+		</style>
 	</head>
-
-	<body>		
-		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">个人信息</h1>
+	
+	
+	<body>
+		<header id="header" class="mui-bar mui-bar-transparent">
+			<a style="color: #FFFFFF;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" style="color: ;"></h1>
 		</header>
+		<div class="mui-content">
+			<img id="img1" src="../img/mbgggg.jpg"/>
+			<div id="" style="width: 100%;height: 100px;background-color: ;position: absolute;top: 15%">
+				<div class="oa-contact-cell mui-table">
+							<div class="oa-contact-avatar mui-table-cell">
+								<img id="img" style="width: 60px;height: 60px;margin-left: 10px;" src="../img/mao.png" />
+							</div>
+							<div class="oa-contact-content mui-table-cell">
+								<div class="mui-clearfix">
+									<h4 id="nc" class="oa-contact-name" style="color: #FFFFFF;">未设置</h4>
+									<span class="oa-contact-position mui-h6" style="color: #FFFFFF;">等级 ---LV1</span>
+								</div>
+								<p class="oa-contact-email mui-h6" style="color: #FFFFFF;">
+									性别 ---<span id="sex">男</span>
+								</p>
+							</div>
+						</div>
+			</div>
+		</div>
+		<!--<div id="" style="width: 100%;height: 50px;background-color: #FFFFFF;border-bottom: 1px solid #F3F3F3;">
+			<span style="line-height:50px;margin-left: 10px;font-size: 14px	;">个性签名</span>
+			<span class="mui-icon mui-icon-compose" style="float: right;line-height: 50px;margin-right: 10px;"></span>
+		</div>-->
+		<ul class="mui-table-view">
+			<li id="gxqm" class="mui-table-view-cell">
+				<span style="background-color: pink;color: #FFFFFF;border-radius: 5px;font-size: 20px;" class="mui-icon iconfont icon-wodedingdan"></span>
+				<span style="color: #777777;">个性签名</span>
+				<span class="mui-icon mui-icon-compose" style="float: right;line-height: ;"></span>
+			</li>
+			<li id="addnc" class="mui-table-view-cell">
+				<span style="background-color: pink;color: #FFFFFF;border-radius: 5px;font-size: 20px;" class="mui-icon iconfont icon-wodedingdan"></span>
+				<span style="color: #777777;">昵称</span>
+				<span class="mui-icon mui-icon-compose" style="float: right;line-height: ;"></span>
+			</li>
+			<li class="mui-table-view-cell">
+				<span class="mui-icon iconfont icon-dizhi"></span>
+				<span style="color: #777777;">注册日期</span>
+				<span id="sj" style="float: right;font-size: 14px;color: #777777;"></span>
+			</li>
+			<li class="mui-table-view-cell">
+				<span class="mui-icon iconfont icon-dizhi"></span>
+				<span style="color: #777777;">好友</span>
+				<span style="float: right;font-size: 14px;color: #777777;"><span id="hy"></span>人</span>
+			</li>
+			<li id="cs" class="mui-table-view-cell">
+				<span class="mui-icon iconfont icon-dizhi"></span>
+				<span style="color: #777777;">城市</span>
+				<span id="mcity" style="float: right; font-size: 14px;color: #777777;">呼和浩特市</span>
+			</li>
+			<li class="mui-table-view-cell">
+				<span class="mui-icon iconfont icon-dizhi"></span>
+				<span style="color: #777777;">ID</span>
+				<span style="float: right; font-size: 14px;color: #777777;">100102</span>
+			</li>
+		</ul>
 		<script src="../js/mui.min.js"></script>
-		<script>
+		<script type="text/javascript">
 			mui.init({
-				swipeBack: true
+				swipeBack: true //启用右滑关闭功能
 			});
+			var img;
+			var nc;
+			var gxqm;
+			var sex;
+			var addnc;
+			var sj;
+			var hy;
+			var user = JSON.parse(localStorage.getItem('user'));
+			mui.plusReady(function(){
+				personagewebview = plus.webview.currentWebview();
+				nc = document.getElementById('nc');
+				sex = document.getElementById('sex');
+				sj = document.getElementById('sj');
+				hy = document.getElementById('hy');
+				addnc = document.getElementById('addnc');
+				gxqm = document.getElementById('gxqm');
+				addnc.addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'nickname.html',
+						id: 'nickname.html',
+						show: {
+						},
+						extras:{
+							
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				})
+				gxqm.addEventListener('tap',function(){
+					mui.openWindow({
+						url: 'signure.html',
+						id: 'signure.html',
+						show: {
+						},
+						extras:{
+							
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				})
+				
+				mui.ajax(config.ajax_url+'/Home/User/personage',{
+			     	   		data:{
+			     	   			user_id:user.login_id
+			     	   		},
+			     	   		dataType:'json',
+			     	   		type:'post',
+			     	   		success:function(data){
+			     	   			var res = JSON.parse(data);
+			     	   			if(res.nickname == null){
+			     	   				nc.innerHTML = '未设置';
+			     	   			}else{
+			     	   				nc.innerHTML = res.nickname;
+			     	   			}
+			     	   			if(res.sex == null){
+			     	   				sex.innerHTML = '未设置';
+			     	   			}else{
+			     	   				if(res.sex == 1){
+			     	   					sex.innerHTML = '男';
+			     	   				}else{
+			     	   					sex.innerHTML = '女';
+			     	   				}
+			     	   			}
+			     	   			sj.innerHTML = getLocalTime(res.time);
+			     	   			if(res.friends == null){
+			     	   				hy.innerHTML = '0';
+			     	   			}else{
+			     	   				hy.innerHTML = res.friends.split(',').length;
+			     	   				
+			     	   			}
+			     	   			
+			     	    	},
+			     	    	error:function(xhr,type,errorThrown){
+								//异常处理；
+								mui.toast('请检查网络');
+								console.log(type);
+							}
+			       		});
+			})
+			//时间戳转时间格式
+			function getLocalTime(nS) {     
+    			return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
+    		}
 			
 		</script>
 
 	</body>
 
 </html>
-
-
-			
-				
