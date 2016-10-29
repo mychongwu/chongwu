@@ -57,7 +57,7 @@
 				})
 				
 				sub.addEventListener('tap',function(){
-					k = plus.nativeUI.showWaiting();
+					var k = plus.nativeUI.showWaiting();
 					mui.ajax(config.ajax_url+'/Home/User/sys',{
 			     	   		data:{
 			     	   			sex:sum,
