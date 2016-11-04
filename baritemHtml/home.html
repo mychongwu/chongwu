@@ -69,77 +69,7 @@
 						<div id="scroll1" class="mui-scroll-wrapper">
 							<div class="mui-scroll" >
 			<div class="mui-input-row mui-search" style="margin-top: 5px;padding-left: 3px;padding-right: 3px;">
-		<!--<input type="search" class="mui-input-clear" placeholder="宠物关键字" style="background-color: #EEEEEE;"-->
 	</div>
-
-	<!--<div id="" style="width: 100%;height: 180px;background-color: #FFFFFF;margin-top: -10px;">
-		<div id="" style="width: 24%;height: 85px;float: left;margin: 1px;border: 1px solid #F3FCFB;">
-			<div id="" style="width: 100%;height: 60px;">
-				<img style="border-radius: 5px;" width="100%" height="100%" src="../img/chat.jpeg"/>
-			</div>
-			<div id="" style="width: 100%;height: 25px;text-align: center;line-height: 25px;color: #8F8F94;font-size: 14px;">
-				猫类
-			</div>
-		</div>
-		<div id="" style="width: 24%;height: 85px;float: left;margin: 1px;border: 1px solid #F3FCFB;">
-			<div id="" style="width: 100%;height: 60px;">
-				<img style="border-radius: 5px;" width="100%" height="100%" src="../img/chat.jpeg"/>
-			</div>
-			<div id="" style="width: 100%;height: 25px;text-align: center;line-height: 25px;color: #8F8F94;font-size: 14px;">
-				猫类
-			</div>
-		</div>
-		<div id="" style="width: 24%;height: 85px;float: left;margin: 1px;border: 1px solid #F3FCFB;">
-			<div id="" style="width: 100%;height: 60px;">
-				<img style="border-radius: 5px;" width="100%" height="100%" src="../img/chat.jpeg"/>
-			</div>
-			<div id="" style="width: 100%;height: 25px;text-align: center;line-height: 25px;color: #8F8F94;font-size: 14px;">
-				猫类
-			</div>
-		</div>
-		<div id="" style="width: 24%;height: 85px;float: left;margin: 1px;border: 1px solid #F3FCFB;">
-			<div id="" style="width: 100%;height: 60px;">
-				<img style="border-radius: 5px;" width="100%" height="100%" src="../img/chat.jpeg"/>
-			</div>
-			<div id="" style="width: 100%;height: 25px;text-align: center;line-height: 25px;color: #8F8F94;font-size: 14px;">
-				猫类
-			</div>
-		</div>
-		<div id="" style="width: 24%;height: 85px;float: left;margin: 1px;border: 1px solid #F3FCFB;">
-			<div id="" style="width: 100%;height: 60px;">
-				<img style="border-radius: 5px;" width="100%" height="100%" src="../img/chat.jpeg"/>
-			</div>
-			<div id="" style="width: 100%;height: 25px;text-align: center;line-height: 25px;color: #8F8F94;font-size: 14px;">
-				猫类
-			</div>
-		</div>
-		<div id="" style="width: 24%;height: 85px;float: left;margin: 1px;border: 1px solid #F3FCFB;">
-			<div id="" style="width: 100%;height: 60px;">
-				<img style="border-radius: 5px;" width="100%" height="100%" src="../img/chat.jpeg"/>
-			</div>
-			<div id="" style="width: 100%;height: 25px;text-align: center;line-height: 25px;color: #8F8F94;font-size: 14px;">
-				猫类
-			</div>
-		</div>
-		<div id="" style="width: 24%;height: 85px;float: left;margin: 1px;border: 1px solid #F3FCFB;">
-			<div id="" style="width: 100%;height: 60px;">
-				<img style="border-radius: 5px;" width="100%" height="100%" src="../img/chat.jpeg"/>
-			</div>
-			<div id="" style="width: 100%;height: 25px;text-align: center;line-height: 25px;color: #8F8F94;font-size: 14px;">
-				猫类
-			</div>
-		</div>
-		<div id="" style="width: 24%;height: 85px;float: left;margin: 1px;border: 1px solid #F3FCFB;">
-			<div id="" style="width: 100%;height: 60px;">
-				<img style="border-radius: 5px;" width="100%" height="100%" src="../img/chat.jpeg"/>
-			</div>
-			<div id="" style="width: 100%;height: 25px;text-align: center;line-height: 25px;color: #8F8F94;font-size: 14px;">
-				猫类
-			</div>
-		</div>
-		
-		
-	</div>-->
 	
 			<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 				<li class="mui-table-view-cell">
@@ -270,6 +200,10 @@
 		
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/config.js"></script>
+		<script src="../js/upload.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/js/img-tool/image-new.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ajax.js" charset="UTF-8"></script>
 		<script>
 			mui.init({
 			swipeBack:false,
@@ -340,168 +274,23 @@
 			//子集方法
 			function showOrHidePopover(){
 				
-				mui('#popover').popover('toggle');
+				if (localStorage.getItem('user')) {
+					//上拉菜单
+					console.log(localStorage.getItem('user'));
+				shangla();
+				}else {
+					
+					mui.openWindow({
+						  	url:"../Mine/login.html",
+						    id:'login',
+						    
+						    });
+				}
+				
 			}
 			
-			
-			mui('#selects').on('tap','span',function(){
-				
-				var id = this.id;
-				
-				if(id=='up_video'){
-					
-					
-					//videoCapture();
-					
-//			      mui.openWindow({
-//				  	url:'shexiang.html',
-//				    id:'shexiang',
-//				   
-//				  });
-				}
-				if(id=='up_img'){
-					captureImage();//1
-					
-				}
-				
-			});
-			
-			
-//			
-//			function videoCapture(){
-//				var cmr = plus.camera.getCamera();
-//				var res = cmr.supportedVideoResolutions[0];
-//				var fmt = cmr.supportedVideoFormats[0];
-//				console.log("Resolution: "+res+", Format: "+fmt+"1");
-//				cmr.startVideoCapture( function( path ){
-//						console.log( "Capture video success: " + path + "2" ); 
-//						
-//						plus.io.resolveLocalFileSystemURL( path, function( entry ) {
-//						entry.file( function(file){
-//							var fileReader = new plus.io.FileReader();
-//							console.log(JSON.stringify(file));
-//							savePicture(file.fullPath,file.name);
-//						} );
-//					}, function ( e ) {
-//						mui.toast('失败！');
-//					} );
-//						
-//					},
-//					function( error ) {
-//						console.log( "Capture video failed: " + error.message + "3" );
-//					},
-//					{resolution:res,format:fmt}
-//				);
-//			}
-//			
-//			document.addEventListener( "plusready", onPlusReady, false );
-//			var r = null; 
-//			// 扩展API加载完毕，现在可以正常调用扩展API 
-//			function onPlusReady() {
-//			}
-//			// 保存图片到相册中 
-//			function savePicture(fullPath,name) {
-//				plus.gallery.save( fullPath, function () {
-//					console.log('保存成功');
-//					createUpload(fullPath,name);
-//				});
-//		}
-//
-//document.addEventListener( "plusready", onPlusReady, false );
-//var r = null; 
-//// 扩展API加载完毕，现在可以正常调用扩展API 
-//function onPlusReady() {
-//}
-//
-//// 创建上传任务123 
-//function createUpload(fullPath,name) {
-//			var task = plus.uploader.createUpload("http://192.168.1.114/pet/index.php/Home/User/ups", 
-//				{ method:"POST",blocksize:204800,priority:100 },
-//				function ( t, status ) {
-//					// 上传完成
-//					if ( status == 200 ) { 
-//						alert( "Upload success: " + t.url );
-//						for (n in t) {
-//							console.log( n+"~~~~"+t[n] );
-//						}
-//					} else {
-//						alert( "Upload failed: " + status );
-//					}
-//				}
-//			);
-//			var ss = task.addFile(fullPath, {key:name} );
-//			console.log(ss);
-//			task.start();
-//		}
-//			
-//		
+
 		
-		
-		///图片上传
-		
-		
-		function captureImage(){
-			var cmr = plus.camera.getCamera();
-			var res = cmr.supportedImageResolutions[0];
-			var fmt = cmr.supportedImageFormats[0];
-			console.log("Resolution: "+res+", Format: "+fmt);
-			cmr.captureImage( function( path ){
-					plus.io.resolveLocalFileSystemURL( path, function( entry ) {
-						entry.file( function(file){
-							var fileReader = new plus.io.FileReader();
-							console.log(JSON.stringify(file));
-							savePictures(file.fullPath,file.name);
-						} );
-					}, function ( e ) {
-						mui.toast('失败！');
-					} );
-				},
-				function( error ) {
-					mui.toast('上传照片失败！');
-				},
-				{resolution:res,format:fmt}
-			);
-		}
-		
-		document.addEventListener( "plusready", onPlusReady, false );
-			var r = null; 
-			// 扩展API加载完毕，现在可以正常调用扩展API 
-			function onPlusReady() {
-			}
-			// 保存图片到相册中 
-			function savePictures(fullPath,name) {
-				plus.gallery.save( fullPath, function () {
-					createUploadss(fullPath,name);
-				});
-		}
-		document.addEventListener( "plusready", onPlusReady, false );
-		var r = null; 
-		function onPlusReady() {
-		}
-		function createUploadss(fullPath,name) {
-			
-			var task = plus.uploader.createUpload( config.ajax_url+"/Home/Ww/ups", 
-				{ method:"POST"},
-				function ( t, status) {
-					// 上传完成
-					for(c in t){
-						
-						console.log(c+"~~"+t[c]);
-						
-					}
-					console.log(322);
-					
-					if ( status == 200 ) { 
-						alert( "Upload success: " + t.url+'成了？' );
-					} else {
-						alert( "Upload failed: " + status+'炸了' );
-					}
-				}
-			);
-			task.addFile(fullPath, {key:name} );
-			task.start();
-		}
-	
 		
 		</script>
 

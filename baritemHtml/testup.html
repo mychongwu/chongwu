@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/classify.css" />
+		<link rel="stylesheet" href="../css/classify.min.css">
+	</head>
+	<body style="background-color: #FFFFFF;">
+		<header class="mui-bar mui-bar-nav" style="background-color: #FF4677;color: white;">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+		    <h1 class="mui-title" style="color: white;">发布</h1>
+		</header>
+		
+		<div style="margin-top: 45px;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media">
+					<div class="" style="width: 100%;float: right;margin-top: 5px;">
+						<textarea id="info_content" placeholder="这一刻的想法..." style="float: right;border: none;"></textarea>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="res" name='nihap' >
+			<video id='videoa' style="width:90%;height:200px;background-color: black;margin-left: 5%;" id="videos">
+			</video>
+		</div>
+		<div id='imgs'>
+			
+			
+		</div>
+		<div style="padding: 20px;">
+		<button id="but" style="background-color: #FF4677;" type="button" class="mui-btn mui-btn-danger mui-btn-block">确认发布</button>
+		</div>
+		<script src="../js/load.js" charset="utf-8"></script>
+		<script src="../js/mui.min.js" charset="UTF-8"></script>
+		<script src="../js/own.js" charset="UTF-8"></script>
+		<script src="../js/arttmpl.js" charset="UTF-8"></script>
+		<script src="../js/upload.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: false
+			});
+					var paths=[];//多图数组；
+					var video_src='';//视频地址
+					var types = '';//传入类型
+			mui.plusReady(function(){
+       			 types = localStorage.getItem('types');
+				console.log(types);
+				if(types=='up_text'){
+					var re = document.getElementById('res');
+					re.remove();
+				//	re.style.display='none';
+				}else if(types=='up_video'){//上传视频
+					 video_src=localStorage.getItem('path');
+					document.getElementById("videoa").src= video_src;
+					
+				}else if(types =='up_img'){
+					
+					var re = document.getElementById('res');
+					re.remove();
+					files = localStorage.getItem('files');
+					var strs = files.substr(2);
+					strs = strs.substr(0,strs.length-2).split('","');
+					var imgs = document.getElementById("imgs");
+					imgs.style.width="90%";//22
+					imgs.style.margin="20px auto";
+					imgs.style.padding="1%";//22s
+					for(n in strs){
+						var imga = document.createElement("img");
+						imga.src=strs[n];
+						console.log('!!!'+strs[n])
+						paths.push(strs[n]);
+						if(strs.length>=3){
+							imga.style.width='30%';
+							imga.style.marginLeft = '3%';
+						}else{
+							imga.style.width='30%';
+							imga.style.marginLeft = '3%';
+						}
+						imga.style.borderRadius='3px';
+						imga.style.height='90px';
+						
+						imgs.appendChild(imga);
+					}
+				}
+			});
+			
+			var bt = document.getElementById("but");
+			bt.addEventListener('tap',function(){
+				
+				
+				
+				if(types=='up_text'){
+					createUpload('','up_text',document.getElementById("info_content").value);
+				}else if(types=='up_video'){
+					createUpload(video_src,'up_video',document.getElementById("info_content").value);
+				}else if(types =='up_img'){
+					
+					createUpload(paths,'up_img',document.getElementById("info_content").value);
+					
+				}
+			
+				
+			});
+		</script>
+	</body>
+</html>

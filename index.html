@@ -73,6 +73,7 @@
 		//商品详情的父子模版
 		var detailTem;
 		var detailsub;
+		var tps;
 		mui.plusReady(function() {
 			//改变statusbar
 			plus.navigator.setStatusBarBackground('#41cea9');
@@ -156,6 +157,7 @@
 		
 		 //初始化每个tabitem所对应的页面
 		function inittabitemWebviews() {
+			
 			for (var i = 0; i < barItemUrl.length; i++) {
 				barItemWebView[i] = mui.preload({
 					url: barItemUrl[i],
@@ -191,6 +193,11 @@
 				navtitle.innerText = tabitem.children[tabitem.children.length - 1].innerText;
 				//设置将显示当前webview
 				showCurWebView(tabitem.getAttribute('href'));
+				if(tabitem.getAttribute('href')!="baritemHtml/home.html"){
+					document.getElementById("menuss").style.display='none';
+				}else{
+					document.getElementById("menuss").style.display='inline-block';
+				}
 			});
 		}
 		
@@ -425,10 +432,8 @@
 	//
 	var menus = document.getElementById("menuss");
 			menus.addEventListener('tap',function(){
-				
-				//mui.fire('home.html','showOrHidePopover',{param:333});
+
 				barItemWebView[0].evalJS("showOrHidePopover()");
-				//console.log(barItemWebView);
 				
 			});
 			</script>
