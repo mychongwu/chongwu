@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="../css/own.css"/>
+    <script src="../js/config.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
     		.headImg {
     			padding: 8% 0px 13% 0px;
@@ -134,7 +135,26 @@
 				trueimg.style.display = 'inline';
 				touxiangimg.style.display = 'none';
 				var user = JSON.parse(localStorage.getItem('user'));
-				trueimg.src = '../img/nan.png';
+				mui.ajax(config.ajax_url+'/Home/User/system',{
+	     	   		data:{
+	     	   			user_id:user.login_id
+	     	   		},
+	     	   		dataType:'json',
+	     	   		type:'post',
+	     	   		success:function(data){
+	     	   			var res = JSON.parse(data);
+	     	   			if(res.login_img == ''){
+	     	   				trueimg.src = '../img/nan.png';
+	     	   			}else{
+	     	   				trueimg.src = config.img_url+res.login_img;
+	     	   			}
+	     	    	},
+	     	    	error:function(xhr,type,errorThrown){
+						//异常处理；
+						console.log(type);
+					}
+	       		});
+				
 				touxiangword.innerText = user.username;
 				touxiangword.style.color = '#FFFFFF';
 			}
@@ -204,9 +224,27 @@
 				trueimg.style.display = 'inline';
 				var user = JSON.parse(localStorage.getItem('user'));
 //				trueimg.src = user.website_logo; 
-				trueimg.src = '../img/touxiang.jpg';
-				touxiangword.innerText = user.website_name;
-				touxiangword.style.color = 'black';
+				mui.ajax(config.ajax_url+'/Home/User/system',{
+	     	   		data:{
+	     	   			user_id:user.login_id
+	     	   		},
+	     	   		dataType:'json',
+	     	   		type:'post',
+	     	   		success:function(data){
+	     	   			var res = JSON.parse(data);
+	     	   			if(res.login_img == ''){
+	     	   				trueimg.src = '../img/touxiang.jpg';
+	     	   			}else{
+	     	   				trueimg.src = config.img_url+res.login_img;
+	     	   			}
+	     	    	},
+	     	    	error:function(xhr,type,errorThrown){
+						//异常处理；
+						console.log(type);
+					}
+	       		});
+				touxiangword.innerText = user.username;
+				touxiangword.style.color = '#FFFFFF';
 			},false);
 		});
 		
