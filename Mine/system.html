@@ -121,7 +121,7 @@
 			     	   			if(res.login_img == null){
 			     	   				img.src = "../img/chat.jpeg";
 			     	   			}else{
-									img.src = res.login_img+'jpg';
+									img.src = config.img_url+res.login_img;
 			     	   			}
 			     	   			if(res.sex == null){
 			     	   				msex.innerHTML = '未设置';
@@ -347,43 +347,44 @@
 					{ method:"POST",blocksize:204800,priority:100 },
 					function ( t,status ) {
 						// 上传完成
-						if ( status == 200 ) { 
-							
-							addmytx(name);
+						if ( status == 200 ) {
+							mui.toast('上传成功');
 						} else {
-							alert( "Upload failed: " + status );
+							mui.toast('上传失败');
 						}
 					}
 				);
-				task.addFile( fullPath, {key:name} );
+				task.addData('msid',user.login_id);
+				task.addFile( fullPath, {key:name});
 				task.start();
 			}
 			
 			//联网更改头像
-			function addmytx(name){
-				mui.ajax(config.ajax_url+'/Home/User/sys',{
-	     	   		data:{
-	     	   			user_id:user.login_id,
-	     	   			img:name
-	     	   		},
-	     	   		dataType:'json',
-	     	   		type:'post',
-	     	   		success:function(data){
-	     	   			if(data == 1){
-	     	   				mui.toast('修改成功');
-	     	   				var ress = plus.webview.getWebviewById("baritemHtml/mine.html");
-							ress.reload(true);
-	     	   			}else{
-	     	   				mui.toast('修改失败');
-	     	   			}
-	     	   			
-	     	    	},
-		     	    error:function(xhr,type,errorThrown){
-						//异常处理；
-						console.log(type);
-					}
-		      	});
-			}
+//			function addmytx(name){
+//				alert(name);
+//				mui.ajax(config.ajax_url+'/Home/User/sys',{
+//	     	   		data:{
+//	     	   			user_id:user.login_id,
+//	     	   			img:name
+//	     	   		},
+//	     	   		dataType:'json',
+//	     	   		type:'post',
+//	     	   		success:function(data){
+//	     	   			if(data == 1){
+//	     	   				mui.toast('修改成功');
+//	     	   				var ress = plus.webview.getWebviewById("baritemHtml/mine.html");
+//							ress.reload(true);
+//	     	   			}else{
+//	     	   				mui.toast('修改失败');
+//	     	   			}
+//	     	   			
+//	     	    	},
+//		     	    error:function(xhr,type,errorThrown){
+//						//异常处理；
+//						console.log(type);
+//					}
+//		      	});
+//			}
 			
 			
 		</script>

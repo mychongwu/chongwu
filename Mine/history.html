@@ -329,8 +329,15 @@
 			     	   		type:'post',
 			     	   		success:function(data){
 			     	   			var res = JSON.parse(data);
-			     	   			
-			     	   			for (var i=0;i<res.length;i++) {
+			     	   			if(res == ''){
+			     	   				content.innerHTML = '您还没有发布信息';
+			     	   				content.style.textAlign = 'center';
+			     	   				content.style.color = '#777777';
+			     	   				content.style.lineHeight = '200px';
+			     	   				content.style.fontSize = '14px';
+			     	   				k.close();
+			     	   			}else{
+			     	   				for (var i=0;i<res.length;i++) {
 							    str += "<div id='content' style='background-color: #FFFFFF;margin-top: ;padding: 15px;border-bottom: 1px solid #CCCCCC;'>"+
 							    "<div class='mui-card-content'>"+
 									"<div class='mui-card-content-inner'  style='white-space:normal'>"+
@@ -370,6 +377,8 @@
 									content.innerHTML = str;
 									k.close();
 			     	   			}
+			     	   			}
+			     	   			
 			     	    	},
 			     	    	error:function(xhr,type,errorThrown){
 								//异常处理；

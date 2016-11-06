@@ -127,6 +127,8 @@
 				hy = document.getElementById('hy');
 				addnc = document.getElementById('addnc');
 				gxqm = document.getElementById('gxqm');
+				img = document.getElementById('img');
+				
 				addnc.addEventListener('tap',function(){
 					mui.openWindow({
 						url: 'nickname.html',
@@ -164,6 +166,10 @@
 			     	   		type:'post',
 			     	   		success:function(data){
 			     	   			var res = JSON.parse(data);
+			     	   			if(res.login_img != ''){
+			     	   				img.src = config.img_url+res.login_img;
+			     	   				img.style.borderRadius ='60px';
+			     	   			}
 			     	   			if(res.nickname == null){
 			     	   				nc.innerHTML = '未设置';
 			     	   			}else{
