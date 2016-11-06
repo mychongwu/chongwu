@@ -349,6 +349,8 @@
 						// 上传完成
 						if ( status == 200 ) {
 							mui.toast('上传成功');
+							var ress = plus.webview.getWebviewById("baritemHtml/mine.html");
+							ress.reload(true);
 						} else {
 							mui.toast('上传失败');
 						}
