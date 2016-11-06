@@ -198,6 +198,19 @@
 				}else{
 					document.getElementById("menuss").style.display='inline-block';
 				}
+				if(tabitem.getAttribute('href') == "baritemHtml/xinyuandan.html"){
+					//##
+					console.log('asdasdasd')
+					if (!localStorage.getItem('user')) {
+					mui.openWindow({
+						  	url:"Mine/login.html",
+						    id:'login',
+						    
+						    });
+						}
+					
+					
+				}
 			});
 		}
 		
@@ -222,7 +235,7 @@
 				url: 'template-main.html',
 				id: 'template-main.html',
 				styles: {
-					top:'0px',
+					top:'40px',
 					bottom:'0px'
 				},
 				extras: {
@@ -432,11 +445,11 @@
 	//
 	var menus = document.getElementById("menuss");
 			menus.addEventListener('tap',function(){
-
-				barItemWebView[0].evalJS("showOrHidePopover()");
 				
+				barItemWebView[0].evalJS("showOrHidePopover()");				
 			});
 			</script>
 </body>
 
 </html>
+

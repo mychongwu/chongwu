@@ -51,8 +51,7 @@
 				console.log(types);
 				if(types=='up_text'){
 					var re = document.getElementById('res');
-					re.remove();
-				//	re.style.display='none';
+					re.style.display='none';
 				}else if(types=='up_video'){//上传视频
 					 video_src=localStorage.getItem('path');
 					document.getElementById("videoa").src= video_src;

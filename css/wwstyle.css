@@ -7,9 +7,9 @@
 }
 #bnt div span{
 	display: inline-block;
-	float:left;
-	width:50%;
+	float:right;
+	width:30px;
 	height:30px;
 	line-height: 30px;
-	text-align: center;
+	text-align: left;
 }

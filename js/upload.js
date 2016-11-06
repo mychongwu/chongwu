@@ -1,6 +1,6 @@
 document.write("<script language=javascript src='js/common.js'></script>");
 document.write("<script language=javascript src='js/img-tool/image-new.js'></script>");
-document.write('<script src='../js/config.js'></script>');
+document.write("<script src='../js/config.js'></script>");
 //配置文件
 function peizhi(){
 var o = imageTool.options;
