@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -15,6 +16,7 @@
 				-webkit-touch-callout: none;
 				-webkit-user-select: none;
 			}
+			
 			footer {
 				position: fixed;
 				width: 100%;
@@ -27,6 +29,7 @@
 				padding: 0px 50px;
 				background-color: #fafafa;
 			}
+			
 			.footer-left {
 				position: absolute;
 				width: 50px;
@@ -38,6 +41,7 @@
 				line-height: 100%;
 				padding: 12px 4px;
 			}
+			
 			.footer-right {
 				position: absolute;
 				width: 50px;
@@ -50,15 +54,18 @@
 				padding: 12px 5px;
 				display: inline-block;
 			}
+			
 			.footer-center {
 				height: 100%;
 				padding: 5px 0px;
 			}
+			
 			.footer-center [class*=input] {
 				width: 100%;
 				height: 100%;
 				border-radius: 5px;
 			}
+			
 			.footer-center .input-text {
 				background: #fff;
 				border: solid 1px #ddd;
@@ -68,27 +75,33 @@
 				font-family: verdana !important;
 				overflow: hidden;
 			}
+			
 			.footer-center .input-sound {
 				background-color: #eee;
 			}
+			
 			.mui-content {
 				height: 100%;
 				padding: 44px 0px 50px 0px;
 				overflow: auto;
 				background-color: #eaeaea;
 			}
+			
 			#msg-list {
 				height: 100%;
 				overflow: auto;
 				-webkit-overflow-scrolling: touch;
 			}
+			
 			.msg-item {
 				padding: 8px;
 				clear: both;
 			}
+			
 			.msg-item .mui-item-clear {
 				clear: both;
 			}
+			
 			.msg-item .msg-user {
 				width: 38px;
 				height: 38px;
@@ -103,7 +116,7 @@
 				color: #ddd;
 			}
 			
-			.msg-item .msg-user-img{
+			.msg-item .msg-user-img {
 				width: 38px;
 				height: 38px;
 				display: inline-block;
@@ -129,9 +142,11 @@
 				min-width: 35px;
 				float: left;
 			}
+			
 			.msg-item .msg-content .msg-content-inner {
 				overflow-x: hidden;
 			}
+			
 			.msg-item .msg-content .msg-content-arrow {
 				position: absolute;
 				border: solid 1px #d3d3d3;
@@ -145,45 +160,53 @@
 				-webkit-transform: rotateZ(45deg);
 				transform: rotateZ(45deg);
 			}
+			
 			.msg-item-self .msg-user,
 			.msg-item-self .msg-content {
 				float: right;
 			}
+			
 			.msg-item-self .msg-content .msg-content-arrow {
 				left: auto;
 				right: -5px;
 				-webkit-transform: rotateZ(225deg);
 				transform: rotateZ(225deg);
 			}
+			
 			.msg-item-self .msg-content,
 			.msg-item-self .msg-content .msg-content-arrow {
 				background-color: #4CD964;
 				color: #fff;
 				border-color: #2AC845;
 			}
+			
 			footer .mui-icon {
 				color: #000;
 			}
+			
 			footer .mui-icon:active {
 				color: #007AFF !important;
 			}
+			
 			footer .mui-icon-paperplane:before {
 				content: "发送";
 			}
+			
 			footer .mui-icon-paperplane {
 				/*-webkit-transform: rotateZ(45deg);
 				transform: rotateZ(45deg);*/
-				
 				font-size: 16px;
 				word-break: keep-all;
 				line-height: 100%;
 				padding-top: 6px;
 				color: rgba(0, 135, 250, 1);
 			}
+			
 			#msg-sound {
 				-webkit-user-select: none !important;
 				user-select: none !important;
 			}
+			
 			.rprogress {
 				position: absolute;
 				left: 50%;
@@ -201,6 +224,7 @@
 				display: none;
 				-webkit-transition: .15s;
 			}
+			
 			.rschedule {
 				background-color: rgba(0, 0, 0, 0);
 				border: 5px solid rgba(0, 183, 229, 0.9);
@@ -219,7 +243,8 @@
 				-webkit-animation: spin 1s infinite linear;
 				animation: spin 1s infinite linear;
 			}
-			.r-sigh{
+			
+			.r-sigh {
 				display: none;
 				border-radius: 50px;
 				box-shadow: 0 0 15px #2187e7;
@@ -236,15 +261,19 @@
 				font-weight: bold;
 				color: #2187e7;
 			}
-			.rprogress-sigh{
+			
+			.rprogress-sigh {
 				background-image: none !important;
 			}
-			.rprogress-sigh .rschedule{
+			
+			.rprogress-sigh .rschedule {
 				display: none !important;
 			}
-			.rprogress-sigh .r-sigh{
+			
+			.rprogress-sigh .r-sigh {
 				display: block !important;
 			}
+			
 			.rsalert {
 				font-size: 12px;
 				color: #bbb;
@@ -257,6 +286,7 @@
 				left: 0px;
 				bottom: 0px;
 			}
+			
 			@-webkit-keyframes spin {
 				0% {
 					-webkit-transform: rotate(0deg);
@@ -265,6 +295,7 @@
 					-webkit-transform: rotate(360deg);
 				}
 			}
+			
 			@keyframes spin {
 				0% {
 					transform: rotate(0deg);
@@ -273,6 +304,7 @@
 					transform: rotate(360deg);
 				}
 			}
+			
 			#h {
 				background: #fff;
 				border: solid 1px #ddd;
@@ -287,10 +319,12 @@
 				word-break: break-all;
 				word-wrap: break-word;
 			}
+			
 			.cancel {
 				background-color: darkred;
 			}
-			.dzg-datetime-span{
+			
+			.dzg-datetime-span {
 				display: block;
 				width: 100%;
 				height: 30px;
@@ -299,7 +333,8 @@
 				font-size: 0.8em;
 				color: #CDCDCD;
 			}
-			.mui-title{
+			
+			.mui-title {
 				color: #ff4677;
 			}
 		</style>
@@ -314,33 +349,33 @@
 			<h1 class="mui-title" id="dzg-title-name"></h1>
 		</header>
 		<pre id='h'></pre>
-		
+
 		<script id='msg-template' type="text/template">
-			
+
 			<% for(var i in record){ var item=record[i]; %>
-				<span class="dzg-datetime-span"><%=(item.dtime)%></span>
-				<div class="msg-item <%= (item.sender==user.login_id ?' msg-item-self':'') %>" msg-type='<%=(item.type)%>' msg-content='<%=(item.content)%>'>
-					<% if(item.sender==user.login_id ) { %>
-						<img class="msg-content-image msg-user mui-icon mui-icon-person" id="dzg-icon-tx" src="../img/touxiang.jpg" style="max-width: 100px;" />
-					<% } else { %>
-						<img class="msg-user-img" src="../img/touxiang.jpg" alt="" />
-					<% } %>
-					<div class="msg-content">
-						<div class="msg-content-inner">
-							<%=( item.content|| '&nbsp;&nbsp;') %>
-						</div>
-						<div class="msg-content-arrow"></div>
+			<span class="dzg-datetime-span"><%=(item.dtime)%></span>
+			<div class="msg-item <%= (item.sender==user.login_id ?' msg-item-self':'') %>" msg-type='<%=(item.type)%>' msg-content='<%=(item.content)%>'>
+				<% if(item.sender==user.login_id ) { %>
+				<img class="msg-content-image msg-user mui-icon mui-icon-person" id="dzg-icon-tx" src="../img/touxiang.jpg" style="max-width: 100px;" />
+				<% } else { %>
+				<img class="msg-user-img" src="../img/touxiang.jpg" alt="" />
+				<% } %>
+				<div class="msg-content">
+					<div class="msg-content-inner">
+						<%=( item.content|| '&nbsp;&nbsp;') %>
 					</div>
-					<div class="mui-item-clear"></div>
+					<div class="msg-content-arrow"></div>
 				</div>
+				<div class="mui-item-clear"></div>
+			</div>
 			<% } %>
 		</script>
-		
+
 		<div class="mui-content">
 			<div id='msg-list'>
 			</div>
 		</div>
-		
+
 		<footer>
 			<div class="footer-left" style="line-height: 30px;">
 				我说:
@@ -352,7 +387,7 @@
 				<i id='msg-type' class="mui-icon mui-icon-paperplane"></i>
 			</label>
 		</footer>
-		
+
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/mui.imageViewer.js"></script>
 		<script src="../js/arttmpl.js"></script>
@@ -371,29 +406,34 @@
 					}
 				});
 				template.config('escape', false);
-				//$.plusReady=function(fn){fn();};
 				$.plusReady(function() {
-//					localStorage.setItem("user", '{"login_id":101,"namne":"dzg"}');
 					var webview = plus.webview.currentWebview();
 					var user = localStorage.getItem('user');
-					user = eval("("+user+")");
+					user = eval("(" + user + ")");
 					
-					// 清除聊天记录
-//					im_data.clear(webview.u_id,function(tx){ 
-//						console.log(tx);
+					im_data.get_max_time(user.login_id, webview.u_id,function(dd){
+						console.log(dd[0].c);
+					});
+
+//					im_data.clear(function(d){
+//						console.log(d);
 //						bindMsgList();
-//					}); 
+//					});
+					// 清除聊天记录
+//										im_data.clear(webview.u_id,function(tx){ 
+//											console.log(tx);
+//											bindMsgList();
+//										}); 
 					if(webview.name == "") {
 						webview.name = "游客";
 					}
-					
-//					}
+
 					document.getElementById("dzg-title-name").innerHTML = webview.name;
 					plus.webview.currentWebview().setStyle({
 						softinputMode: "adjustResize"
 					});
 					var showKeyboard = function() {
-						if ($.os.ios) {
+						if($.os.ios) {
 							var webView = plus.webview.currentWebview().nativeInstanceObject();
 							webView.plusCallMethod({
 								"setKeyboardDisplayRequiresUserAction": false
@@ -410,7 +450,7 @@
 						}
 					};
 					var record = [];
-					
+
 					var ui = {
 						body: doc.querySelector('body'),
 						footer: doc.querySelector('footer'),
@@ -425,64 +465,87 @@
 					ui.h.style.width = ui.boxMsgText.offsetWidth + 'px';
 					var footerPadding = ui.footer.offsetHeight - ui.boxMsgText.offsetHeight;
 					var bindMsgList = function() {
-						im_data.get(user.login_id,webview.u_id,function(data){
+						im_data.get(user.login_id, webview.u_id, function(data) {
 							console.log(JSON.stringify(data));
 							ui.areaMsgList.innerHTML = template('msg-template', {
-								"record": data,/*获取所有聊天数据-dzg*/
+								"record": data,
+								/*获取所有聊天数据-dzg*/
 								"user": user
 							});
 							ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
 						});
 					};
-					$.getJSON(config.ajax_url+"Home/Im/get_msg",{from:webview.u_id,to:user.login_id},function(data){
-						for(var i in data){
-							im_data.set(user.login_id, webview.u_id, {sender: data[i].to, type: 'text',content: data.content},function(d){
+					
+					function get_message() {
+						im_data.get_max_time(user.login_id, webview.u_id,function(tx){
+							$.getJSON(config.ajax_url + "Home/Im/get_msg", {
+								from: webview.u_id,
+								to: user.login_id,
+								dtime: tx[0].c
+							}, function(data) {
+								for(var i in data) {
+									im_data.set(user.login_id, webview.u_id, {
+										sender: data[i].to,
+										type: 'text',
+										content: data[i].content,
+										dtime: data[i].dtime
+									}, function(d) {
+										
+									});
+								}
 								bindMsgList();
+								setTimeout(function(){get_message()},2000);
 							});
-						}
-					});
+						});
+					};
+					get_message();
 					bindMsgList();
 					window.addEventListener('resize', function() {
 						ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
 					}, false);
+					//发送消息
 					var send = function(msg) {
-//						record.push(msg);
 						console.log(JSON.stringify(msg));
-						im_data.set(user.login_id, webview.u_id, msg,function(tx){
+						im_data.set(user.login_id, webview.u_id, msg, function(tx) {
 							toRobot(msg.content);
 							bindMsgList();
 						});
-						//bindMsgList();
 					};
 					var toRobot = function(info) {
-//						var apiUrl = 'http://www.tuling123.com/openapi/api';
-//						$.getJSON(apiUrl, {
-//							"key": 'acfbca724ea1b5db96d2eef88ce677dc',
-//							"info": info,
-//							"userid": plus.device.uuid
-//						}, function(data) {
-//							im_data.set(user.login_id, webview.u_id, {sender: user.login_id,type: 'text',content: data.text},function(d){
-//								bindMsgList();
-//							});
-//						});
-						$.getJSON(config.ajax_url+"Home/Im/send_msg",{from:user.login_id,to:webview.u_id,content:info});
-				}
+						mui.ajax(config.ajax_url + "Home/Im/send_msg", {
+							data: {
+								from: user.login_id,
+								to: webview.u_id,
+								content: info
+							},
+							crossDomain:true,
+							dataType: 'json', 
+							type: 'get',
+							success: function(data) {
+//								console.log(data);
+							},
+							error: function(xhr, type, errorThrown) {
+								console.log(type);
+							}
+						});
+					}
+
 					function msgTextFocus() {
+						ui.boxMsgText.focus();
+						setTimeout(function() {
 							ui.boxMsgText.focus();
-							setTimeout(function() {
-								ui.boxMsgText.focus();
-							}, 150);
-						}
-						//解决长按“发送”按钮，导致键盘关闭的问题；
+						}, 150);
+					}
+					//解决长按“发送”按钮，导致键盘关闭的问题；
 					ui.footerRight.addEventListener('touchstart', function(event) {
-						if (ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
+						if(ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
 							msgTextFocus();
 							event.preventDefault();
 						}
 					});
 					//解决长按“发送”按钮，导致键盘关闭的问题；
 					ui.footerRight.addEventListener('touchmove', function(event) {
-						if (ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
+						if(ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
 							msgTextFocus();
 							event.preventDefault();
 						}
@@ -497,7 +560,7 @@
 							return false;
 						}
 						send({
-							sender: webview.u_id,//dzg-
+							sender: webview.u_id, //dzg-
 							type: 'text',
 							content: ui.boxMsgText.value.replace(new RegExp('\n', 'gm'), '<br/>')
 						});
@@ -518,18 +581,18 @@
 							ui.boxMsgText.focus();
 						}, 0);
 						focus = true;
-						setTimeout(function () {
+						setTimeout(function() {
 							focus = false;
-						},1000);
+						}, 1000);
 						event.detail.gesture.preventDefault();
 					}, false);
 					//点击消息列表，关闭键盘
-					ui.areaMsgList.addEventListener('click',function (event) {
-						if(!focus){
+					ui.areaMsgList.addEventListener('click', function(event) {
+						if(!focus) {
 							ui.boxMsgText.blur();
 						}
 					})
-					
+
 				});
 			}(mui, document));
 		</script>
