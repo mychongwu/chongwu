@@ -54,9 +54,13 @@
 			if(type == 2) {
 				img_class = "mui-pull-right";
 			}
+			var img_path = '../img/touxiang.jpg';
+			if(data[i][data_columns.m_src] !== ''){
+				img_path = config.img_url+data[i][data_columns.m_src];
+			}
 			var img = create_tag("img", {
 				"class": "mui-media-object " + img_class,
-				"src": data[i][data_columns.m_src]
+				"src": img_path
 			}, "");
 
 			var a_class = "dzg-a-class";

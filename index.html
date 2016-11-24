@@ -59,9 +59,10 @@
 		<script src="js/mui.min.js" charset="UTF-8"></script>
 		<script src="js/ajax.js" charset="UTF-8"></script>
 		<script src="js/config.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/Cache.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="js/Cache.js" type="text/javascript" charset="utf-8"></script>-->
 		<script src="js/im_data.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="UTF-8">
+			
 			mui.init({
 				swipeBack: false
 			});
@@ -78,6 +79,7 @@
 			var detailsub;
 			var tps;
 			mui.plusReady(function() {
+				plus.storage.clear();
 				//改变statusbar
 				plus.navigator.setStatusBarBackground('#41cea9');
 				navtitle = document.getElementById('nav-title');
@@ -104,31 +106,6 @@
 					closeStartScreent();
 				}
 			});
-			/**
-			 * 消息队列好友入栈
-			 * @param Int id
-			 */
-			function friends_push(id){
-				var f = localStorage.getItem("my_friends_arr");
-				f = eval("["+f+"]");
-				console.log(f);
-				if(f.indexOf(id) < 0){
-					f.push(id);
-					localStorage.setItem("my_friends_arr", f);
-				}
-				
-			}
-			/**
-			 * 消息队列好友出队
-			 */
-			function friends_shift(){
-				var r = localStorage.getItem("my_friends_arr");
-				r = eval("["+r+"]");
-				console.log(r);
-				var x = r.shift();
-				localStorage.setItem("my_friends_arr",r);
-				return x;
-			}
 			
 			/**
 			 * 获取消息总数 
@@ -136,56 +113,46 @@
 			function get_message_count() {
 				var user = eval("(" + localStorage.getItem("user") + ")");
 				if(!user) {
-					return false;
+					user = {};
+					user.login_id = 0;
+					user.friends = [];
 				}
-
 				var friends = user.friends;
+				var friends_data = [];
 				friends = eval('[' + friends + ']');
-				localStorage.setItem("my_count_tmp", 0);
 				for(var f in friends) {
-					friends_push(friends[f]);
-					im_data.get_max_time(user.login_id, friends[f], function(tx) {
-						localStorage.setItem("my_dtime", tx[0].c);
-						console.log(friends[f]);
-						mui.ajax(config.ajax_url + "Home/Im/get_message_count", {
-							data: {
-								from: friends_shift(),
-								to: user.login_id,//localStorage.getItem("my_friends_id"),
-								dtime: tx[0].c
-							},
-							crossDomain:true,
-							type: 'get',
-							success: function(data) {
-								console.log(data);
-								data = eval("("+data+")");
-								
-								var c = parseInt(localStorage.getItem("my_count_tmp"))+parseInt(data.counts);
-								localStorage.setItem("my_count_tmp", c);
-//								console.log(mui('.mui-tab-item')[2].children[0].className);
-								console.log(localStorage.getItem("my_count_tmp"));
-							},
-							error: function(xhr, type, errorThrown) {
-								console.log(type);
-							}
-						});
-						if(localStorage.getItem("my_count_tmp") != 0){
-							console.log(localStorage.getItem("my_count_tmp"));
-							mui('.mui-tab-item')[2].children[0].innerHTML = '<span class="mui-badge">'+localStorage.getItem("my_count_tmp")+'</span>';
-						}
-//						$.getJSON(config.ajax_url + "Home/Im/get_message_count", {
-//							from: user.login_id,
-//							to: friends[f],
-//							dtime: tx[0].c
-//						}, function(data) {
-//							console.log(data);
-//
-//						});
-					});
+					friends_data.push({f_id:friends[f],f_date:im_data.get_max_time(user.login_id, friends[f])});
 				}
+//				console.log(user.login_id);
+//				console.log(JSON.stringify(friends_data));
+				mui.ajax(config.ajax_url + "Home/Im/get_friends_new_message_counts", {
+					data: {
+						f_data: JSON.stringify(friends_data),
+						to: user.login_id//localStorage.getItem("my_friends_id"),
+					},
+					dataType: 'json',
+					type: 'post',
+					success: function(data) {
+						if(typeof(data) == "string"){
+							data = eval("("+data+")");
+						}
+						console.log(JSON.stringify(data));
+						//data = eval("("+data+")");
+						if(data.counts != 0 && data.counts != null){
+							mui('.mui-tab-item')[2].children[0].innerHTML = '<span class="mui-badge">'+data.counts+'</span>';
+						} else {
+							mui('.mui-tab-item')[2].children[0].innerHTML = "";
+						}
+						plus.storage.setItem('my_goods_friends', JSON.stringify(data.result));
+					},
+					error: function(xhr, type, errorThrown) {
+						console.log(type);
+					}
+				});
 				setTimeout(function() {
-					get_message_count()
-				}, 3000);
-			}
+					get_message_count();
+				}, 5000);
+		} 
 
 			//关闭启动页面
 			function closeStartScreent() {
@@ -286,6 +253,7 @@
 						document.getElementById("menuss").style.display = 'inline-block';
 					}
 					if(tabitem.getAttribute('href') == "baritemHtml/xinyuandan.html") {
+						mui('.mui-tab-item')[2].children[0].innerHTML = "";
 						if(!localStorage.getItem('user')) {
 							mui.openWindow({
 								url: "Mine/login.html",
