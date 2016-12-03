@@ -468,21 +468,15 @@
 						mui.ajax(config.ajax_url + "Home/Im/get_new_msg", {
 							data: {
 								from: user.login_id,
-								to: webview.u_id,
-								begin: ''
+								to: webview.u_id
 							},
 							type: 'post',
 							success: function(data) {
+								console.log(JSON.stringify(data.length));
 								if(data.length != 0){
 									for(var ms in data){
 										im_data.set(user.login_id, webview.u_id, data[ms]);
-//										if(data[ms].sender == user.login_id) {
-//											im_data.set(user.login_id, webview.u_id, data[ms]);
-//										} else {
-//											im_data.set(webview.u_id, user.login_id,data[ms]);
-//										}
 									}
-//									console.log(im_data.get(user.login_id,webview.u_id))
 									bindMsgList();
 								}
 							},
@@ -555,7 +549,8 @@
 							return false;
 						}
 						send({
-							sender: webview.u_id, //dzg-
+							sender: user.login_id,
+							to: webview.u_id, //dzg-
 							type: 'text',
 							content: ui.boxMsgText.value.replace(new RegExp('\n', 'gm'), '<br/>')
 						});
