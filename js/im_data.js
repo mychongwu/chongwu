@@ -12,7 +12,7 @@
 			var arr = [];
 			var res = {};
 			var from_to = plus.storage.getItem(from + to);
-			console.log(from_to);
+//			console.log(from_to);
 			if(from_to == null) {
 				res.lasttime = data.dtime;
 				arr.push(swap_json(data));
@@ -82,23 +82,23 @@
 		 * @param {String} from 发起用户
 		 * @param {String} to 发送到用户
 		 */
-	im_data.get_max_time = function(from, to) {
-			var chat = swap_json(plus.storage.getItem(from + to));
-			if(chat == null) {
-				return null;
-			}
-			return chat.lasttime;
-		}
-	im_data.set_max_time = function(from, to){
-		var chat = swap_json(plus.storage.getItem(from + to));
-		if(chat == null) {
-			chat = {};
-			chat.lasttime = im_data.get_now(); 
-		} else {
-			chat.lasttime = im_data.get_now();
-		}
-		plus.storage.setItem(from + to, swap_str(chat));
-	}
+//	im_data.get_max_time = function(from, to) {
+//			var chat = swap_json(plus.storage.getItem(from + to));
+//			if(chat == null) {
+//				return null;
+//			}
+//			return chat.lasttime;
+//		}
+//	im_data.set_max_time = function(from, to){
+//		var chat = swap_json(plus.storage.getItem(from + to));
+//		if(chat == null) {
+//			chat = {};
+//			chat.lasttime = im_data.get_now(); 
+//		} else {
+//			chat.lasttime = im_data.get_now();
+//		}
+//		plus.storage.setItem(from + to, swap_str(chat));
+//	}
 		/**
 		 * 清除聊天缓存记录
 		 * @param {String} to 用户id
@@ -113,6 +113,7 @@
 				user = eval("(" + user + ")");
 				plus.storage.removeItem(user.login_id + to);
 			}
+			return true;
 		}
 		/**
 		 * 获取当前时间

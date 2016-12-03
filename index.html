@@ -21,6 +21,7 @@
 			.mui-active .mui-tab-label {
 				color: #ff4677;
 			}
+			
 		</style>
 
 	</head>
@@ -117,15 +118,15 @@
 					user.login_id = 0;
 					user.friends = [];
 				}
-				var friends = user.friends;
-				var friends_data = [];
-				friends = eval('[' + friends + ']');
-				for(var f in friends) {
-					friends_data.push({f_id:friends[f],f_date:im_data.get_max_time(user.login_id, friends[f])});
-				}
+//				var friends = user.friends;
+//				var friends_data = [];
+//				friends = eval('[' + friends + ']');
+//				for(var f in friends) {
+//					friends_data.push({f_id:friends[f],f_date:im_data.get_max_time(user.login_id, friends[f])});
+//				}
 				mui.ajax(config.ajax_url + "Home/Im/get_friends_new_message_counts", {
 					data: {
-						f_data: JSON.stringify(friends_data),
+//						f_data: JSON.stringify(friends_data),
 						from: user.login_id//localStorage.getItem("my_friends_id"),
 					},
 					dataType: 'json',
@@ -134,7 +135,7 @@
 						if(typeof(data) == "string"){
 							data = eval("("+data+")");
 						}
-						console.log(JSON.stringify(data));
+//						console.log(JSON.stringify(data));
 						//data = eval("("+data+")");
 						if(data.counts != 0 && data.counts != null){
 							mui('.mui-tab-item')[2].children[0].innerHTML = '<span class="mui-badge">'+data.counts+'</span>';

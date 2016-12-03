@@ -345,17 +345,19 @@
 	<body contextmenu="return false;">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#delete"></a>
 			<h1 class="mui-title" id="dzg-title-name"></h1>
 		</header>
+
 		<pre id='h'></pre>
 
 		<script id='msg-template' type="text/template">
-		<span class="dzg-datetime-span"></span>
+			<span class="dzg-datetime-span"></span>
 			<% for(var i in record){ var item=record[i]; %>
-			
+
 			<div class="msg-item <%= (item.sender==user.login_id ?' msg-item-self':'') %>" msg-type='<%=(item.type)%>' msg-content='<%=(item.content)%>'>
 				<% if(item.sender==user.login_id ) { %>
-				<img class="msg-content-image msg-user mui-icon mui-icon-person" id="dzg-icon-tx" src="" style="max-width: 100px;" />
+				<img class="msg-content-image msg-user mui-icon mui-icon-person" id="dzg-icon-tx" src="<%=(user.full_img)%>" style="max-width: 100px;" />
 				<% } else { %>
 				<img class="msg-user-img" src="../img/touxiang.jpg" alt="" />
 				<% } %>
@@ -371,10 +373,22 @@
 		</script>
 
 		<div class="mui-content">
+
 			<div id='msg-list'>
 			</div>
 		</div>
-
+		<div id="delete" class="mui-popover mui-popover-action mui-popover-top">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="javascript:del_chat_all()" style="color: #FF3B30;" id="delete_button_a">删除信息</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#delete"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
 		<footer>
 			<div class="footer-left" style="line-height: 30px;">
 				我说:
@@ -409,7 +423,11 @@
 					var webview = plus.webview.currentWebview();
 					var user = localStorage.getItem('user');
 					user = eval("(" + user + ")");
-					
+					if(user.login_img == '' || user.login_img == null){
+						user.full_img = "../img/chat.jpeg";
+					} else {
+						user.full_img = config.img_url + user.login_img;
+					}
 					if(webview.name == "") {
 						webview.name = "游客";
 					}
@@ -417,6 +435,32 @@
 					webview.setStyle({
 						softinputMode: "adjustResize"
 					});
+
+					var is_del = true;
+					//删除聊天记录
+					del_chat_all = function() {
+						var x = im_data.clear(webview.u_id);
+						document.getElementById("delete_button_a").innerHTML = "消息删除中...";
+						if(is_del) {
+							setTimeout(function() {
+								if(true) {
+									bindMsgList();
+									document.getElementById("delete").classList.remove("mui-active");
+									document.getElementsByClassName("mui-backdrop")[0].classList.remove("mui-active");
+									document.getElementById("delete_button_a").innerHTML = "删除信息";
+									mui.toast('删除成功!');
+									is_del = true;
+								}
+							}, 2000);
+						}
+						is_del = false;
+					}
+					
+					function get_user_img(u_id){
+						var friends = plus.storage.getItem('my_goods_friends');
+						
+					}
+
 					var showKeyboard = function() {
 						if($.os.ios) {
 							var webView = plus.webview.currentWebview().nativeInstanceObject();
@@ -451,7 +495,7 @@
 					var footerPadding = ui.footer.offsetHeight - ui.boxMsgText.offsetHeight;
 					var bindMsgList = function() {
 						var msg_new = im_data.get(user.login_id, webview.u_id);
-//						console.log(JSON.stringify(msg_new));
+						//						console.log(JSON.stringify(msg_new));
 						//msg_new = eval('['+msg_new+']');
 						ui.areaMsgList.innerHTML = template('msg-template', {
 							"record": msg_new,
@@ -462,9 +506,7 @@
 					};
 					//获取消息
 					var get_message = function() {
-						console.log(JSON.stringify(im_data.get(user.login_id,webview.u_id)));
-//						var max_time = im_data.get_max_time(user.login_id,webview.u_id);
-//						im_data.set_max_time(user.login_id,webview.u_id);
+						//						console.log(JSON.stringify(im_data.get(user.login_id,webview.u_id)));
 						mui.ajax(config.ajax_url + "Home/Im/get_new_msg", {
 							data: {
 								from: user.login_id,
@@ -472,9 +514,9 @@
 							},
 							type: 'post',
 							success: function(data) {
-								console.log(JSON.stringify(data.length));
-								if(data.length != 0){
-									for(var ms in data){
+								//								console.log(JSON.stringify(data.length));
+								if(data.length != 0) {
+									for(var ms in data) {
 										im_data.set(user.login_id, webview.u_id, data[ms]);
 									}
 									bindMsgList();
@@ -484,22 +526,24 @@
 								console.log(type);
 							}
 						});
-						
-						setTimeout(function(){get_message()},3000);
+
+						setTimeout(function() {
+							get_message()
+						}, 2000);
 					}
 					bindMsgList();
 					get_message();
-					
+
 					window.addEventListener('resize', function() {
 						ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
 					}, false);
 					//发送消息
 					var send = function(msg) {
-//						console.log(msg);
+						//						console.log(msg);
 						im_data.set(user.login_id, webview.u_id, msg);
 						bindMsgList();
 						toRobot(msg.content);
-//						bindMsgList();
+						//						bindMsgList();
 					};
 					var toRobot = function(info) {
 						mui.ajax(config.ajax_url + "Home/Im/send_msg", {
@@ -508,10 +552,10 @@
 								to: webview.u_id,
 								content: info
 							},
-							dataType: 'json', 
+							dataType: 'json',
 							type: 'post',
 							success: function(data) {
-//								console.log(data);
+								//								console.log(data);
 							},
 							error: function(xhr, type, errorThrown) {
 								console.log(type);
