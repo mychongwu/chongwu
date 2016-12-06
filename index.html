@@ -81,6 +81,7 @@
 			var tps;
 			mui.plusReady(function() {
 //				plus.storage.clear();
+				plus.storage.setItem("message_counts","0");
 				//改变statusbar
 				plus.navigator.setStatusBarBackground('#41cea9');
 				navtitle = document.getElementById('nav-title');
@@ -138,8 +139,22 @@
 //						console.log(JSON.stringify(data));
 						//data = eval("("+data+")");
 						if(data.counts != 0 && data.counts != null){
+							var m_c = plus.storage.getItem("message_counts");
+//							console.log(m_c);
+							if(m_c < data.counts){
+								if ( plus.audio != undefined ) {
+									p = plus.audio.createPlayer( "/src/message.mp3" );
+									p.play( function () {
+										p.stop();
+									}, function ( e ) {
+										console.log( "Audio play error: " + e.message ); 
+									} );
+								}
+							}
+							plus.storage.setItem("message_counts",data.counts.toString());
 							mui('.mui-tab-item')[2].children[0].innerHTML = '<span class="mui-badge">'+data.counts+'</span>';
 						} else {
+							plus.storage.setItem("message_counts","0");
 							mui('.mui-tab-item')[2].children[0].innerHTML = "";
 						}
 						plus.storage.setItem('my_goods_friends', JSON.stringify(data.result));

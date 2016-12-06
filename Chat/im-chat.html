@@ -495,7 +495,7 @@
 					var footerPadding = ui.footer.offsetHeight - ui.boxMsgText.offsetHeight;
 					var bindMsgList = function() {
 						var msg_new = im_data.get(user.login_id, webview.u_id);
-												console.log(JSON.stringify(user));
+//												console.log(JSON.stringify(user));
 						//msg_new = eval('['+msg_new+']');
 						ui.areaMsgList.innerHTML = template('msg-template', {
 							"record": msg_new,
