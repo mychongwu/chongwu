@@ -77,6 +77,30 @@
 			}
 			return swap_json(chat.data);
 		}
+	/**
+	 * 获取用户头像
+	 * @param {Object} u_id
+	 * @return {String}
+	 */
+	im_data.get_img = function(u_id){
+		var friends_data = eval('('+plus.storage.getItem('my_goods_friends')+')');
+		var res = '';
+		for(var i in friends_data){
+			var f = friends_data[i];
+			if(typeof(f.m_params) == "string"){
+				f.m_params = eval('('+f.m_params+')');
+			}
+			if(u_id == f.m_params.u_id){
+				if(f.m_params.tx == '' || f.m_params.tx == null) {
+					res = {tx:'../img/chat.jpeg'};
+				} else {
+					res =  {tx: (config.img_url + f.m_params.tx)};
+				}
+				break;
+			} 
+		}
+		return res;
+	}
 		/**
 		 * 获取最后一次聊天时间
 		 * @param {String} from 发起用户

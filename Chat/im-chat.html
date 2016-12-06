@@ -359,7 +359,7 @@
 				<% if(item.sender==user.login_id ) { %>
 				<img class="msg-content-image msg-user mui-icon mui-icon-person" id="dzg-icon-tx" src="<%=(user.full_img)%>" style="max-width: 100px;" />
 				<% } else { %>
-				<img class="msg-user-img" src="../img/touxiang.jpg" alt="" />
+				<img class="msg-user-img" src="<%=(tx.tx) %>" alt="" />
 				<% } %>
 				<div class="msg-content">
 					<div class="msg-content-inner">
@@ -495,12 +495,12 @@
 					var footerPadding = ui.footer.offsetHeight - ui.boxMsgText.offsetHeight;
 					var bindMsgList = function() {
 						var msg_new = im_data.get(user.login_id, webview.u_id);
-						//						console.log(JSON.stringify(msg_new));
+												console.log(JSON.stringify(user));
 						//msg_new = eval('['+msg_new+']');
 						ui.areaMsgList.innerHTML = template('msg-template', {
 							"record": msg_new,
-							/*获取所有聊天数据-dzg*/
-							"user": user
+							"user": user,
+							"tx": im_data.get_img(webview.u_id)
 						});
 						ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
 					};

@@ -143,6 +143,7 @@
 							mui('.mui-tab-item')[2].children[0].innerHTML = "";
 						}
 						plus.storage.setItem('my_goods_friends', JSON.stringify(data.result));
+//						console.log(plus.storage.getItem('my_goods_friends'));
 					},
 					error: function(xhr, type, errorThrown) {
 						console.log(type);
