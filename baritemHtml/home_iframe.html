@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>悬赏首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--依赖库-->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/flex.css" />
+		<!--个人css byXXN-->
+		<link rel="stylesheet" href="../css/offer.css" />
+		<link rel="stylesheet" href="../css/pulshicontext.css" />
+		<!--动画css3显示/隐藏的效果-->
+		<link rel="stylesheet" href="../css/keyframes.css" />
+				<link rel="stylesheet" type="text/css" href="../css/app.css" />	   
+    	<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+   	 	<link rel="stylesheet" type="text/css" href="../css/own.css"/>
+    	<link rel="stylesheet" type="text/css" href="../css/wwstyle.css"/> 
+   		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<script src="../js/arttmpl.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style>
+		.xin-font .mui-pull-top-pocket {
+			top: 0px;
+			background-color: #fff;
+		}
+	</style>
+
+	<body class="xin-font mui-content offer-body bg-white mui-scroll-wrapper ios-android" id="pullrefresh" style="z-index: 999;padding: 0px;">
+		<!-- 2.数据内容容器-->
+		<div class="mui-scroll" style="z-index: 999;">
+			<div class="mui-table-view mui-table-view-chevron" id="list_1">
+			
+			</div>
+			<!-- 数据容器结束-->
+		</div>
+		<!--
+        	TODO 数据模版
+        	-->
+		<script type="text/html" id="offer-answer">
+			<%for(var i in data){ var d = data[i]; %>
+			<div class="offer-body-tab-box" style="margin: 0;">
+				<ul  class="clear" id="info_content">
+				<li class="clear" style="width: 100%;">
+				<div  style="border:none;width:100%">
+				<div class="" style="width:100%;">
+					<div class="mui-card-content-inner" style="white-space:normal;width:100%;">
+						<p style=""><img style="width:30px;" src="../img/chat.jpeg" align="left"> 
+							<a href="#" style="color:#8F8F94 ;">用户姓名</a></p>
+							<div style="height: 10px;"></div>
+						<p  class="news" ids="新闻ID"   style="color: #333;margin-top:3px;">这里显示文章摘要(20字)，让读者对文章内容有个粗略的概念...单一图片是视频的</p>
+					</div>
+				</div>
+				<div class="mui-card-header mui-card-media" style="width:100%;">			
+					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
+					<img style="width:29%;float: left;margin-left:3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
+					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
+					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
+					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
+					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
+				</div>
+				<div style="clear: both;"></div>
+				<div id="bnt" style="width: 100%;height: 30px;margin-left:0;line-height: 30px;">
+						<div id="" style="color: #8F8F94;width: 50%;height: 30px;background-color: ;float: left;">
+							发表于 2015/05/02
+						</div>
+						<div class="zan" style="width: 25%;height: 30px;background-color: ;float: right;">
+							<span class="mui-icon-extra mui-icon-extra-like" style="text-align:center;font-size:15px;line-height: 28px;color: #EBEBF1;"></span>
+							<span style="color: #8F8F94;font-size: 12px;text-align:right;">100</span>
+						</div>
+						
+						<div id="" style="width: 25%;height: 30px;background-color: ;float: right;">
+							<span class="mui-icon mui-icon-chat" style="text-align:right;margin-left:5px;font-size:16px;line-height: 32px;color: #8F8F94;"></span>
+							<span style="color: #8F8F94;font-size: 12px;text-align:right;">100</span>
+						</div>
+						
+						
+					</div>
+			</div>
+			</li>
+			</ul>
+			</div>
+			<%}%>
+		</script>
+
+		<input type="hidden" id="menu_data_type" value="1" />
+		<!--
+			TODO 当前页码
+		-->
+		<!--推荐当前页码 -->
+		<input type="hidden" value="1" id="t_1" />
+		<!--依赖库-->
+		<script src="../js/mui.min.js"></script>
+		<!--图片预览的js-->
+		<script src="../js/util/mui.zoom.js"></script>
+		<script src="../js/util/mui.previewimage.js"></script>
+		<!--XXN JS-->
+		<script src="../js/config.js"></script>
+		<script src="../js/upload.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/js/img-tool/image-new.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/ww_ajax.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	<script>
+		//TODO 分享信息
+		share_info_data = {};
+		data = {};
+
+		//	A 页面大小的自适应控制
+		(function(doc, win) {
+			if(!doc.addEventListener) {
+				return;
+			}
+			var docEl = doc.documentElement;
+
+			function recalc(e) {
+				if(e && e.preventDefault) {
+					e.preventDefault();
+				}
+				var clientWidth = docEl.clientWidth;
+				if(!clientWidth) {
+					return;
+				}
+				docEl.style.fontSize = 50 * (clientWidth / 375) + 'px';
+			}
+			try {
+				recalc();
+			} catch(e) {
+
+			}
+			win.addEventListener('orientationchange', recalc, false);
+			win.addEventListener('resize', recalc, false);
+			doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
+		//	A 初始化配置
+		//阻尼系数                                                                                                                      
+		var deceleration = mui.os.ios ? 0.001 : 0.0001;
+
+		mui.init({
+			gestureConfig: {
+				tap: true, //默认为true
+				doubletap: true, //默认为false
+				longtap: true, //默认为false
+				swipe: true, //默认为true
+				drag: true, //默认为true
+				hold: false, //默认为false，不监听
+				release: false //默认为false，不监听
+			},
+			pullRefresh: {
+				container: '#pullrefresh',
+				scrollY: true, //是否竖向滚动
+				scrollX: false, //是否横向滚动
+				deceleration: deceleration, //阻尼系数,系数越小滑动越灵敏
+				down: {
+					callback: pulldownRefresh
+				},
+				up: {
+					height: 30,
+					contentrefresh: '正在加载...',
+					contentnomore: '没有更多内容了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+					callback: pullupRefresh
+				}
+			}
+		});
+		/**
+		 * 下拉刷新具体业务实现 TODO
+		 */
+		function pulldownRefresh() {
+			console.log(11212112);
+			document.getElementById("t_1").value = 2;
+			if(!mui.os.ios) {
+				plus.nativeUI.showWaiting('努力加载中..', {
+					padlock: true
+				});
+			}
+			refresh_page(true, {}, function() {
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				plus.nativeUI.closeWaiting();
+			}, function() {
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+				plus.nativeUI.closeWaiting();
+			});
+		}
+		//		var count = 0;
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		// TODO 
+		function pullupRefresh() {
+			var t = document.getElementById("t_1");
+			refresh_page(false, {
+				p: t.value
+			}, function(data) {
+				if(data.length == 0) {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+				} else {
+					t.value = parseInt(t.value) + 1;
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+				}
+
+			}, function() {
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+			});
+		}
+		if(mui.os.plus) {
+			mui.plusReady(function() {
+				plus.nativeUI.showWaiting('努力加载中..', {
+					background: 'rgba(0,0,0,0.5)',
+					padlock: true
+				});
+				refresh_page(true, {}, function() {
+					plus.nativeUI.closeWaiting();
+				}, function() {
+					plus.nativeUI.closeWaiting();
+				});
+				});
+		} else {
+			mui.ready(function() {
+				mui('#pullrefresh').pullRefresh().pulldownLoading();
+				//				mui('#pullrefresh').pullRefresh().pullupLoading();
+			});
+		}
+		/**
+		 * TODO 刷新对应tab的内容
+		 * @param {Boolean} is_refresh 是否请求新数据
+		 * @param {Object} extend 扩展参数
+		 * @param {Function} success_function 成功回调
+		 * @param {Function} error_function 失败回调
+		 */
+		function refresh_page(is_refresh, extend, success_function, error_function) {
+			menu_data_type_obj = document.getElementById("menu_data_type");
+			var user_sess = JSON.parse(localStorage.getItem('user'));
+			if(user_sess == null || user_sess.length == 0) {
+				user_sess = {};
+				user_sess.id = '';
+			}
+			is_refresh = !is_refresh ? false : true;
+			console.log(JSON.stringify(extend));
+			if(typeof(extend) == "string") {
+				extend = eval('(' + extend + ')');
+			} else if(typeof(extend) == "undefined") {
+				extend = {};
+			}
+			var params = {
+				is_refresh: is_refresh,
+				type: menu_data_type_obj.value,
+				user_id: user_sess.id
+			};
+			for(var ex in extend) {
+				params[ex] = extend[ex];
+			}
+			var waiting = null;
+
+			/*
+			 TODO Ajax请求数据
+			 * */
+			mui.ajax(config.ajax_url+'Home/Info/hot_info', {
+				data: params,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					
+					console.log(JSON.stringify(data));
+					
+					var user_sess = JSON.parse(localStorage.getItem('user'));
+					if(user_sess == null || user_sess.length == 0) {
+						user_sess = {};
+						user_sess.id = '';
+					}
+					template.helper('log', function(msg) {
+						console.log(msg);
+					});
+					console.log(JSON.stringify(data));
+					var html = template('offer-answer', {
+						'data': data,
+						'mui': mui,
+						'user_sess': user_sess
+					});
+					
+					//成功回调
+					if(typeof(success_function) == "function") {
+						console.log(JSON.stringify(data));
+						success_function(data);
+					}
+
+					if(is_refresh) {
+						document.getElementById("list_1").innerHTML = html;
+					} else {
+						document.getElementById("list_1").innerHTML += html;
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					//失败回调
+					if(typeof(error_function) == "function") {
+						error_function();
+					}
+					//异常处理；
+					console.log(errorThrown);
+					console.log(type);
+				}
+			});
+
+		}
+
+		//TODO tab切换加载方法
+		function now_tab_index(index) {
+
+			if(index == 4) {
+				plus.nativeUI.closeWaiting();
+				//document.getElementById("list_1").innerHTML = '';
+				return false;
+			}
+//			var now_web = plus.webview.getWebviewById("xin_offer_a_reward_iframe.html");
+//			now_web.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,1)"); 
+			mui('#pullrefresh').pullRefresh().refresh(true);
+			document.getElementById("t_1").value = "2";
+			document.getElementById("menu_data_type").value = index;
+			plus.nativeUI.showWaiting('努力加载中..', {
+				background: 'rgba(0,0,0,0.5)',
+				padlock: true
+			});
+			refresh_page(true, {}, function() {
+				plus.nativeUI.closeWaiting();
+			}, function() {
+				plus.nativeUI.closeWaiting();
+			});
+		}
+
+		mui.plusReady(function() {
+			console.log(plus.webview.currentWebview().id);
+			// 安卓 / ios height ios-android
+			if(!mui.os.ios) {
+				document.querySelector('.ios-android').style.height = 0;
+			} else {
+				document.querySelector('.ios-android').style.height = 'auto';
+			}
+
+			mui('.mui-table-view').on('tap', '.user_jump', function() {
+				url_jumb('../str/li_ownmy.html', 'li_ownmy', {
+					'laoshu_user_id': this.getAttribute("data-user-id")
+				});
+			})
+
+			var user_sess = JSON.parse(localStorage.getItem('user'));
+			if(user_sess == null || user_sess.length == 0) {
+				user_sess = {};
+				user_sess.id = '';
+			}
+			
+			/**
+			 * 抢赏跳转
+			 */
+			mui(".mui-table-view").on("tap", ".qs", function() {
+				url_jumb("li_rob.html", "li_rob", {
+					"r_id": this.id
+				});
+			});
+
+			/**
+			 * 跳转抢赏详细页面
+			 * 
+			 */
+
+			mui(".mui-table-view").on("tap", ".qs_wd", function() {
+				url_jumb("li_rewrad_new.html", "li_rewrad_new", {
+					"rid": this.id
+				});
+			});
+
+		
+		});
+		
+			//子集方法
+			function showOrHidePopover(){
+				
+				if (localStorage.getItem('user')) {
+					//上拉菜单
+					console.log(localStorage.getItem('user'));
+					shangla();
+				}else {
+					
+					mui.openWindow({
+						  	url:"../Mine/login.html",
+						    id:'login',
+						    
+						    });
+				}
+				
+			}
+	</script>
+
+</html>

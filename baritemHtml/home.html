@@ -1,311 +1,164 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 	<head>
-		<meta charset="utf-8">
-		<title>Hello MUI</title>
+		<meta charset="UTF-8" />
+		<title>悬赏首页</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<!--标准mui.css-->
+		<!--依赖库-->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
 		<link rel="stylesheet" href="../css/mui.min.css">
-		<!--App自定义的css-->
-		<link rel="stylesheet" type="text/css" href="../css/app.css" />	   
-    	<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
-   	 	<link rel="stylesheet" type="text/css" href="../css/own.css"/>
-    	<link rel="stylesheet" type="text/css" href="../css/wwstyle.css"/>
-   		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<link rel="stylesheet" href="../css/flex.css" />
+		<!--个人css byXXN-->
+		<link rel="stylesheet" href="../css/offer.css" />
+		<link rel="stylesheet" href="../css/pulshicontext.css" />
+		<!--动画css3显示/隐藏的效果-->
+		<link rel="stylesheet" href="../css/keyframes.css" />
+		<script src="../js/arttmpl.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-
-	<body>
-
 		<style>
-			.mui-control-content {
-				background-color: white;
-				min-height: 215px;
+			.mui-iframe-wrapper {
+				z-index: 2;
 			}
-			.mui-control-content .mui-loading {
-				margin-top: 50px;
-			}
-			#selects span{
-				
-				display: inline-block;
-				width:30%;
-				height:50px;
-				text-align: center;
+			.mui-fullscreen {
+				z-index: 2;
 			}
 		</style>
-		
-		
-		
-		<div class="mui-content">
-			<!-- mui-fullscreen 全屏自适应高度 -->
-			
-			
-			<div id="slider" class="mui-slider mui-fullscreen" >
-				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="background-color: #FFFFFF;">
-			<a class="mui-control-item" href="#item1mobile">
-				今日热门
-			</a>
-					<a class="mui-control-item" href="#item2mobile">
-				好友爱宠
-			</a>
-					<a class="mui-control-item" href="#item3mobile">
-				最新资讯
-			</a>
-				</div>
-				
-				
-				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"  style="background-color: #ff4677;"></div>
-				<div class="mui-slider-group" style="margin-top:2px;">
-					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-						<div id="scroll1" class="mui-scroll-wrapper">
-							<div class="mui-scroll" >
-			<div class="mui-input-row mui-search" style="margin-top: 5px;padding-left: 3px;padding-right: 3px;">
-	</div>
-	
-			<ul id="info_content" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
-	<!--			<li style="position: relative;overflow: hidden;padding: 11px 15px;">
+	<body class="xin-font">
 
-			<div class="mui-card" style="border:none;">
-				<div class="mui-card-content">
-					<div class="mui-card-content-inner" style="white-space:normal;">
-						<p style=""><img style="width:30px;" src="../img/chat.jpeg" align="left"> 
-							<a href="#" style="color:#8F8F94 ;">用户姓名</a></p>
-							<div style="height: 10px;"></div>
-						<p  onclick="xiangxi(2)"   style="color: #333;margin-top:3px;">这里显示文章摘要最多五个字让读者对文章内容有个粗略单一图片是视频的...</p>
-					</div>
-				</div>
-				<div class="mui-card-header mui-card-media">			
-					<img style="width:100%;" src="../img/chat.jpeg" />
-				</div>
-				
-				<div id="bnt" style="width: 100%;height: 30px;margin-left:0;line-height: 30px;margin-left:5px;">
-						<div id="" style="color: #8F8F94;width: 50%;height: 30px;background-color: ;float: left;">
-							发表于 2015/05/02
-						</div>
-						
-						<div onclick="zan(this,2)" style="width: 25%;height: 30px;background-color: ;float: right;">
-							<span class="mui-icon-extra mui-icon-extra-like" style="text-align:center;font-size:15px;line-height: 28px;color: #EBEBF1;"></span>
-							<span style="color: #8F8F94;font-size: 12px;text-align:right;">100</span>
-						</div>
-						
-						<div id="" style="width: 25%;height: 30px;background-color: ;float: right;">
-							<span class="mui-icon mui-icon-chat" style="text-align:right;margin-left:5px;font-size:16px;line-height: 32px;color: #8F8F94;"></span>
-							<span style="color: #8F8F94;font-size: 12px;text-align:right;">100</span>
-						</div>
-						
-						
-					</div>
-			</div>
-				</li>
-				
-			<li class="mui-table-view-cell">
-				
-				
-			<div class="mui-card" style="border:none;">
-				<div class="mui-card-content">
-					<div class="mui-card-content-inner" style="white-space:normal;">
-						<p style=""><img style="width:30px;" src="../img/chat.jpeg" align="left"> 
-							<a href="#" style="color:#8F8F94 ;">用户姓名</a></p>
-							<div style="height: 10px;"></div>
-						<p  class="news" ids="新闻ID"   style="color: #333;margin-top:3px;">这里显示文章摘要(20字)，让读者对文章内容有个粗略的概念...单一图片是视频的</p>
-					</div>
-				</div>
-				<div class="mui-card-header mui-card-media imgs" >			
-					<img style="width:29.5%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29.5%;float: left;margin-left:3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29.5%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29.5%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29.5%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29.5%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
+		<header class="offer-search bg-white publish-head mui-bar">
+			<!-- 1.1 搜索引擎-->
 
-				</div>
-				<div style="clear: both;"></div>
-				<div id="bnt" style="width: 100%;height: 30px;margin-left:0;line-height: 30px;margin-left:5px;">
-						<div id="" style="color: #8F8F94;width: 50%;height: 30px;background-color: ;float: left;">
-							发表于 2015/05/02
-						</div>
-						<div class="zan" style="width: 25%;height: 30px;background-color: ;float: right;">
-							<span class="mui-icon-extra mui-icon-extra-like" style="text-align:center;font-size:15px;line-height: 28px;color: #EBEBF1;"></span>
-							<span style="color: #8F8F94;font-size: 12px;text-align:right;">100</span>
-						</div>
-						
-						<div id="" style="width: 25%;height: 30px;background-color: ;float: right;">
-							<span class="mui-icon mui-icon-chat" style="text-align:right;margin-left:5px;font-size:16px;line-height: 32px;color: #8F8F94;"></span>
-							<span style="color: #8F8F94;font-size: 12px;text-align:right;">100</span>
-						</div>
-						
-						
-					</div>
-			</div>
-			</li> -->
-				
-			</ul>
-							</div>
-						</div>
-					</div>
-					<div id="item2mobile" class="mui-slider-item mui-control-content">
-						<div id="scroll2" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<div class="mui-loading">
-									<div class="mui-spinner">
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-					<div id="item3mobile" class="mui-slider-item mui-control-content">
-						<div id="scroll3" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
-								<div class="mui-loading">
-									<div class="mui-spinner">
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
+			<!--1.2选项卡-->
+			<!--
+			TODO 当前标签状态
+			-->
+			<input type="hidden" id="menu_data_type" value="1" />
+			<!-- 2.1导航条-->
+			<div class="offer-body-nav-box menu_item_a" style="margin: 0;padding: 0;">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted clear">
+					<a href="#item1mobile" style="width:33%;text-align: center;" data-type="1" class="nav mui-active mui-control-item menu_item_a_button">热门</a>
+					<a href="#item2mobile" style="width:33%;text-align: center;" data-type="2" class="nav mui-control-item menu_item_a_button">全部</a>
+					<a href="#item3mobile" style="width:33%;text-align: center;" data-type="3" class="nav mui-control-item menu_item_a_button">好友</a>
 				</div>
 			</div>
-		</div>
+
+			<!--
+				TODO 当前页码
+			-->
+			<!--推荐当前页码 -->
+			<input type="hidden" value="1" id="t_1" />
+			<!--全部当前页码 -->
+			<input type="hidden" value="1" id="t_2" />
+			<!--关注当前页码 -->
+			<input type="hidden" value="1" id="t_3" />
+			<!--筛选当前页码 -->
+			<input type="hidden" value="1" id="t_4" />
+
+		</header>
+		<!-- 2.数据内容容器-->
+		<div class="mui-content offer-body bg-white"></div>
 		
-		<div id="popover" class="mui-popover" style="width:80%;height: 200px;margin:30% 10%;line-height: 200px;">
-				
-				<div id="selects">
-					<span id="up_img">图片</span>
-					<span id="up_video">视频</span>
-					<span id='up_text'>文本信息</span>
-				</div>
-				
-		</div>
 		
+
+		<!--依赖库-->
 		<script src="../js/mui.min.js"></script>
-		<script src="../js/config.js"></script>
-		<script src="../js/upload.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/js/img-tool/image-new.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/ww_ajax.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/ajax.js" charset="UTF-8"></script>
-		<script>
-			mui.init({
-			swipeBack:false,
 
-			});
-			var p = 1;
-			(function($) {
-				//取消绑定事件
-				
-				mui.post('http://10.10.10.111/Pet/index.php/Home/Info/hot_info',{
-						'page':p
-					},function(data){//s
-						//服务器返回响应，根据响应结果，分析是否登录成功；
-						var ul = document.getElementById("info_content");
-						
-						ul.innerHTML =ww_ajax_true(data);
-						
-					},'json'
-				);
-				
-				$('.mui-scroll-wrapper').scroll({
-					indicators: false //是否显示滚动条a
-				});
-				var html2 = '<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed"><li class="mui-table-view-cell"><div class="mui-card" style="border:none;"><div class="mui-card-content"><div class="mui-card-content-inner" style="white-space:normal"><p><img style="width: 30px;" src="../img/chat.jpeg" align="center"> <a href="#" style="color:#8F8F94 ;">用户姓名</a></p><p style="color: #333;margin-top:3px;">这里显示文章摘要(20字)，让读者对文章内容有个粗略的概念...单一图片是视频的</p></div></div><div class="mui-card-header mui-card-media"><img style="width:100%;" src="../img/chat.jpeg" /></div><div id="bnt" style="width: 100%;height: 30px;"><div id="" style="width: 25%;height: 30px;background-color: ;float: left;"><span class="mui-icon mui-icon-chatbubble" style="color: #8F8F94; line-height: 30px;"></span><span style="color: #8F8F94;font-size: 12px;">100</span></div><div id="" style="width: 25%;height: 30px;background-color: ;float: left;"><span class="mui-icon mui-icon-compose" style="color: #8F8F94; line-height: 30px;"></span><span style="color: #8F8F94;font-size: 12px;">100</span></div><div id="" style="width: 25%;height: 30px;background-color: ;float: left;"><span class="mui-icon mui-icon-compose" style="line-height: 30px;color: #8F8F94"></span><span style="color: #8F8F94;font-size: 12px;">100</span></div><div id="" style="width: 25%;height: 30px;background-color: ;float: right;"><span class="mui-icon-extra mui-icon-extra-like" style="text-align:center;font-size:17px;line-height: 30px;color: #8F8F94"></span><span style="color: #8F8F94;font-size: 12px;">100</span></div></div></div></li></ul>';
-				var html3 = '<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed"><li class="mui-table-view-cell"><div class="mui-card" style="border:none;"><div class="mui-card-content"><div class="mui-card-content-inner"  style="white-space:normal"><p><img style="width: 30px;" src="../img/chat.jpeg" align="center"> <a href="#" style="color:#8F8F94 ;">用户姓名</a></p><p style="color: #333;margin-top:3px;">这里显示文章摘要(20字)，让读者对文章内容有个粗略的概念...单一图片是视频的wqeqweqweqwewqe</p></div></div><div class="mui-card-header mui-card-media imgs" >			<img style="width:29.5%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" /><img style="width:29.5%;float: left;margin-left:3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" /><img style="width:29.5%;float: left;margin-left:3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" /><img style="width:29.5%;float: left;margin-left:3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" /><img style="width:29.5%;float: left;margin-left:3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" /><img style="width:29.5%;float: left;margin-left:3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" /></div><div style="clear: both;"></div><div id="bnt" style="width: 100%;height: 30px;"><div id="" style="width: 25%;height: 30px;background-color: ;float: left;"><span class="mui-icon mui-icon-chatbubble" style="color: #8F8F94; line-height: 30px;"></span><span style="color: #8F8F94;font-size: 12px;">100</span></div><div id="" style="width: 25%;height: 30px;background-color: ;float: left;"><span class="mui-icon mui-icon-compose" style="color: #8F8F94; line-height: 30px;"></span><span style="color: #8F8F94;font-size: 12px;">100</span></div><div id="" style="width: 25%;height: 30px;background-color: ;float: left;"><span class="mui-icon mui-icon-compose" style="line-height: 30px;color: #8F8F94"></span><span style="color: #8F8F94;font-size: 12px;">100</span></div><div id="" style="width: 25%;height: 30px;background-color: ;float: right;"><span class="mui-icon-extra mui-icon-extra-like" style="text-align:center;font-size:17px;line-height: 30px;color: #8F8F94"></span><span style="color: #8F8F94;font-size: 12px;">100</span></div></div></div></li></ul>';
-				var item2 = document.getElementById('item2mobile');
-				var item3 = document.getElementById('item3mobile');
-				document.getElementById('slider').addEventListener('slide', function(e) {
-					
-					var as = document.getElementsByClassName("mui-control-item");
-					for(i=0;i<as.length;i++){
-						as[i].style.color='black';
-					}
-					if (e.detail.slideNumber === 1) {
-						if (item2.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								item2.querySelector('.mui-scroll').innerHTML = html2;
-							}, 500);
-						}
-					} else if (e.detail.slideNumber === 2) {
-						if (item3.querySelector('.mui-loading')) {
-							setTimeout(function() {
-								item3.querySelector('.mui-scroll').innerHTML = html3;
-							}, 500);
-						}
-					}
-				});
-				var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
-				$('.mui-input-group').on('change', 'input', function() {	
-					
-					if (this.checked) {
-						
-						sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
-						//force repaint
-						sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
-					}
-					
-				});
-			})(mui);
-			var testarr = [];
-			function zan(a,id,thisdiv){
-				console.log(a);
-				if(testarr.indexOf(id)!= -1){
-					mui.toast('已赞');
+		<!--author ： MR。王炜-->
+		<script src="../js/config.js"></script>
+		<!--<script src="../js/upload.js" type="text/javascript" charset="utf-8"></script>-->
+
+		<!--XXN JS-->
+	</body>
+	<script>
+		//	A 自适应
+		(function(doc, win) {
+			if(!doc.addEventListener) {
+				return;
+			}
+			var docEl = doc.documentElement;
+
+			function recalc(e) {
+				if(e && e.preventDefault) {
+					e.preventDefault();
+				}
+				var clientWidth = docEl.clientWidth;
+				if(!clientWidth) {
 					return;
 				}
-				 	testarr.push(id);
-					
-				mui.post('http://10.10.10.111/Pet/index.php/Home/Info/zan',{
-						'id':id,//22
-						'zan':a
-					},function(datas){
-						//服务器返回响应，根据响应结果，分析是否登录成功；3
-						console.log(datas);
-						thisdiv.lastChild.innerHTML = datas;
-						thisdiv.firstChild.style.color='#777777';
-					},'json'
-				);
-				
-			}
-			
-			
-			//子集方法
-			function showOrHidePopover(){
-				
-				if (localStorage.getItem('user')) {
-					//上拉菜单
-					console.log(localStorage.getItem('user'));
-					shangla();
-				}else {
-					
-					mui.openWindow({
-						  	url:"../Mine/login.html",
-						    id:'login',
-						    
-						    });
-				}
-				
-			}
-			
 
-			function xiangxi(id){
-				console.log(3333);
-			localStorage.setItem("ids",id);
-				//打开详情页面          
-				  mui.openWindow({
-				  	url:'news_detail.html',
-				    id:'news_detail.html',
-				   
-				  });
+				docEl.style.fontSize = 50 * (clientWidth / 375) + 'px';
 			}
+			try {
+				recalc();
+			} catch(e) {
+
+			}
+
+			win.addEventListener('orientationchange', recalc, false);
+			win.addEventListener('resize', recalc, false);
+			doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
 		
-		</script>
-
-	</body>
-
-</html>
-
-
+		//	B 初始化配置信息		
+		mui.init({
+			gestureConfig: {
+				swiperight: true,
+				doubletap: true //开始双击监听
+			},
+			// 关于刷新页面嵌套配置
+			subpages: [{
+				url: 'home_iframe.html',
+				id: 'home_iframe.html',
+				styles: {
+					top: '44px',
+					bottom: '0px',
+				}
+			}]
+		});
+		
+		mui.plusReady(function(){
+			// 2.
+			console.log(plus.webview.currentWebview().id);
+			//	A 前提
+			ws = plus.webview.currentWebview();
+			//关闭splash页面；
 			
-				
+		});
+		
+		
+		
+		
+		// 头部筛选按钮执行的事件
+		
+		
+		
+		mui.plusReady(function() {
+			//tab切换事件
+			mui('.menu_item_a').on('tap', '.menu_item_a_button', function() {
+//				menu_data_type_obj.value = this.getAttribute("data-type");
+				var parent =  plus.webview.getWebviewById('home_iframe.html');
+				if(this.getAttribute("data-type") == "3" && !localStorage.getItem('user')) {
+					mui.openWindow({
+						url: "../html/login.html",
+						id: 'login'
+					});
+					return false;
+				}
+			   	parent.evalJS("now_tab_index('"+this.getAttribute("data-type")+"')");
+			});
+		});
+		//	B 配置双击点击头部 ，嵌入的 页面容器下拉刷新，滚动条到
+		var contentWebview = null;
+		document.querySelector('header').addEventListener('doubletap', function() {
+			if(contentWebview == null) {
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+		});
+		
+		
+	</script>
+</html>

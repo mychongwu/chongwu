@@ -21,7 +21,6 @@
 			.mui-active .mui-tab-label {
 				color: #ff4677;
 			}
-			
 		</style>
 
 	</head>
@@ -37,9 +36,9 @@
 				<span class="mui-icon iconfont icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</a>
-			<a class="mui-tab-item" href="baritemHtml/test.html">
+			<a class="mui-tab-item" href="baritemHtml/category.html">
 				<span class="mui-icon iconfont icon-fenlei"></span>
-				<span class="mui-tab-label">宠物</span>
+				<span class="mui-tab-label">附近</span>
 			</a>
 			<a class="mui-tab-item" href="baritemHtml/xinyuandan.html">
 				<!--<span class="mui-icon iconfont icon-xinyuandan"></span>-->
@@ -63,14 +62,13 @@
 		<!--<script src="js/Cache.js" type="text/javascript" charset="utf-8"></script>-->
 		<script src="js/im_data.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="UTF-8">
-			
 			mui.init({
 				swipeBack: false
 			});
 			var mainWebView; //当前主webview
 			var navtitle;
 			var curTabItem; //当前被选中tabitem
-			var barItemUrl = ['baritemHtml/home.html', 'baritemHtml/category.html', 'baritemHtml/xinyuandan.html', 'baritemHtml/cart.html', 'baritemHtml/mine.html'];
+			var barItemUrl = ['baritemHtml/home.html', 'baritemHtml/category.html', 'baritemHtml/xinyuandan.html', 'baritemHtml/mine.html'];
 			var barItemWebView = {}; //每个tabitem所对应显示的页面对象
 			//父子模版页面
 			var headerWebView;
@@ -80,8 +78,8 @@
 			var detailsub;
 			var tps;
 			mui.plusReady(function() {
-//				plus.storage.clear();
-				plus.storage.setItem("message_counts","0");
+				//				plus.storage.clear();
+				plus.storage.setItem("message_counts", "0");
 				//改变statusbar
 				plus.navigator.setStatusBarBackground('#41cea9');
 				navtitle = document.getElementById('nav-title');
@@ -100,6 +98,8 @@
 				changeWebViewEvent();
 				//更新用户消息列表
 				get_message_count();
+				//更新当前用户位置坐标
+				update_location();
 
 				//判断是否已经获取session_key
 				if(!localStorage.getItem('session_key')) {
@@ -109,6 +109,41 @@
 				}
 			});
 			
+			function update_location(){
+				var user = localStorage.getItem('user');
+				if(!user){
+					return false;
+				}
+				user = JSON.parse(user);
+				plus.geolocation.getCurrentPosition(function(p) {
+					console.log(user.login_id);
+					console.log(p.coords.latitude);
+					console.log(p.coords.longitude);
+					mui.ajax(config.ajax_url+'Home/Location/index',{
+						data:{
+							user_id: user.login_id,
+							latitude: p.coords.latitude,
+							longitude:p.coords.longitude
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							console.log(JSON.stringify(data));
+						},
+						error:function(xhr,type,errorThrown){
+							console.error(errorThrown);
+						}
+					});
+				}, function(e) {
+					console.log("Geolocation error: " + e.message);
+				});
+				setTimeout(function(){
+					update_location();
+				},1000*60*30);
+				
+			}
+
 			/**
 			 * 获取消息总数 
 			 */
@@ -119,46 +154,46 @@
 					user.login_id = 0;
 					user.friends = [];
 				}
-//				var friends = user.friends;
-//				var friends_data = [];
-//				friends = eval('[' + friends + ']');
-//				for(var f in friends) {
-//					friends_data.push({f_id:friends[f],f_date:im_data.get_max_time(user.login_id, friends[f])});
-//				}
+				//				var friends = user.friends;
+				//				var friends_data = [];
+				//				friends = eval('[' + friends + ']');
+				//				for(var f in friends) {
+				//					friends_data.push({f_id:friends[f],f_date:im_data.get_max_time(user.login_id, friends[f])});
+				//				}
 				mui.ajax(config.ajax_url + "Home/Im/get_friends_new_message_counts", {
 					data: {
-//						f_data: JSON.stringify(friends_data),
-						from: user.login_id//localStorage.getItem("my_friends_id"),
+						//						f_data: JSON.stringify(friends_data),
+						from: user.login_id //localStorage.getItem("my_friends_id"),
 					},
 					dataType: 'json',
 					type: 'post',
 					success: function(data) {
-						if(typeof(data) == "string"){
-							data = eval("("+data+")");
+						if(typeof(data) == "string") {
+							data = eval("(" + data + ")");
 						}
-//						console.log(JSON.stringify(data));
+						//						console.log(JSON.stringify(data));
 						//data = eval("("+data+")");
-						if(data.counts != 0 && data.counts != null){
+						if(data.counts != 0 && data.counts != null) {
 							var m_c = plus.storage.getItem("message_counts");
-//							console.log(m_c);
-							if(m_c < data.counts){
-								if ( plus.audio != undefined ) {
-									p = plus.audio.createPlayer( "/src/message.mp3" );
-									p.play( function () {
+							//							console.log(m_c);
+							if(m_c < data.counts) {
+								if(plus.audio != undefined) {
+									p = plus.audio.createPlayer("/src/message.mp3");
+									p.play(function() {
 										p.stop();
-									}, function ( e ) {
-										console.log( "Audio play error: " + e.message ); 
-									} );
+									}, function(e) {
+										console.log("Audio play error: " + e.message);
+									});
 								}
 							}
-							plus.storage.setItem("message_counts",data.counts.toString());
-							mui('.mui-tab-item')[2].children[0].innerHTML = '<span class="mui-badge">'+data.counts+'</span>';
+							plus.storage.setItem("message_counts", data.counts.toString());
+							mui('.mui-tab-item')[2].children[0].innerHTML = '<span class="mui-badge">' + data.counts + '</span>';
 						} else {
-							plus.storage.setItem("message_counts","0");
+							plus.storage.setItem("message_counts", "0");
 							mui('.mui-tab-item')[2].children[0].innerHTML = "";
 						}
 						plus.storage.setItem('my_goods_friends', JSON.stringify(data.result));
-//						console.log(plus.storage.getItem('my_goods_friends'));
+						//						console.log(plus.storage.getItem('my_goods_friends'));
 					},
 					error: function(xhr, type, errorThrown) {
 						console.log(type);
@@ -167,7 +202,7 @@
 				setTimeout(function() {
 					get_message_count();
 				}, 5000);
-		} 
+			}
 
 			//关闭启动页面
 			function closeStartScreent() {
@@ -266,6 +301,10 @@
 						document.getElementById("menuss").style.display = 'none';
 					} else {
 						document.getElementById("menuss").style.display = 'inline-block';
+					}
+					if(tabitem.getAttribute('href') == 'baritemHtml/category.html'){
+						update_location();
+						plus.webview.getWebviewById("baritemHtml/category.html").reload(true);
 					}
 					if(tabitem.getAttribute('href') == "baritemHtml/xinyuandan.html") {
 						mui('.mui-tab-item')[2].children[0].innerHTML = "";
