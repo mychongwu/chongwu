@@ -553,8 +553,8 @@
 			//
 			var menus = document.getElementById("menuss");
 			menus.addEventListener('tap', function() {
-
-				barItemWebView[0].evalJS("showOrHidePopover()");
+				var parent = plus.webview.getWebviewById("home_iframe.html");
+				parent.evalJS("showOrHidePopover()");
 			});
 		</script>
 	</body>

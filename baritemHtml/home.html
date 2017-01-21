@@ -39,9 +39,8 @@
 			<!-- 2.1导航条-->
 			<div class="offer-body-nav-box menu_item_a" style="margin: 0;padding: 0;">
 				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted clear">
-					<a href="#item1mobile" style="width:33%;text-align: center;" data-type="1" class="nav mui-active mui-control-item menu_item_a_button">热门</a>
-					<a href="#item2mobile" style="width:33%;text-align: center;" data-type="2" class="nav mui-control-item menu_item_a_button">全部</a>
-					<a href="#item3mobile" style="width:33%;text-align: center;" data-type="3" class="nav mui-control-item menu_item_a_button">好友</a>
+					<a href="#item1mobile" style="width:50%;text-align: center;" data-type="1" class="nav mui-active mui-control-item menu_item_a_button">热门</a>
+					<a href="#item3mobile" style="width:50%;text-align: center;" data-type="3" class="nav mui-control-item menu_item_a_button">好友</a>
 				</div>
 			</div>
 
@@ -142,7 +141,7 @@
 				var parent =  plus.webview.getWebviewById('home_iframe.html');
 				if(this.getAttribute("data-type") == "3" && !localStorage.getItem('user')) {
 					mui.openWindow({
-						url: "../html/login.html",
+						url: "../Mine/login.html",
 						id: 'login'
 					});
 					return false;

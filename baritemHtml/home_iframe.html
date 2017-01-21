@@ -15,12 +15,13 @@
 		<link rel="stylesheet" href="../css/offer.css" />
 		<link rel="stylesheet" href="../css/pulshicontext.css" />
 		<!--动画css3显示/隐藏的效果-->
+		<link rel="stylesheet" href="../css/strengths/xin_scale_img.css" />
 		<link rel="stylesheet" href="../css/keyframes.css" />
-				<link rel="stylesheet" type="text/css" href="../css/app.css" />	   
-    	<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
-   	 	<link rel="stylesheet" type="text/css" href="../css/own.css"/>
-    	<link rel="stylesheet" type="text/css" href="../css/wwstyle.css"/> 
-   		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/own.css" />
+		<link rel="stylesheet" type="text/css" href="../css/wwstyle.css" />
+		<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
 		<script src="../js/arttmpl.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<style>
@@ -30,11 +31,11 @@
 		}
 	</style>
 
-	<body class="xin-font mui-content offer-body bg-white mui-scroll-wrapper ios-android" id="pullrefresh" style="z-index: 999;padding: 0px;">
+	<body class="xin-font mui-content offer-body bg-white mui-scroll-wrapper ios-android" id="pullrefresh" style="padding: 0px;">
 		<!-- 2.数据内容容器-->
-		<div class="mui-scroll" style="z-index: 999;">
+		<div class="mui-scroll">
 			<div class="mui-table-view mui-table-view-chevron" id="list_1">
-			
+
 			</div>
 			<!-- 数据容器结束-->
 		</div>
@@ -43,50 +44,64 @@
         	-->
 		<script type="text/html" id="offer-answer">
 			<%for(var i in data){ var d = data[i]; %>
-			<div class="offer-body-tab-box" style="margin: 0;">
-				<ul  class="clear" id="info_content">
-				<li class="clear" style="width: 100%;">
-				<div  style="border:none;width:100%">
-				<div class="" style="width:100%;">
-					<div class="mui-card-content-inner" style="white-space:normal;width:100%;">
-						<p style=""><img style="width:30px;" src="../img/chat.jpeg" align="left"> 
-							<a href="#" style="color:#8F8F94 ;">用户姓名</a></p>
-							<div style="height: 10px;"></div>
-						<p  class="news" ids="新闻ID"   style="color: #333;margin-top:3px;">这里显示文章摘要(20字)，让读者对文章内容有个粗略的概念...单一图片是视频的</p>
-					</div>
-				</div>
-				<div class="mui-card-header mui-card-media" style="width:100%;">			
-					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29%;float: left;margin-left:3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-					<img style="width:29%;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" src="../img/chat.jpeg" />
-				</div>
-				<div style="clear: both;"></div>
-				<div id="bnt" style="width: 100%;height: 30px;margin-left:0;line-height: 30px;">
-						<div id="" style="color: #8F8F94;width: 50%;height: 30px;background-color: ;float: left;">
-							发表于 2015/05/02
+			<div style="width:100%;height:20px;"></div>
+			<div class="offer-body-tab-box">
+				<ul class="clear" id="info_content" style="padding-left: 10px;">
+					<li class="clear" style="width: 100%;list-style: none;padding: 0px;">
+						<div style="border:none;width:100%">
+							<div class="" style="width:100%;">
+								<div class="mui-card-content-inner" style="white-space:normal;width:100%;">
+									<p style="float:left"><img style="width:30px;height:30px" src="<%=get_img(d.login_img)%>" align="left">
+										<a href="#" style="color:#8F8F94 ;">
+											<%=d.username%>
+										</a>
+									</p>
+									<%if(d.info_friend == 3){%>
+									<%}else if(d.info_friend == 1){%>
+										<span data-id="<%=d.user_id%>" class="guanzhu" style="font-size:14px;margin-right:0.2rem;float:right;color:red">已关注</span>									
+									<%}else{%>
+										<span data-id="<%=d.user_id%>" class="guanzhu" style="font-size:14px;margin-right:0.2rem;float:right;color:#8F8F94">关注</span>
+									<%}%>
+									<div style="height: 10px;clear: both;"></div>
+									<p class="news" ids="<%=d.info_id%>" style="color: #333;margin-top:3px;">
+										<%=d.info_content%>
+									</p>
+								</div>
+							</div>
+							<div class="mui-card-header mui-card-media" style="width:100%;">
+								<%if(d.info_type == 1){ %>
+								<%	var sss = to_json(d.info_imgs);
+						for( n in sss){ var ds = sss[n];
+						%>
+								<img src="<%=ajax_img + ds%>" data-preview-src="" data-preview-group="<%=d.info_id%>" style="width:2rem;height:2rem;float: left;margin-left: 3%;margin-bottom: 5px; border-radius: 3px;" />
+								<% } }else if(d.info_type == 2){%>
+								<%if(!mui.os.ios) {%>
+								<div class="video_player" data-src="<%=(ajax_video+d.info_imgs)%>" style="width:80%;height:3rem;background-color:#000000;margin:5px auto;background-image: url(../img/replay_img.png); background-position: center;background-repeat: no-repeat;">
+								</div>
+								<%}else{%>
+								<div class="ios_play" style="width:80%;height:3rem;background-color:#000000;margin:5px auto;background-image: url(../img/replay_img.png); background-position: center;background-repeat: no-repeat;">
+								</div>
+								<video style="width:80%;height:3rem; margin:5px auto;display: none;background-color:#000000" src="<%=(ajax_video+d.info_imgs)%>" webkit-playsinline controls></video>
+								<% } }%>
+							</div>
+							<div style="clear: both;"></div>
+							<div id="bnt" style="width: 100%;height: 30px;margin-left:0;line-height: 30px;">
+								<div id="" style="color: #8F8F94;width: 50%;height: 30px;background-color: ;float: left;">
+									发表于
+									<%=d.info_time%>
+								</div>
+								<div class="zan" id="<%=d.info_id%>" style="width: 25%;height: 30px;background-color: ;float: right;">
+									<span class="mui-icon-extra mui-icon-extra-like" style="text-align:center;font-size:15px;line-height: 28px;color:<%=dian(d.info_zan)%>;"></span>
+									<span style="color: #8F8F94;font-size: 12px;text-align:right;"><%=d.info_zan%></span>
+								</div>
+							</div>
 						</div>
-						<div class="zan" style="width: 25%;height: 30px;background-color: ;float: right;">
-							<span class="mui-icon-extra mui-icon-extra-like" style="text-align:center;font-size:15px;line-height: 28px;color: #EBEBF1;"></span>
-							<span style="color: #8F8F94;font-size: 12px;text-align:right;">100</span>
-						</div>
-						
-						<div id="" style="width: 25%;height: 30px;background-color: ;float: right;">
-							<span class="mui-icon mui-icon-chat" style="text-align:right;margin-left:5px;font-size:16px;line-height: 32px;color: #8F8F94;"></span>
-							<span style="color: #8F8F94;font-size: 12px;text-align:right;">100</span>
-						</div>
-						
-						
-					</div>
+					</li>
+				</ul>
 			</div>
-			</li>
-			</ul>
-			</div>
+			<div style="width:100%;height:20px;"></div>
 			<%}%>
 		</script>
-
 		<input type="hidden" id="menu_data_type" value="1" />
 		<!--
 			TODO 当前页码
@@ -96,20 +111,21 @@
 		<!--依赖库-->
 		<script src="../js/mui.min.js"></script>
 		<!--图片预览的js-->
-		<script src="../js/util/mui.zoom.js"></script>
-		<script src="../js/util/mui.previewimage.js"></script>
+		<script src="../js/mui.zoom.js"></script>
+		<script src="../js/mui.previewimage.js"></script>
 		<!--XXN JS-->
 		<script src="../js/config.js"></script>
 		<script src="../js/upload.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/js/img-tool/image-new.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/ww_ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/demo_videoPlaySimple.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 	<script>
 		//TODO 分享信息
 		share_info_data = {};
 		data = {};
-
+		mui.previewImage();
 		//	A 页面大小的自适应控制
 		(function(doc, win) {
 			if(!doc.addEventListener) {
@@ -170,7 +186,6 @@
 		 * 下拉刷新具体业务实现 TODO
 		 */
 		function pulldownRefresh() {
-			console.log(11212112);
 			document.getElementById("t_1").value = 2;
 			if(!mui.os.ios) {
 				plus.nativeUI.showWaiting('努力加载中..', {
@@ -217,7 +232,7 @@
 				}, function() {
 					plus.nativeUI.closeWaiting();
 				});
-				});
+			});
 		} else {
 			mui.ready(function() {
 				mui('#pullrefresh').pullRefresh().pulldownLoading();
@@ -234,12 +249,12 @@
 		function refresh_page(is_refresh, extend, success_function, error_function) {
 			menu_data_type_obj = document.getElementById("menu_data_type");
 			var user_sess = JSON.parse(localStorage.getItem('user'));
+			console.log(JSON.stringify(user_sess));
 			if(user_sess == null || user_sess.length == 0) {
 				user_sess = {};
 				user_sess.id = '';
 			}
 			is_refresh = !is_refresh ? false : true;
-			console.log(JSON.stringify(extend));
 			if(typeof(extend) == "string") {
 				extend = eval('(' + extend + ')');
 			} else if(typeof(extend) == "undefined") {
@@ -248,40 +263,66 @@
 			var params = {
 				is_refresh: is_refresh,
 				type: menu_data_type_obj.value,
-				user_id: user_sess.id
+				user_id: user_sess.login_id
 			};
 			for(var ex in extend) {
 				params[ex] = extend[ex];
 			}
 			var waiting = null;
-
+			console.log(JSON.stringify(params));
 			/*
 			 TODO Ajax请求数据
 			 * */
-			mui.ajax(config.ajax_url+'Home/Info/hot_info', {
+			console.log(config.ajax_url + 'Home/Info/hot_info');
+			mui.ajax(config.ajax_url + 'Home/Info/hot_info', {
 				data: params,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					
+
 					console.log(JSON.stringify(data));
-					
 					var user_sess = JSON.parse(localStorage.getItem('user'));
 					if(user_sess == null || user_sess.length == 0) {
 						user_sess = {};
 						user_sess.id = '';
 					}
+					var testarr = localStorage.getItem("zan");
+					if(testarr == null || testarr == '') {
+						testarr = '0,0,0';
+
+					}
+					var sa = testarr.split(',');
+					template.helper('dian', function(msg) {
+						if(sa.indexOf(msg) != -1) {
+							return '#EBEBF1'
+						} else {
+							return 'red';
+						}
+					});
+					
+					template.helper('get_img', function(path) {
+							if(path == '' || path == null) {
+								return '../img/touxiang.jpg';
+							}
+							return config.img_url + path;
+						});
+					
 					template.helper('log', function(msg) {
 						console.log(msg);
+					});
+					template.helper('to_json', function(obj) {
+						return JSON.parse(obj);
 					});
 					console.log(JSON.stringify(data));
 					var html = template('offer-answer', {
 						'data': data,
 						'mui': mui,
-						'user_sess': user_sess
+						'user_sess': user_sess,
+						'ajax_img': config.img_url,
+						'ajax_video': config.ww_url
 					});
-					
+
 					//成功回调
 					if(typeof(success_function) == "function") {
 						console.log(JSON.stringify(data));
@@ -315,8 +356,8 @@
 				//document.getElementById("list_1").innerHTML = '';
 				return false;
 			}
-//			var now_web = plus.webview.getWebviewById("xin_offer_a_reward_iframe.html");
-//			now_web.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,1)"); 
+			//			var now_web = plus.webview.getWebviewById("xin_offer_a_reward_iframe.html");
+			//			now_web.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,1)"); 
 			mui('#pullrefresh').pullRefresh().refresh(true);
 			document.getElementById("t_1").value = "2";
 			document.getElementById("menu_data_type").value = index;
@@ -332,6 +373,82 @@
 		}
 
 		mui.plusReady(function() {
+
+			mui(".mui-table-view").on("tap", ".ios_play", function() {
+				this.style.display = "none";
+				this.nextElementSibling.style.display = "block";
+				this.nextElementSibling.play();
+
+			}); //
+			//TODO 关注加好友
+			mui(".mui-table-view").on("tap", ".guanzhu", function() {
+				if(!localStorage.getItem('user')) {
+					mui.openWindow({
+						url: "../Mine/login.html",
+						id: 'login'
+					});
+					return false;
+				}
+				var o_id = this.getAttribute("data-id");
+				var user_sess = JSON.parse(localStorage.getItem('user'));
+				if(user_sess == null || user_sess.length == 0) {
+					user_sess = {};
+					user_sess.id = '';
+				}
+				var thisdiv = this;
+				mui.ajax(config.ajax_url + 'Home/Location/add_friend', {
+						data: {
+							user_id: user_sess.login_id,
+							friend_id: o_id
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							if(data.error_code == 0) {
+								thisdiv.innerHTML = "已关注";
+								thisdiv.style.color = "red";
+								mui.toast('添加好友成功');
+							} else {
+								mui.toast(data.error_message);
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+
+						}
+					});
+
+			});
+
+			mui(".mui-table-view").on("tap", ".zan", function() {
+				//alert(53);	
+				var testarr = localStorage.getItem("zan");
+				if(testarr == null || testarr == '') {
+					testarr = '0,0,0';
+
+				}
+				var ss = testarr.split(',');
+				if(ss.indexOf(this.id) != -1) {
+					mui.toast('已赞');
+					return;
+				}
+				ss.push(this.id);
+				var b = ss.join(",");
+				localStorage.setItem('zan', b);
+				this.childNodes[1].style.color = 'red';
+				var sa = this.childNodes[3].innerHTML;
+				this.childNodes[3].innerHTML = parseInt(sa) + 1;
+				var thisdiv = this;
+				mui.post('http://10.10.10.111/Pet/index.php/Home/Info/zan', {
+					'id': thisdiv.id, //22
+				}, function(datas) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；3
+					console.log(datas);
+					thisdiv.childNodes[3].innerHTML = datas;
+					thisdiv.childNodes[1].style.color = 'red';
+				}, 'json');
+			});
+
 			console.log(plus.webview.currentWebview().id);
 			// 安卓 / ios height ios-android
 			if(!mui.os.ios) {
@@ -351,7 +468,7 @@
 				user_sess = {};
 				user_sess.id = '';
 			}
-			
+
 			/**
 			 * 抢赏跳转
 			 */
@@ -372,26 +489,25 @@
 				});
 			});
 
-		
 		});
-		
-			//子集方法
-			function showOrHidePopover(){
-				
-				if (localStorage.getItem('user')) {
-					//上拉菜单
-					console.log(localStorage.getItem('user'));
-					shangla();
-				}else {
-					
-					mui.openWindow({
-						  	url:"../Mine/login.html",
-						    id:'login',
-						    
-						    });
-				}
-				
+
+		//子集方法
+		function showOrHidePopover() {
+
+			if(localStorage.getItem('user')) {
+				//上拉菜单
+				console.log(localStorage.getItem('user'));
+				shangla();
+			} else {
+
+				mui.openWindow({
+					url: "../Mine/login.html",
+					id: 'login',
+
+				});
 			}
+
+		}
 	</script>
 
 </html>
